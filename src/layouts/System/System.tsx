@@ -5,6 +5,7 @@ import i18n from "i18next";
 import { useTranslation } from "react-i18next";
 import Title from "antd/lib/typography/Title";
 import { useAuthorization } from "../../hooks";
+import {constants} from "../../styles/constants";
 
 const { Header, Content, Sider } = Layout;
 
@@ -28,15 +29,16 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
   const handleChange = (value: string) => {
     i18n.changeLanguage(value);
   };
+
   return (
     <Layout>
       <Sider
         trigger={null} collapsible collapsed={collapsed}
         breakpoint="lg"
         style={{
-          overflow: "auto",
-          height: "100vh",
-
+            overflow: "auto",
+            height: "100vh",
+            backgroundColor: constants.blue,
         }}
         onBreakpoint={(broken) => {
           console.log(broken);
@@ -47,11 +49,10 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
       >
         <Flex style={{ height: "100%" }} vertical>
           <div style={{ height: 64, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Title level={4} style={{ margin: 0, lineHeight: 1 }}>НУМО </Title>
+            <Title level={4} style={{ margin: 0, lineHeight: 1, color: constants.white}}>НУМО</Title>
           </div>
           <Flex style={{ height: "100%" }} vertical justify="space-between">
             <Menu
-              theme="dark"
               mode="inline"
               defaultSelectedKeys={[ "1" ]}
               items={[
@@ -61,6 +62,7 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
                   label: "nav 1",
                 },
               ]}
+              style={{background: constants.blue}}
             />
             <Button
               style={{ margin: "0 4px 16px 4px" }}
@@ -75,7 +77,7 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
         <Header
           style={{
             padding: 0,
-            background: "#001529",
+            background: constants.white,
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -86,13 +88,12 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
             style={{
+                color: constants.brown,
               fontSize: "16px",
               width: 48,
               height: 48,
-              color: "#ffffff",
             }}
           />
-
           <Select
             defaultValue={i18n.resolvedLanguage}
             theme="dark"
