@@ -18,7 +18,7 @@ export const SignIn: FC<IProps> = (): JSX.Element => {
   const onFinish = (values: any) => {
     console.log(values);
     api.authorization.signIn({ email: values.email, password: values.password, loader: t("signIn.loader.title") })
-      .then(({ accessToken, user: any }) => {
+      .then(({ accessToken, user }) => {
         setAuthorization(accessToken, user);
         navigate("/");
       });
