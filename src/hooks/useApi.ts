@@ -28,7 +28,6 @@ interface IApiAccountGetConfig extends IApiConfig {}
 
 export interface IUseApi {
   authorization: {
-    signUp: (config: IApiAuthorizationSignUpConfig) => Promise<void>;
     signIn: (config: IApiAuthorizationSignInConfig) => Promise<{ accessToken: string, tokenType: string, user: IUser }>;
     signOut: (config: IApiAuthorizationSignOutConfig) => Promise<void>;
   };
@@ -58,33 +57,17 @@ export const useApi: TUseApi = (): IUseApi => {
 
   return {
     authorization: {
-      signUp: ({ email, fullname, debug, password, loader }) => {
-        const body = {
-          email: email,
-          fullname: fullname,
-          password: password,
-        };
-        return http.request<void>({
-          method: "POST",
-          url: `${API_URL}/account/register`,
-          headers,
-          data: body,
-          debug,
-          loader: !!loader ? loader : "Processing sign up...",
-        });
-      },
       signIn: ({ loader, debug, password, username }) => {
         return new Promise((resolve, reject) => {
-          const formData = new FormData();
-
-          formData.append("username", username);
-          formData.append("password", password);
 
           http.request<{ access_token: string, token_type: string, account: IUser }>({
             method: "POST",
-            url: `${API_URL}/account/login`,
-            headers: { "Content-Type": "multipart/form-data" },
-            data: formData,
+            url: `${API_URL}/authentication`,
+            headers,
+            data: {
+              password,
+              username,
+            },
             loader: !!loader ? loader : "Processing sign in...",
             debug,
           })
