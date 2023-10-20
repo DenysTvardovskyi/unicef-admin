@@ -113,7 +113,9 @@ export const Staff: FC<IProps> = (): JSX.Element => {
             <Button disabled={editingKey !== ""} onClick={() => edit(record)}>
               Edit
             </Button>
-            <Button onClick={() => handleDelete(record.id)}>Delete</Button>
+            <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.id)}>
+              <Button>Delete</Button>
+            </Popconfirm>
           </Flex>
         );
       },
