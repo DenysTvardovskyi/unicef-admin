@@ -34,7 +34,7 @@ type TUseApi = () => IUseApi;
 
 export const useApi: TUseApi = (): IUseApi => {
   const http = useHTTP();
-  const { isAuthorized, accessToken, tokenType } = useAuthorization();
+  const { isAuthorized, accessToken } = useAuthorization();
 
   const headers: AxiosRequestHeaders = useMemo<AxiosRequestHeaders>(() => {
     const _headers: any = {};
@@ -47,14 +47,14 @@ export const useApi: TUseApi = (): IUseApi => {
     _headers["Content-Type"] = "application/json";
 
     return _headers;
-  }, [ isAuthorized, accessToken, tokenType ]);
+  }, [ isAuthorized, accessToken ]);
 
   return {
     authorization: {
       signIn: ({ loader, debug, password, email }) => {
         return new Promise((resolve, reject) => {
 
-          http.request<{ rawToken: string, account: IUser }>({
+          http.request<{ rawToken: string, user: IUser }>({
             method: "POST",
             url: `${API_URL}/authentication`,
             headers,
@@ -66,11 +66,11 @@ export const useApi: TUseApi = (): IUseApi => {
             debug,
           })
             .then((data) => {
-              const { token, account } = data;
+              const { token, user } = data;
 
               return resolve({
                 accessToken: token,
-                user: account,
+                user,
               });
             })
             .catch(reject);
