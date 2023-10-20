@@ -26,7 +26,7 @@ const dataSource = [
 ];
 
 export const Groups: FC<IProps> = (): JSX.Element => {
-  const columns = [
+  const columns: any = [
     {
       title: "Name",
       dataIndex: "name",
@@ -47,7 +47,7 @@ export const Groups: FC<IProps> = (): JSX.Element => {
     {
       title: "Users",
       dataIndex: "totalUsers",
-      sorter: (a, b) => a.totalUsers - b.totalUsers,
+      sorter: (a: any, b: any) => a.totalUsers - b.totalUsers,
       key: "totalUsers",
     },
     {

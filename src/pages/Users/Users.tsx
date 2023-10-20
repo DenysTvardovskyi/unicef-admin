@@ -53,7 +53,7 @@ const dataSource = [
 ];
 
 export const Users: FC<IProps> = (): JSX.Element => {
-  const columns = [
+  const columns: any = [
     {
       title: "Name",
       dataIndex: "name",
@@ -68,13 +68,13 @@ export const Users: FC<IProps> = (): JSX.Element => {
         },
       ],
       filterSearch: true,
-      onFilter: (value: string, record) => record.name.includes(value),
+      onFilter: (value: string, record: any) => record.name.includes(value),
       key: "name",
     },
     {
       title: "Age",
       dataIndex: "age",
-      sorter: (a, b) => a.age - b.age,
+      sorter: (a: any, b: any) => a.age - b.age,
       key: "age",
     },
     {
@@ -89,7 +89,7 @@ export const Users: FC<IProps> = (): JSX.Element => {
       fixed: "right",
       width: "100px",
       align: "center",
-      render: (record) => <Button onClick={() => navigate("/user/" + record.key)}>View</Button>,
+      render: (record: any) => <Button onClick={() => navigate("/user/" + record.key)}>View</Button>,
     },
   ];
   const navigate = useNavigate();

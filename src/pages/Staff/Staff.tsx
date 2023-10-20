@@ -23,7 +23,7 @@ const dataSource = [
 ];
 
 export const Staff: FC<IProps> = (): JSX.Element => {
-  const columns = [
+  const columns: any = [
     {
       title: "Name",
       dataIndex: "name",
@@ -38,7 +38,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
         },
       ],
       filterSearch: true,
-      onFilter: (value: string, record) => record.name.includes(value),
+      onFilter: (value: string, record: any) => record.name.includes(value),
       key: "name",
     },
     {
@@ -48,7 +48,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
       fixed: "right",
       width: "100px",
       align: "center",
-      render: (record) => <Button onClick={() => console.log("delete")}>Delete</Button>,
+      render: (record: any) => <Button onClick={() => console.log("delete")}>Delete</Button>,
     },
   ];
   const navigate = useNavigate();

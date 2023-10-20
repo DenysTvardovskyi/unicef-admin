@@ -10,7 +10,7 @@ import {
   UserOutlined,
 
 } from "@ant-design/icons";
-import { Avatar, Button, Flex, Layout, Menu, MenuProps, Select, Badge } from "antd";
+import { Avatar, Button, Flex, Layout, Menu, MenuProps, Select } from "antd";
 import i18n from "i18next";
 import { useTranslation } from "react-i18next";
 import Title from "antd/lib/typography/Title";
@@ -66,7 +66,7 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
   const {user} = useAuthorization()
   const [ collapsed, setCollapsed ] = useState(false);
   const [ hasBreakPoint, setBreakPoint ] = useState(false);
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   const { resetAuthorization } = useAuthorization();
@@ -104,7 +104,7 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
             <Menu
               mode="inline"
               defaultSelectedKeys={[ location.pathname ]}
-              defaultOpenKeys={[ LINKS.filter((link) => (location.pathname).split(link.key).length === 2)?.[0]?.key || "" ]}
+              defaultOpenKeys={[ ""+LINKS.filter((link) => (location.pathname).split(link?.key).length === 2)?.[0]?.key || "" ]}
               items={LINKS}
               style={{background: constants.blue, color: constants.white}}
             />
@@ -149,7 +149,6 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
           <Flex gap={16} align="center">
             <Select
               defaultValue={i18n.resolvedLanguage}
-              theme="dark"
               style={{ width: 60 }}
               onChange={handleChange}
               options={langOptions}

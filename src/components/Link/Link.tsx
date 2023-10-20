@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { LinkProps, NavLink as RouterLink } from "react-router-dom";
 import { classes } from "../../utils";
 

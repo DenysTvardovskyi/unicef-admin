@@ -8,7 +8,6 @@ import { JWT } from "../utils";
 type TUseAuthorization = () => {
   isAuthorized: boolean;
   accessToken: string;
-  tokenType: string;
   user: IUser;
   setAuthorization: (token: string, type?: string, user?: IUser) => void;
   resetAuthorization: () => void;
@@ -18,7 +17,7 @@ type TUseAuthorization = () => {
 export const useAuthorization: TUseAuthorization = () => {
   const loader = useLoader();
   const dispatch = useDispatch();
-  const { accessToken, tokenType, user } = useStore((store) => store.authorization);
+  const { accessToken, user } = useStore((store) => store.authorization);
 
   const { isValid, isActive } = JWT.parseAndValidateToken(accessToken);
 
@@ -44,7 +43,6 @@ export const useAuthorization: TUseAuthorization = () => {
   return {
     isAuthorized: isValid() && isActive(),
     accessToken,
-    tokenType,
     user,
     setAuthorization,
     setUser,

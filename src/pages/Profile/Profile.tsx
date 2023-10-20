@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { System as SystemLayout } from "../../layouts";
-import {Avatar, Flex, Badge, Col, Descriptions, DescriptionsProps, Row, Card} from "antd";
+import {Avatar, Flex, Badge, Descriptions, DescriptionsProps, Card} from "antd";
 import Title from "antd/es/typography/Title";
 import { useAuthorization } from "../../hooks";
 import {getInitials} from "../../utils";
