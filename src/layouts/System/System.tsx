@@ -119,8 +119,8 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
             options={langOptions}
           />
         </Header>
-        <Content style={{ margin: "24px 16px" }}>
-          <div style={{ padding: 24, height: "100%", background: "#ffffff" }}>{children}</div>
+        <Content style={{ margin: "24px 16px"}}>
+          <div style={{ padding: 24, height: "100%", background: "#ffffff"}}>{children}</div>
         </Content>
       </Layout>
     </Layout>
