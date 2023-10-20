@@ -18,12 +18,12 @@ export const Profile: FC<IProps> = (): JSX.Element => {
     {
       key: "1",
       label: "First Name",
-      children: user.name,
+      children: user?.name || "",
     },
     {
       key: "2",
       label: "Last Name",
-      children: user.lastName,
+      children: user?.lastName || "",
     },
     {
       key: "3",

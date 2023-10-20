@@ -22,7 +22,7 @@ interface IApiAccountGetConfig extends IApiConfig {}
 
 export interface IUseApi {
   authorization: {
-    signIn: (config: IApiAuthorizationSignInConfig) => Promise<{ accessToken: string, tokenType: string, user: IUser }>;
+    signIn: (config: IApiAuthorizationSignInConfig) => Promise<{ accessToken: string, user: IUser }>;
     signOut: (config: IApiAuthorizationSignOutConfig) => Promise<void>;
   };
   account: {
@@ -66,10 +66,10 @@ export const useApi: TUseApi = (): IUseApi => {
             debug,
           })
             .then((data) => {
-              const { rawToken, account } = data;
+              const { token, account } = data;
 
               return resolve({
-                accessToken: rawToken,
+                accessToken: token,
                 user: account,
               });
             })
