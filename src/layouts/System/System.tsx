@@ -100,7 +100,7 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
               defaultSelectedKeys={[ location.pathname ]}
               defaultOpenKeys={[ LINKS.filter((link) => (location.pathname).split(link.key).length === 2)[0].key ]}
               items={LINKS}
-              style={{background: constants.blue}}
+              style={{background: constants.blue, color: constants.white}}
             />
             <Button
               style={{ margin: "0 4px 16px 4px" }}
