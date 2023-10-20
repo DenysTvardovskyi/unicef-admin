@@ -3,6 +3,8 @@ import { useHTTP } from "./useHTTP";
 import { useAuthorization } from "./useAuthorization";
 import { AxiosRequestHeaders } from "axios";
 import { IUser } from "../models";
+import { IGroup } from "../models/group";
+import { ICustomer } from "../models/customer";
 
 const API_URL: string = import.meta.env.VITE_BASE_URL!;
 
@@ -19,6 +21,32 @@ interface IApiAuthorizationSignInConfig extends IApiConfig {
 interface IApiAuthorizationSignOutConfig extends IApiConfig {}
 
 interface IApiAccountGetConfig extends IApiConfig {}
+
+interface IApiGroupsGetConfig extends IApiConfig {}
+interface IApiGroupsOneConfig extends IApiConfig {
+  id: string;
+}
+interface IApiGroupsCustomersConfig extends IApiConfig {
+  id: string;
+}
+interface IApiGroupsCreateConfig extends IApiConfig {
+  name: string
+  description: string
+  minChildAge: number
+  maxChildAge: number
+  minChildCount: number
+  maxChildCount: number
+  customerTraffics: string[]
+  recommendationDays: string[]
+  recommendationFrequencies: string[]
+  conversationStates: string[]
+}
+interface IApiGroupsDeleteConfig extends IApiConfig {
+  id: string;
+}
+interface IApiGroupsUpdateConfig extends IApiConfig {
+  id: string;
+}
 
 interface IApiUsersGetConfig extends IApiConfig {}
 
@@ -51,6 +79,14 @@ export interface IUseApi {
     delete: (config: IApiUsersDeleteConfig) => Promise<void>;
     update: (config: IApiUsersUpdateConfig) => Promise<IUser>;
   };
+  groups: {
+    get: (config: IApiGroupsGetConfig) => Promise<IGroup[]>;
+    one: (config: IApiGroupsOneConfig) => Promise<IGroup[]>;
+    customers: (config: IApiGroupsCustomersConfig) => Promise<ICustomer[]>;
+    create: (config: IApiGroupsCreateConfig) => Promise<IGroup>;
+    delete: (config: IApiGroupsDeleteConfig) => Promise<void>;
+    update: (config: IApiGroupsUpdateConfig) => Promise<IGroup>;
+  }
 }
 
 type TUseApi = () => IUseApi;
@@ -153,6 +189,58 @@ export const useApi: TUseApi = (): IUseApi => {
         return http.request<IUser>({
           method: "PUT",
           url: `${API_URL}/users/${id}`,
+          headers,
+          data: { ...user },
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+    },
+    groups: {
+      get: ({ loader }) => {
+        return http.request<IGroup[]>({
+          method: "GET",
+          url: `${API_URL}/groups`,
+          headers,
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+      one: ({ id,loader }) => {
+        return http.request<IGroup[]>({
+          method: "GET",
+          url: `${API_URL}/groups?$filter=id eq ${id}`,
+          headers,
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+      customers: ({ id, loader }) => {
+        return http.request<ICustomer[]>({
+          method: "GET",
+          url: `${API_URL}/groups${id}/customers`,
+          headers,
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+      create: ({ loader, debug, ...body }) => {
+        return http.request<IGroup>({
+          method: "POST",
+          url: `${API_URL}/groups`,
+          headers,
+          data: {...body},
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+      delete: ({ id, loader }) => {
+        return http.request<void>({
+          method: "DELETE",
+          url: `${API_URL}/groups/${id}`,
+          headers,
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+      update: ({ id, user, loader }) => {
+        return http.request<IGroup>({
+          method: "PUT",
+          url: `${API_URL}/groups/${id}`,
           headers,
           data: { ...user },
           // loader: !!loader ? loader : "Loading users...",

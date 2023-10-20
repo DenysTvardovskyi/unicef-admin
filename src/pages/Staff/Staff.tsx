@@ -6,21 +6,6 @@ import { useApi, useNotification } from "../../hooks";
 
 interface IProps {}
 
-const dataSource = [
-  {
-    key: "1",
-    name: "Prime 1",
-  },
-  {
-    key: "2",
-    name: "True",
-  },
-  {
-    key: "3",
-    name: "Vice",
-  },
-];
-
 export const Staff: FC<IProps> = (): JSX.Element => {
   const api = useApi();
   const [ form ] = Form.useForm();
@@ -157,10 +142,12 @@ export const Staff: FC<IProps> = (): JSX.Element => {
       }
       api.users.update({
         id: record.id,
-        name: row.name,
-        lastName: row.lastName,
-        email: row.email,
-        ...record,
+        user: {
+          name: row.name,
+          lastName: row.lastName,
+          email: row.email,
+          ...record,
+        }
       });
     } catch (errInfo) {
       console.log("Validate Failed:", errInfo);
@@ -172,7 +159,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
   };
 
   useEffect(() => {
-    api.users.get({}).then((users) => setData(users));
+    api.users.get({}).then((users) => setData(users.items));
   }, []);
 
   return (

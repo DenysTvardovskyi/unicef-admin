@@ -68,7 +68,6 @@ export const Groups: FC<IProps> = (): JSX.Element => {
     },
   });
   return (
-
     <Flex gap="small" vertical>
       <Title level={3}>Groups</Title>
       <Table
@@ -78,6 +77,5 @@ export const Groups: FC<IProps> = (): JSX.Element => {
         pagination={tableParams.pagination}
       />
     </Flex>
-
   );
 };
