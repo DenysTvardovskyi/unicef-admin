@@ -2,10 +2,10 @@ import { FC } from "react";
 import { Landing as AuthLayout } from "../../layouts";
 import { useApi, useAuthorization } from "../../hooks";
 import { Link, useNavigate } from "react-router-dom";
-import { LockOutlined, MailOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Flex, Form, Input } from "antd";
-import Title from "antd/es/typography/Title";
+import { LockOutlined, MailOutlined, SmileOutlined } from "@ant-design/icons";
+import {Button, Checkbox, Flex, Form, Input, Result} from "antd";
 import { useTranslation } from "react-i18next";
+import {constants} from "../../styles/constants";
 
 interface IProps {}
 
@@ -68,9 +68,16 @@ export const SignIn: FC<IProps> = (): JSX.Element => {
       </Form>
     </AuthLayout>
   ) : (
-    <AuthLayout main={{ className: "d-flex justify-content-center" }}>
-      <Title>{t("signIn.authorized.title")}</Title>
-      <Link to="/">{t("signIn.authorized.goHome")}</Link>
+    <AuthLayout>
+        <Flex style={{width: "100%", height: "100%", justifyContent: "center", alignItems: "center"}}>
+            <Result
+                icon={<SmileOutlined style={{color: constants.blue}}/>}
+                title={t("signIn.authorized.title")}
+                extra={
+                    <Link to="/"><Button type="primary" style={{background: constants.blue}}>{t("signIn.authorized.goHome")}</Button></Link>
+                }
+            />
+        </Flex>
     </AuthLayout>
   );
 };
