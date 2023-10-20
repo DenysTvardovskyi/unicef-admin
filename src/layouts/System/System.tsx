@@ -17,6 +17,7 @@ import { useAuthorization } from "../../hooks";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { constants } from "../../styles/constants";
 import "./navigation.css";
+import { getInitials } from "../../utils";
 
 const { Header, Content, Sider } = Layout;
 
@@ -62,6 +63,7 @@ const LINKS = [
 ];
 
 export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
+  const { user } = useAuthorization();
   const [ collapsed, setCollapsed ] = useState(false);
   const [ hasBreakPoint, setBreakPoint ] = useState(false);
   const { t } = useTranslation();
@@ -77,7 +79,7 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
   };
 
   return (
-    <Layout style={{ display: "flex" }}>
+    <Layout>
       <Sider
         trigger={null}
         collapsedWidth={hasBreakPoint ? "0" : "80"}
@@ -156,10 +158,9 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
             />
             <Avatar
               size={32}
-              icon={<UserOutlined />}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", fontSize: 16 }}
               onClick={() => navigate("/profile")}
-            />
+            >{getInitials(user)}</Avatar>
           </Flex>
         </Header>
         <Content style={{ margin: "24px 16px", maxHeight: "100%" }}>

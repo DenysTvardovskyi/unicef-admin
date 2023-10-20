@@ -1,7 +1,8 @@
 import { FC } from "react";
-import { Avatar, Badge, Col, Descriptions, DescriptionsProps, Flex, Row } from "antd";
+import { Avatar, Badge, Card, Descriptions, DescriptionsProps, Flex } from "antd";
 import Title from "antd/es/typography/Title";
 import { useAuthorization } from "../../hooks";
+import { getInitials } from "../../utils";
 
 interface IProps {}
 
@@ -47,20 +48,22 @@ export const Profile: FC<IProps> = (): JSX.Element => {
   ];
 
   return (
-    <Flex gap="small" vertical>
-      <Title>Profile</Title>
-      <Row>
-        <Col span={3}>
-          <Badge.Ribbon text="SuperAdmin" color={BADGES["SuperAdmin"]}>
-            <Avatar size={128} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-              <Title style={{ margin: 0 }}>UA</Title>
-            </Avatar>
-          </Badge.Ribbon>
-        </Col>
-        <Col span={20} offset={1}>
-          <Descriptions title="User Info" items={items} />
-        </Col>
-      </Row>
+    <Flex gap="small" justify={"center"} align={"center"}>
+      <Card style={{ width: 500 }}>
+        <Title>Profile</Title>
+        <Flex vertical gap={"middle"}>
+          <Flex>
+            <Badge.Ribbon text={user.role} color={BADGES[user.role]}>
+              <Avatar size={128} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Title style={{ margin: 0 }}>{getInitials(user)}</Title>
+              </Avatar>
+            </Badge.Ribbon>
+          </Flex>
+
+          <Descriptions column={1} title="User Info" items={items} />
+        </Flex>
+
+      </Card>
     </Flex>
   );
 };
