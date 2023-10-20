@@ -18,6 +18,7 @@ import { useAuthorization } from "../../hooks";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { constants } from "../../styles/constants";
 import "./navigation.css"
+import {getInitials} from "../../utils";
 const { Header, Content, Sider } = Layout;
 
 const LANGUAGES: any = {
@@ -62,6 +63,7 @@ const LINKS = [
 ];
 
 export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
+  const {user} = useAuthorization()
   const [ collapsed, setCollapsed ] = useState(false);
   const [ hasBreakPoint, setBreakPoint ] = useState(false);
   const { t } = useTranslation();
@@ -154,10 +156,9 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
             />
             <Avatar
               size={32}
-              icon={<UserOutlined />}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", fontSize: 16}}
               onClick={() => navigate("/profile")}
-            />
+            >{getInitials(user)}</Avatar>
           </Flex>
 
         </Header>
