@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import Title from "antd/lib/typography/Title";
 import { useAuthorization } from "../../hooks";
 import { Link, useLocation } from "react-router-dom";
+import {constants} from "../../styles/constants";
 
 const { Header, Content, Sider } = Layout;
 
@@ -71,15 +72,16 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
   const handleChange = (value: string) => {
     i18n.changeLanguage(value);
   };
+
   return (
     <Layout>
       <Sider
         trigger={null} collapsible collapsed={collapsed}
         breakpoint="lg"
         style={{
-          overflow: "auto",
-          height: "100vh",
-
+            overflow: "auto",
+            height: "100vh",
+            backgroundColor: constants.blue,
         }}
         onBreakpoint={(broken) => {
           console.log(broken);
@@ -90,15 +92,15 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
       >
         <Flex style={{ height: "100%" }} vertical>
           <div style={{ minHeight: 64, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Title level={4} style={{ margin: 0, lineHeight: 1 }}>НУМО</Title>
+            <Title level={4} style={{ margin: 0, lineHeight: 1, color: constants.white}}>НУМО</Title>
           </div>
           <Flex style={{ height: "100%" }} vertical justify="space-between">
             <Menu
-              theme="dark"
               mode="inline"
               defaultSelectedKeys={[ location.pathname ]}
               defaultOpenKeys={[ LINKS.filter((link) => (location.pathname).split(link.key).length === 2)[0].key ]}
               items={LINKS}
+              style={{background: constants.blue}}
             />
             <Button
               style={{ margin: "0 4px 16px 4px" }}
@@ -107,13 +109,12 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
             >Log out</Button>
           </Flex>
         </Flex>
-
       </Sider>
-      <Layout className="site-layout" style={{ minHeight: "100vh" }}>
+      <Layout className="site-layout" style={{ height: "100vh" }}>
         <Header
           style={{
             padding: 0,
-            background: "#001529",
+            background: constants.white,
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -124,13 +125,12 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
             style={{
+                color: constants.brown,
               fontSize: "16px",
               width: 48,
               height: 48,
-              color: "#ffffff",
             }}
           />
-
           <Select
             defaultValue={i18n.resolvedLanguage}
             theme="dark"
@@ -139,8 +139,8 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
             options={langOptions}
           />
         </Header>
-        <Content style={{ margin: "24px 16px" }}>
-          <div style={{ padding: 24, height: "100%", background: "#ffffff" }}>{children}</div>
+        <Content style={{ margin: "24px 16px", height: "100%" }}>
+          <div style={{ padding: 24, height: "100%", background: "#ffffff", overflowY: "auto" }}>{children}</div>
         </Content>
       </Layout>
     </Layout>

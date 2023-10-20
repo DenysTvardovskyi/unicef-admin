@@ -32,6 +32,193 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
           <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
         </Flex>
         <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+        <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+        <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+        <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+        <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+      </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+        <Flex gap="small">
+          <Button type="primary" onClick={() => notification.error("Error")}>Error</Button>
+          <Button type="primary" onClick={() => notification.info("Info")}>Info</Button>
+          <Button type="primary" onClick={() => notification.success("Success")}>Success</Button>
+          <Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>
+        </Flex>
+
+        <Flex gap="small">
           <Button type="primary" onClick={handleLoader}>Loader</Button>
         </Flex>
       </Flex>
