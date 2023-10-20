@@ -2,7 +2,7 @@ import { FC } from "react";
 import { System as SystemLayout } from "../../layouts";
 import { useTranslation } from "react-i18next";
 import { useLoader, useNotification } from "../../hooks";
-import {Button, Card, Flex, Skeleton, Table} from "antd";
+import {Button, Card, Col, Flex, Row, Skeleton, Table} from "antd";
 import { ILoaderTask } from "../../components/Loader/Loader";
 import Title from "antd/es/typography/Title";
 import {Column, Pie} from '@ant-design/plots';
@@ -203,23 +203,21 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
       <Flex gap={"small"} vertical>
         <Title>{t("home.title")}</Title>
         <AnalyticsBar/>
-        <Flex gap={"middle"}>
-          <Flex style={{width: "50%"}}>
+        <Row gutter={[16, 16]}>
+          <Col xs={24} sm={12} md={12} lg={8} xl={12}>
             <Table style={{width: "100%"}} dataSource={dataSource} columns={columns} pagination={false}/>
-          </Flex>
-          <Flex gap={"middle"} style={{width: "50%"}}>
-            <Card title="Card title" style={{width: "50%"}}>
+          </Col>
+          <Col xs={24} sm={12} md={12} lg={8} xl={6}>
+            <Card title="Card title" style={{width: "100%"}}>
               {DemoPie()}
             </Card>
-            <Card title="Card title" style={{width: "50%"}}>
+          </Col>
+          <Col xs={24} sm={12} md={12} lg={8} xl={6}>
+            <Card title="Card title" style={{width: "100%"}}>
               {DemoColumn()}
             </Card>
-          </Flex>
-          {/*<Button type="primary" onClick={() => notification.error("Error")}>Error</Button>*/}
-          {/*<Button type="primary" onClick={() => notification.info("Info")}>Info</Button>*/}
-          {/*<Button type="primary" onClick={() => notification.success("Success")}>Success</Button>*/}
-          {/*<Button type="primary" onClick={() => notification.warning("Warning")}>Warning</Button>*/}
-        </Flex>
+          </Col>
+        </Row>
       </Flex>
     </SystemLayout>
   );
