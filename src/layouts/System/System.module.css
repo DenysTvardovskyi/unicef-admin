@@ -1,0 +1,22 @@
+.container {
+  min-height: 100vh;
+}
+
+.body {
+  width: 100%;
+  margin-top: 56px;
+  height: calc(100vh - 56px - 0px);
+}
+
+.main {
+  flex: 1;
+  max-height: calc(100vh - 56px - 0px);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.full {
+  min-height: calc(100vh - 56px - 0px);
+}
+
+/*# sourceMappingURL=System.module.css.map */

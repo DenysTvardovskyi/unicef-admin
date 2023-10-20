@@ -1,0 +1,87 @@
+{
+  "translation": {
+    "header": {
+      "navigation": {
+        "signIn": "Авторизація",
+        "signUp": "Реєстрація"
+      }
+    },
+    "home": {
+      "title": "Привіт світ!"
+    },
+    "signIn": {
+      "email": {
+        "title": "Е-пошта",
+        "validation": {
+          "email": "Пошта не вірна!",
+          "required": "Це поле є обов'язковим!"
+        }
+      },
+      "password": {
+        "title": "Пароль",
+        "validation": {
+          "required": "Це поле є обов'язковим!"
+        }
+      },
+      "remember": {
+        "title": "Запам'ятати мене"
+      },
+      "navigation": {
+        "register": "Зареєструватись!",
+        "logIn": "Увійти"
+      },
+      "authorized": {
+        "title": "Ви вже авторизовані",
+        "goHome": "Повернутись на головну!"
+      },
+      "loader": {
+        "title":"Авторизація..."
+      }
+    },
+    "signUp": {
+      "fullname": {
+        "title": "Ім'я та Прізвище",
+        "validation": {
+          "required": "Це поле є обов'язковим!"
+        }
+      },
+      "email": {
+        "title": "Пошта",
+        "validation": {
+          "email": "Пошта не вірна!",
+          "required": "Це поле є обов'язковим!"
+        }
+      },
+      "password": {
+        "title": "Пароль",
+        "validation": {
+          "required": "Це поле є обов'язковим!"
+        }
+      },
+      "confirm": {
+        "title": "Підтвердіть Пароль",
+        "validation": {
+          "required": "Це поле є обов'язковим!",
+          "noMatch": "Паролі не співпадають!"
+        }
+      },
+      "agreement": {
+        "title": "Я прочитав",
+        "linkText": "угоду користувача",
+        "validation": {
+          "required": "Прийміть Умови!"
+        }
+      },
+      "navigation": {
+        "register": "Зареєструватись"
+      },
+      "authorized": {
+        "title": "Ви вже авторизовані",
+        "goHome": "Повернутись на головну!"
+      },
+      "loader": {
+        "title":"Реєстрація..."
+      }
+    }
+  }
+}

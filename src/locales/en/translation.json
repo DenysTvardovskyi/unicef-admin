@@ -1,0 +1,87 @@
+{
+  "translation": {
+    "header": {
+      "navigation": {
+        "signIn": "Log In",
+        "signUp": "Register"
+      }
+    },
+    "home": {
+      "title": "Hello World!"
+    },
+    "signIn": {
+      "email": {
+        "title": "E-mail",
+        "validation": {
+          "email": "The input is not valid E-mail!",
+          "required": "Please input your E-mail!"
+        }
+      },
+      "password": {
+        "title": "Password",
+        "validation": {
+          "required": "Please input your Password!"
+        }
+      },
+      "remember": {
+        "title": "Remember me"
+      },
+      "navigation": {
+        "register": "Register now!",
+        "logIn": "Log in"
+      },
+      "authorized": {
+        "title": "You are authorized!",
+        "goHome": "Go to Home Page"
+      },
+      "loader": {
+        "title": "Process sign in..."
+      }
+    },
+    "signUp": {
+      "fullname": {
+        "title": "Full Name",
+        "validation": {
+          "required": "Please input your Full Name!"
+        }
+      },
+      "email": {
+        "title": "E-mail",
+        "validation": {
+          "email": "The input is not valid E-mail!",
+          "required": "Please input your E-mail!"
+        }
+      },
+      "password": {
+        "title": "Password",
+        "validation": {
+          "required": "Please input your Password!"
+        }
+      },
+      "confirm": {
+        "title": "Confirm Password",
+        "validation": {
+          "required": "Please confirm your password!",
+          "noMatch": "The new password that you entered do not match!"
+        }
+      },
+      "agreement": {
+        "title": "I have read the",
+        "linkText": "agreement",
+        "validation": {
+          "required": "Should accept agreement"
+        }
+      },
+      "navigation": {
+        "register": "Register"
+      },
+      "authorized": {
+        "title": "You are authorized!",
+        "goHome": "Go to Home Page"
+      },
+      "loader": {
+        "title": "Process sign up..."
+      }
+    }
+  }
+}

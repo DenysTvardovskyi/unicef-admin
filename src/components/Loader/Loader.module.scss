@@ -1,0 +1,38 @@
+@import "../../styles/variables";
+
+.container {
+  position: relative;
+  flex: 1;
+}
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  visibility: hidden;
+  opacity: 0;
+  background: transparent;
+  transition: all ease 0.4s;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  background: $loader-visible-bg;
+  transition: all ease 0.4s;
+}
+
+.message {
+  color: $loader-message-color;
+  font-size: 16px;
+  height: 30px;
+  max-width: 300px;
+  text-align: center;
+}

@@ -1,0 +1,19 @@
+$header-height: 64px;
+$footer-height: 120px;
+
+.container {
+  min-height: 100vh;
+  //padding: 0 62px 20px 62px;
+  background: #000F09;
+
+  //@media screen and (max-width: 425px) {
+  //  padding: 0 16px 24px 16px;
+  //}
+}
+
+.main {
+  flex: 1;
+  min-height: calc(100vh - #{$header-height} - #{$footer-height});
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}

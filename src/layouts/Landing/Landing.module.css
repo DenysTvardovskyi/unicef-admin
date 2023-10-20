@@ -1,0 +1,13 @@
+.container {
+  min-height: 100vh;
+  background: #000F09;
+}
+
+.main {
+  flex: 1;
+  min-height: calc(100vh - 64px - 120px);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/*# sourceMappingURL=Landing.module.css.map */
