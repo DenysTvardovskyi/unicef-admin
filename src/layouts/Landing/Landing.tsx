@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import Title from "antd/lib/typography/Title";
 
 import { Layout } from "antd";
+import {constants} from "../../styles/constants";
 
 const { Header, Content, Footer } = Layout;
 
@@ -23,9 +24,10 @@ export const Landing: FC<IProps> = ({ main, children }: IProps): JSX.Element => 
           width: "100%",
           display: "flex",
           alignItems: "center",
+            backgroundColor: constants.blue
         }}
       >
-        <Title level={2}>НУМО</Title>
+        <Title level={2} style={{color: constants.white}}>НУМО</Title>
       </Header>
       <Content style={{ padding: "50px 50px 0 50px", height: "100%" }}>
         <div style={{ padding: 24, height: '100%', background: "#ffffff", overflowY: "auto" }}>{children}</div>

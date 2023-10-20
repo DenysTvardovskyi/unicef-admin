@@ -110,7 +110,7 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
           </Flex>
         </Flex>
       </Sider>
-      <Layout className="site-layout" style={{ height: "100vh" }}>
+      <Layout className="site-layout" style={{ maxHeight: "100vh" }}>
         <Header
           style={{
             padding: 0,
@@ -139,8 +139,8 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
             options={langOptions}
           />
         </Header>
-        <Content style={{ margin: "24px 16px", height: "100%" }}>
-          <div style={{ padding: 24, height: "100%", background: "#ffffff", overflowY: "auto" }}>{children}</div>
+        <Content style={{ margin: "24px 16px", maxHeight: "100%", }}>
+          <div style={{ padding: 16, height: "100%", overflowY:"auto", background: constants.white}}>{children}</div>
         </Content>
       </Layout>
     </Layout>
