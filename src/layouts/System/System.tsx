@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import {
   AppstoreOutlined,
   CoffeeOutlined,
@@ -8,7 +8,7 @@ import {
   MenuUnfoldOutlined,
   TeamOutlined,
   UserOutlined,
-  IdcardOutlined
+
 } from "@ant-design/icons";
 import { Avatar, Button, Flex, Layout, Menu, MenuProps, Select, Badge } from "antd";
 import i18n from "i18next";
@@ -58,7 +58,6 @@ const LINKS = [
     getItem(<Link to="/analytics/activity">Activity</Link>, "/analytics/activity"),
     getItem(<Link to="/analytics/newsletter">Newsletter</Link>, "/analytics/newsletter"),
   ]),
-  getItem(<Link to="/profile">Profile</Link>, "/profile", <IdcardOutlined />),
   getItem(<Link to="/staff">Staff</Link>, "/staff", <CoffeeOutlined />),
 ];
 
