@@ -1,20 +1,21 @@
 import { FC, useEffect } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
+import { Landing as LandingLayout, System as SystemLayout } from "../../layouts";
 import {
-  Dashboard,
-  Groups,
-  Group,
-  CreateGroup,
-  Users,
-  UserAnalytics,
   ActivityAnalytics,
-  TrafficAnalytics,
+  CreateGroup,
+  Dashboard,
+  Group,
+  Groups,
   NewsletterAnalytics,
-  Profile,
-  Staff,
-  User,
   NotFound,
+  Profile,
   SignIn,
+  Staff,
+  TrafficAnalytics,
+  User,
+  UserAnalytics,
+  Users,
 } from "../../pages";
 import { withCheckAuthorization, withCheckRole } from "../../hocs";
 import { useApi, useAuthorization } from "../../hooks";
@@ -46,22 +47,31 @@ export const Router: FC<IProps> = (): JSX.Element => {
 
   return (
     <HashRouter>
-      <Routes>
-        <Route path="/" element={<PageDashboardWithCheckAuthorization />} />
-        <Route path="/users" element={<PageUsersWithCheckAuthorization />} />
-        <Route path="/user/:userId" element={<PageUserWithCheckAuthorization />} />
-        <Route path="/group/all" element={<PageGroupsWithCheckAuthorization />} />
-        <Route path="/group/:groupId" element={<PageGroupWithCheckAuthorization />} />
-        <Route path="/group/create" element={<PageCreateGroupWithCheckAuthorization />} />
-        <Route path="/analytics/users" element={<PageUserAnalyticsWithCheckAuthorization />} />
-        <Route path="/analytics/traffic" element={<PageTrafficAnalyticsWithCheckAuthorization />} />
-        <Route path="/analytics/activity" element={<PageActivityAnalyticsWithCheckAuthorization />} />
-        <Route path="/analytics/newsletter" element={<PageNewsletterAnalyticsWithCheckAuthorization />} />
-        <Route path="/profile" element={<PageProfileWithCheckAuthorization />} />
-        <Route path="/staff" element={<PageStaffWithCheckAuthorization />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      {isAuthorized ? <SystemLayout>
+          <Routes>
+            <Route path="/" element={<PageDashboardWithCheckAuthorization />} />
+            <Route path="/users" element={<PageUsersWithCheckAuthorization />} />
+            <Route path="/user/:userId" element={<PageUserWithCheckAuthorization />} />
+            <Route path="/group/all" element={<PageGroupsWithCheckAuthorization />} />
+            <Route path="/group/:groupId" element={<PageGroupWithCheckAuthorization />} />
+            <Route path="/group/create" element={<PageCreateGroupWithCheckAuthorization />} />
+            <Route path="/analytics/users" element={<PageUserAnalyticsWithCheckAuthorization />} />
+            <Route path="/analytics/traffic" element={<PageTrafficAnalyticsWithCheckAuthorization />} />
+            <Route path="/analytics/activity" element={<PageActivityAnalyticsWithCheckAuthorization />} />
+            <Route path="/analytics/newsletter" element={<PageNewsletterAnalyticsWithCheckAuthorization />} />
+            <Route path="/profile" element={<PageProfileWithCheckAuthorization />} />
+            <Route path="/staff" element={<PageStaffWithCheckAuthorization />} />
+          </Routes>
+        </SystemLayout>
+        :
+        <LandingLayout>
+          <Routes>
+            <Route path="/" element={<PageDashboardWithCheckAuthorization />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </LandingLayout>
+      }
     </HashRouter>
   );
 };

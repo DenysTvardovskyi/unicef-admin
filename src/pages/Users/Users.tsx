@@ -1,5 +1,4 @@
 import { FC, useState } from "react";
-import { System as SystemLayout } from "../../layouts";
 import { Button, Flex, Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import Title from "antd/es/typography/Title";
@@ -102,16 +101,14 @@ export const Users: FC<IProps> = (): JSX.Element => {
   });
 
   return (
-    <SystemLayout>
-      <Flex gap="small" vertical>
-        <Title level={3}>Users</Title>
-        <Table
-          dataSource={data}
-          columns={columns}
-          scroll={{ x: 700 }}
-          pagination={tableParams.pagination}
-        />
-      </Flex>
-    </SystemLayout>
+    <Flex gap="small" vertical>
+      <Title level={3}>Users</Title>
+      <Table
+        dataSource={data}
+        columns={columns}
+        scroll={{ x: 700 }}
+        pagination={tableParams.pagination}
+      />
+    </Flex>
   );
 };

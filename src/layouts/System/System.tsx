@@ -8,16 +8,16 @@ import {
   MenuUnfoldOutlined,
   TeamOutlined,
   UserOutlined,
-
 } from "@ant-design/icons";
-import { Avatar, Button, Flex, Layout, Menu, MenuProps, Select, Badge } from "antd";
+import { Avatar, Button, Flex, Layout, Menu, MenuProps, Select } from "antd";
 import i18n from "i18next";
 import { useTranslation } from "react-i18next";
 import Title from "antd/lib/typography/Title";
 import { useAuthorization } from "../../hooks";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { constants } from "../../styles/constants";
-import "./navigation.css"
+import "./navigation.css";
+
 const { Header, Content, Sider } = Layout;
 
 const LANGUAGES: any = {
@@ -77,16 +77,16 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
   };
 
   return (
-    <Layout>
+    <Layout style={{ display: "flex" }}>
       <Sider
-          trigger={null}
+        trigger={null}
         collapsedWidth={hasBreakPoint ? "0" : "80"}
         collapsible
         collapsed={collapsed}
         breakpoint="lg"
         onBreakpoint={(broken) => {
-          setCollapsed(broken)
-          setBreakPoint(broken)
+          setCollapsed(broken);
+          setBreakPoint(broken);
         }}
         style={{
           overflow: "auto",
@@ -102,9 +102,11 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
             <Menu
               mode="inline"
               defaultSelectedKeys={[ location.pathname ]}
-              defaultOpenKeys={[ LINKS.filter((link) => (location.pathname).split(link.key).length === 2)?.[0]?.key || "" ]}
+              defaultOpenKeys={[
+                LINKS.filter((link) => (location.pathname).split(link.key).length === 2)?.[0]?.key || "",
+              ]}
               items={LINKS}
-              style={{background: constants.blue, color: constants.white}}
+              style={{ background: constants.blue, color: constants.white }}
             />
 
             {collapsed
@@ -123,7 +125,7 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
           </Flex>
         </Flex>
       </Sider>
-      <Layout className="site-layout" style={{ maxHeight: "100vh" }}>
+      <Layout style={{ maxHeight: "100vh" }}>
         <Header
           style={{
             padding: "0 16px 0 0",
@@ -159,10 +161,9 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
               onClick={() => navigate("/profile")}
             />
           </Flex>
-
         </Header>
-        <Content style={{ margin: "24px 16px", maxHeight: "100%", }}>
-          <div style={{ padding: 16, height: "100%", overflowY:"auto", background: constants.white}}>{children}</div>
+        <Content style={{ margin: "24px 16px", maxHeight: "100%" }}>
+          <div style={{ padding: 16, height: "100%", overflowY: "auto", background: constants.white }}>{children}</div>
         </Content>
       </Layout>
     </Layout>

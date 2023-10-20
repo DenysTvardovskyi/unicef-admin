@@ -1,6 +1,5 @@
 import { FC } from "react";
-import { System as SystemLayout } from "../../layouts";
-import { Avatar, Flex, Badge, Col, Descriptions, DescriptionsProps, Row } from "antd";
+import { Avatar, Badge, Col, Descriptions, DescriptionsProps, Flex, Row } from "antd";
 import Title from "antd/es/typography/Title";
 import { useAuthorization } from "../../hooks";
 
@@ -48,22 +47,20 @@ export const Profile: FC<IProps> = (): JSX.Element => {
   ];
 
   return (
-    <SystemLayout>
-      <Flex gap="small" vertical>
-        <Title>Profile</Title>
-        <Row>
-          <Col span={3}>
-            <Badge.Ribbon text="SuperAdmin" color={BADGES["SuperAdmin"]}>
-              <Avatar size={128} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <Title style={{ margin: 0 }}>UA</Title>
-              </Avatar>
-            </Badge.Ribbon>
-          </Col>
-          <Col span={20} offset={1}>
-            <Descriptions title="User Info" items={items} />
-          </Col>
-        </Row>
-      </Flex>
-    </SystemLayout>
+    <Flex gap="small" vertical>
+      <Title>Profile</Title>
+      <Row>
+        <Col span={3}>
+          <Badge.Ribbon text="SuperAdmin" color={BADGES["SuperAdmin"]}>
+            <Avatar size={128} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+              <Title style={{ margin: 0 }}>UA</Title>
+            </Avatar>
+          </Badge.Ribbon>
+        </Col>
+        <Col span={20} offset={1}>
+          <Descriptions title="User Info" items={items} />
+        </Col>
+      </Row>
+    </Flex>
   );
 };

@@ -1,12 +1,11 @@
 import { FC } from "react";
-import { System as SystemLayout } from "../../layouts";
 import { useTranslation } from "react-i18next";
 import { useLoader, useNotification } from "../../hooks";
-import {Button, Card, Col, Flex, Row, Skeleton, Table} from "antd";
+import { Card, Col, Flex, Row, Skeleton, Table } from "antd";
 import { ILoaderTask } from "../../components/Loader/Loader";
 import Title from "antd/es/typography/Title";
-import {Column, Pie} from '@ant-design/plots';
-import {AnalyticsBar} from "./components/AnalyticsBar";
+import { Column, Pie } from "@ant-design/plots";
+import { AnalyticsBar } from "./components/AnalyticsBar";
 
 interface IProps {}
 
@@ -26,48 +25,48 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
   const DemoPie = () => {
     const data = [
       {
-        type: '分类一',
+        type: "分类一",
         value: 27,
       },
       {
-        type: '分类二',
+        type: "分类二",
         value: 25,
       },
       {
-        type: '分类三',
+        type: "分类三",
         value: 18,
       },
       {
-        type: '分类四',
+        type: "分类四",
         value: 15,
       },
       {
-        type: '分类五',
+        type: "分类五",
         value: 10,
       },
       {
-        type: '其他',
+        type: "其他",
         value: 5,
       },
     ];
     const config = {
       appendPadding: 10,
       data,
-      angleField: 'value',
-      colorField: 'type',
+      angleField: "value",
+      colorField: "type",
       radius: 0.9,
       label: {
-        type: 'inner',
-        offset: '-30%',
+        type: "inner",
+        offset: "-30%",
         content: ({ percent }) => `${(percent * 100).toFixed(0)}%`,
         style: {
           fontSize: 14,
-          textAlign: 'center',
+          textAlign: "center",
         },
       },
       interactions: [
         {
-          type: 'element-active',
+          type: "element-active",
         },
       ],
     };
@@ -77,49 +76,49 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
   const DemoColumn = () => {
     const data = [
       {
-        type: '家具家电',
+        type: "家具家电",
         sales: 38,
       },
       {
-        type: '粮油副食',
+        type: "粮油副食",
         sales: 52,
       },
       {
-        type: '生鲜水果',
+        type: "生鲜水果",
         sales: 61,
       },
       {
-        type: '美容洗护',
+        type: "美容洗护",
         sales: 145,
       },
       {
-        type: '母婴用品',
+        type: "母婴用品",
         sales: 48,
       },
       {
-        type: '进口食品',
+        type: "进口食品",
         sales: 38,
       },
       {
-        type: '食品饮料',
+        type: "食品饮料",
         sales: 38,
       },
       {
-        type: '家庭清洁',
+        type: "家庭清洁",
         sales: 38,
       },
     ];
     const config = {
       data,
-      xField: 'type',
-      yField: 'sales',
+      xField: "type",
+      yField: "sales",
       label: {
         // 可手动配置 label 数据标签位置
-        position: 'middle',
+        position: "middle",
         // 'top', 'bottom', 'middle',
         // 配置样式
         style: {
-          fill: '#FFFFFF',
+          fill: "#ffffff",
           opacity: 0.6,
         },
       },
@@ -131,10 +130,10 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
       },
       meta: {
         type: {
-          alias: '类别',
+          alias: "类别",
         },
         sales: {
-          alias: '销售额',
+          alias: "销售额",
         },
       },
     };
@@ -143,90 +142,90 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
 
   const dataSource = [
     {
-      key: '1',
-      name: 'Mike',
+      key: "1",
+      name: "Mike",
       age: 32,
-      address: '10 Downing Street',
+      address: "10 Downing Street",
     },
     {
-      key: '2',
-      name: 'John',
+      key: "2",
+      name: "John",
       age: 42,
-      address: '10 Downing Street',
+      address: "10 Downing Street",
     },
     {
-      key: '1',
-      name: 'Mike',
+      key: "1",
+      name: "Mike",
       age: 32,
-      address: '10 Downing Street',
+      address: "10 Downing Street",
     },
     {
-      key: '3',
-      name: 'John',
+      key: "3",
+      name: "John",
       age: 42,
-      address: '10 Downing Street',
+      address: "10 Downing Street",
     },
     {
-      key: '4',
-      name: 'Mike',
+      key: "4",
+      name: "Mike",
       age: 32,
-      address: '10 Downing Street',
+      address: "10 Downing Street",
     },
     {
-      key: '5',
-      name: 'John',
+      key: "5",
+      name: "John",
       age: 42,
-      address: '10 Downing Street',
+      address: "10 Downing Street",
     },
   ];
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: "Age",
+      dataIndex: "age",
+      key: "age",
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
     },
   ];
 
-  const loading = true
+  const loading = true;
 
   return (
-    <SystemLayout>
-      <Flex gap={"small"} vertical>
-        <Title>{t("home.title")}</Title>
-        <AnalyticsBar/>
-        <Row gutter={[16, 16]}>
-          <Col xs={24} sm={12} md={12} lg={8} xl={12}>
+
+    <Flex gap={"small"} vertical>
+      <Title>{t("home.title")}</Title>
+      <AnalyticsBar />
+      <Row gutter={[ 16, 16 ]}>
+        <Col xs={24} sm={12} md={12} lg={8} xl={12}>
+          <Skeleton loading={loading} active={true}>
+            <Table style={{ width: "100%" }} dataSource={dataSource} columns={columns} pagination={false} />
+          </Skeleton>
+        </Col>
+        <Col xs={24} sm={12} md={12} lg={8} xl={6}>
+          <Card title="Card title" style={{ width: "100%" }}>
             <Skeleton loading={loading} active={true}>
-              <Table style={{width: "100%"}} dataSource={dataSource} columns={columns} pagination={false}/>
+              {!loading && DemoPie()}
             </Skeleton>
-          </Col>
-          <Col xs={24} sm={12} md={12} lg={8} xl={6}>
-              <Card title="Card title" style={{width: "100%"}}>
-                <Skeleton loading={loading} active={true}>
-                  {!loading && DemoPie() }
-                </Skeleton>
-              </Card>
-          </Col>
-          <Col xs={24} sm={12} md={12} lg={8} xl={6}>
-            <Card title="Card title" style={{width: "100%"}}>
-              <Skeleton loading={loading} active={true}>
-                {!loading && DemoColumn() }
-              </Skeleton>
-            </Card>
-          </Col>
-        </Row>
-      </Flex>
-    </SystemLayout>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={12} lg={8} xl={6}>
+          <Card title="Card title" style={{ width: "100%" }}>
+            <Skeleton loading={loading} active={true}>
+              {!loading && DemoColumn()}
+            </Skeleton>
+          </Card>
+        </Col>
+      </Row>
+    </Flex>
+
   );
 };
