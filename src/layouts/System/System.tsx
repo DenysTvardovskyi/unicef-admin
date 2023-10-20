@@ -8,6 +8,7 @@ import {
   MenuUnfoldOutlined,
   TeamOutlined,
   UserOutlined,
+  IdcardOutlined
 } from "@ant-design/icons";
 import { Avatar, Button, Flex, Layout, Menu, MenuProps, Select, Badge } from "antd";
 import i18n from "i18next";
@@ -16,7 +17,7 @@ import Title from "antd/lib/typography/Title";
 import { useAuthorization } from "../../hooks";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { constants } from "../../styles/constants";
-
+import "./navigation.css"
 const { Header, Content, Sider } = Layout;
 
 const LANGUAGES: any = {
@@ -57,11 +58,13 @@ const LINKS = [
     getItem(<Link to="/analytics/activity">Activity</Link>, "/analytics/activity"),
     getItem(<Link to="/analytics/newsletter">Newsletter</Link>, "/analytics/newsletter"),
   ]),
+  getItem(<Link to="/profile">Profile</Link>, "/profile", <IdcardOutlined />),
   getItem(<Link to="/staff">Staff</Link>, "/staff", <CoffeeOutlined />),
 ];
 
 export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
   const [ collapsed, setCollapsed ] = useState(false);
+  const [ hasBreakPoint, setBreakPoint ] = useState(false);
   const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
@@ -77,18 +80,19 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
   return (
     <Layout>
       <Sider
-        trigger={null} collapsible collapsed={collapsed}
+          trigger={null}
+        collapsedWidth={hasBreakPoint ? "0" : "80"}
+        collapsible
+        collapsed={collapsed}
         breakpoint="lg"
+        onBreakpoint={(broken) => {
+          setCollapsed(broken)
+          setBreakPoint(broken)
+        }}
         style={{
           overflow: "auto",
           height: "100vh",
           backgroundColor: constants.blue,
-        }}
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
         }}
       >
         <Flex style={{ height: "100%" }} vertical>

@@ -1,4 +1,4 @@
-import {Card, Flex, Skeleton} from "antd";
+import {Card, Col, Flex, Row, Skeleton} from "antd";
 import Title from "antd/es/typography/Title";
 
 interface IProps {}
@@ -11,7 +11,6 @@ const cartContentStyles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    border: "1px solid red"
 }
 
 const mocks = [
@@ -24,17 +23,22 @@ const mocks = [
 ]
 
 const getAnalyticsCards = () =>
-    mocks.map(data => <Card style={cartStyles}>
-        <Skeleton loading={false} active style={cartContentStyles}>
-            <Title level={2}>{data.value}</Title>
-            <Title level={5}>{data.label}</Title>
-        </Skeleton>
-    </Card>
+    mocks.map(data =>
+        <Col xs={24} sm={12} md={8} lg={4} xl={4}>
+            <Card style={cartStyles}>
+                <Skeleton loading={data.value > 900} active style={cartContentStyles}>
+                    <Title level={2}>{data.value}</Title>
+                    <Title level={5}>{data.label}</Title>
+                </Skeleton>
+            </Card>
+        </Col>
     )
 
 
 export const AnalyticsBar = (props: IProps) => {
-    return <Flex gap={"middle"}>
-        {getAnalyticsCards()}
-    </Flex>
+    return (
+        <Row gutter={[16, 16]}>
+            {getAnalyticsCards()}
+        </Row>
+    )
 }
