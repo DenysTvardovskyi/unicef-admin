@@ -1,0 +1,26 @@
+.ant-menu-item-selected {
+    background-color: white !important;
+}
+
+.ant-menu-submenu-title[aria-expanded="true"]{
+    color: white !important;
+}
+
+.ant-menu-submenu-selected > .ant-menu-submenu-title{
+    background-color: white;
+}
+
+.ant-menu-submenu-selected svg {
+    fill: #4E4040;
+}
+
+.ant-menu-submenu-selected span:nth-child(2) {
+    color: #4E4040;
+}
+
+.ant-menu-submenu-selected i::before{
+    color: #4E4040;
+}
+.ant-menu-submenu-selected i::after{
+    color: #4E4040;
+}
