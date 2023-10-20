@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { AuthLayout } from "../../layouts";
 import { useApi, useAuthorization } from "../../hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { LockOutlined, MailOutlined, SmileOutlined } from "@ant-design/icons";
@@ -26,7 +25,7 @@ export const SignIn: FC<IProps> = (): JSX.Element => {
   };
 
   return !isAuthorized ? (
-    <AuthLayout>
+    <>
         <Title level={1} style={{color: constants.blue}}>НУМО</Title>
       <Form
         name="normal_login"
@@ -67,21 +66,19 @@ export const SignIn: FC<IProps> = (): JSX.Element => {
           </Flex>
         </Form.Item>
       </Form>
-    </AuthLayout>
+    </>
   ) : (
-    <AuthLayout>
-      <Flex style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
-        <Result
-          icon={<SmileOutlined style={{ color: constants.blue }} />}
-          title={t("signIn.authorized.title")}
-          extra={
-            <Link to="/"><Button
-              type="primary"
-              style={{ background: constants.blue }}
-            >{t("signIn.authorized.goHome")}</Button></Link>
-          }
-        />
-      </Flex>
-    </AuthLayout>
+    <Flex style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+      <Result
+        icon={<SmileOutlined style={{ color: constants.blue }} />}
+        title={t("signIn.authorized.title")}
+        extra={
+          <Link to="/"><Button
+            type="primary"
+            style={{ background: constants.blue }}
+          >{t("signIn.authorized.goHome")}</Button></Link>
+        }
+      />
+    </Flex>
   );
 };

@@ -8,7 +8,6 @@ import {
   MenuUnfoldOutlined,
   TeamOutlined,
   UserOutlined,
-
 } from "@ant-design/icons";
 import { Avatar, Button, Flex, Layout, Menu, MenuProps, Select } from "antd";
 import i18n from "i18next";
@@ -17,8 +16,9 @@ import Title from "antd/lib/typography/Title";
 import { useAuthorization } from "../../hooks";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { constants } from "../../styles/constants";
-import "./navigation.css"
-import {getInitials} from "../../utils";
+import "./navigation.css";
+import { getInitials } from "../../utils";
+
 const { Header, Content, Sider } = Layout;
 
 const LANGUAGES: any = {
@@ -63,7 +63,7 @@ const LINKS = [
 ];
 
 export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
-  const {user} = useAuthorization()
+  const { user } = useAuthorization();
   const [ collapsed, setCollapsed ] = useState(false);
   const [ hasBreakPoint, setBreakPoint ] = useState(false);
   // const { t } = useTranslation();
@@ -81,14 +81,14 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
   return (
     <Layout>
       <Sider
-          trigger={null}
+        trigger={null}
         collapsedWidth={hasBreakPoint ? "0" : "80"}
         collapsible
         collapsed={collapsed}
         breakpoint="lg"
         onBreakpoint={(broken) => {
-          setCollapsed(broken)
-          setBreakPoint(broken)
+          setCollapsed(broken);
+          setBreakPoint(broken);
         }}
         style={{
           overflow: "auto",
@@ -106,7 +106,7 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
               defaultSelectedKeys={[ location.pathname ]}
               defaultOpenKeys={[ ""+LINKS.filter((link) => (location.pathname).split(link?.key).length === 2)?.[0]?.key || "" ]}
               items={LINKS}
-              style={{background: constants.blue, color: constants.white}}
+              style={{ background: constants.blue, color: constants.white }}
             />
 
             {collapsed
@@ -125,7 +125,7 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
           </Flex>
         </Flex>
       </Sider>
-      <Layout className="site-layout" style={{ maxHeight: "100vh" }}>
+      <Layout style={{ maxHeight: "100vh" }}>
         <Header
           style={{
             padding: "0 16px 0 0",
@@ -155,14 +155,13 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
             />
             <Avatar
               size={32}
-              style={{ cursor: "pointer", fontSize: 16}}
+              style={{ cursor: "pointer", fontSize: 16 }}
               onClick={() => navigate("/profile")}
             >{getInitials(user)}</Avatar>
           </Flex>
-
         </Header>
-        <Content style={{ margin: "24px 16px", maxHeight: "100%", }}>
-          <div style={{ padding: 16, height: "100%", overflowY:"auto", background: constants.white}}>{children}</div>
+        <Content style={{ margin: "24px 16px", maxHeight: "100%" }}>
+          <div style={{ padding: 16, height: "100%", overflowY: "auto", background: constants.white }}>{children}</div>
         </Content>
       </Layout>
     </Layout>

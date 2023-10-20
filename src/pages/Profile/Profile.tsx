@@ -1,9 +1,8 @@
 import { FC } from "react";
-import { System as SystemLayout } from "../../layouts";
-import {Avatar, Flex, Badge, Descriptions, DescriptionsProps, Card} from "antd";
+import { Avatar, Badge, Card, Descriptions, DescriptionsProps, Flex } from "antd";
 import Title from "antd/es/typography/Title";
 import { useAuthorization } from "../../hooks";
-import {getInitials} from "../../utils";
+import { getInitials } from "../../utils";
 
 interface IProps {}
 
@@ -49,25 +48,22 @@ export const Profile: FC<IProps> = (): JSX.Element => {
   ];
 
   return (
-    <SystemLayout>
-      <Flex gap="small" justify={"center"} align={"center"}>
-        <Card style={{ width: 500 }}>
-          <Title>Profile</Title>
-          <Flex vertical gap={"middle"}>
-            <Flex>
-              <Badge.Ribbon text={user.role} color={BADGES[user.role]}>
-                <Avatar size={128} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                  <Title style={{ margin: 0 }}>{getInitials(user)}</Title>
-                </Avatar>
-              </Badge.Ribbon>
-            </Flex>
-
-            <Descriptions column={1} title="User Info" items={items} />
+    <Flex gap="small" justify={"center"} align={"center"}>
+      <Card style={{ width: 500 }}>
+        <Title>Profile</Title>
+        <Flex vertical gap={"middle"}>
+          <Flex>
+            <Badge.Ribbon text={user.role} color={BADGES[user.role]}>
+              <Avatar size={128} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Title style={{ margin: 0 }}>{getInitials(user)}</Title>
+              </Avatar>
+            </Badge.Ribbon>
           </Flex>
 
-        </Card>
+          <Descriptions column={1} title="User Info" items={items} />
+        </Flex>
 
-      </Flex>
-    </SystemLayout>
+      </Card>
+    </Flex>
   );
 };

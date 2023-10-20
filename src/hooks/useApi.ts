@@ -20,6 +20,23 @@ interface IApiAuthorizationSignOutConfig extends IApiConfig {}
 
 interface IApiAccountGetConfig extends IApiConfig {}
 
+interface IApiUsersGetConfig extends IApiConfig {}
+
+interface IApiUsersCreateConfig extends IApiConfig {
+  name: string;
+  lastName: string;
+  email: string;
+}
+
+interface IApiUsersDeleteConfig extends IApiConfig {
+  id: string;
+}
+
+interface IApiUsersUpdateConfig extends IApiConfig {
+  id: string;
+  user: IUser;
+}
+
 export interface IUseApi {
   authorization: {
     signIn: (config: IApiAuthorizationSignInConfig) => Promise<{ accessToken: string, user: IUser }>;
@@ -27,6 +44,12 @@ export interface IUseApi {
   };
   account: {
     get: (config: IApiAccountGetConfig) => Promise<IUser>;
+  };
+  users: {
+    get: (config: IApiUsersGetConfig) => Promise<IUser[]>;
+    create: (config: IApiUsersCreateConfig) => Promise<IUser>;
+    delete: (config: IApiUsersDeleteConfig) => Promise<void>;
+    update: (config: IApiUsersUpdateConfig) => Promise<IUser>;
   };
 }
 
@@ -92,7 +115,47 @@ export const useApi: TUseApi = (): IUseApi => {
           method: "GET",
           url: `${API_URL}/users/current`,
           headers,
-          loader: !!loader ? loader : "Loading users...",
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+    },
+    users: {
+      get: ({ loader }) => {
+        return http.request<IUser[]>({
+          method: "GET",
+          url: `${API_URL}/users`,
+          headers,
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+      create: ({ name, lastName, email, loader }) => {
+        return http.request<IUser>({
+          method: "POST",
+          url: `${API_URL}/users`,
+          headers,
+          data: {
+            name,
+            lastName,
+            email,
+          },
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+      delete: ({ id, loader }) => {
+        return http.request<void>({
+          method: "DELETE",
+          url: `${API_URL}/users/${id}`,
+          headers,
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+      update: ({ id, user, loader }) => {
+        return http.request<IUser>({
+          method: "PUT",
+          url: `${API_URL}/users/${id}`,
+          headers,
+          data: { ...user },
+          // loader: !!loader ? loader : "Loading users...",
         });
       },
     },
