@@ -198,6 +198,8 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
     },
   ];
 
+  const loading = true
+
   return (
     <SystemLayout>
       <Flex gap={"small"} vertical>
@@ -205,16 +207,22 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
         <AnalyticsBar/>
         <Row gutter={[16, 16]}>
           <Col xs={24} sm={12} md={12} lg={8} xl={12}>
-            <Table style={{width: "100%"}} dataSource={dataSource} columns={columns} pagination={false}/>
+            <Skeleton loading={loading} active={true}>
+              <Table style={{width: "100%"}} dataSource={dataSource} columns={columns} pagination={false}/>
+            </Skeleton>
+          </Col>
+          <Col xs={24} sm={12} md={12} lg={8} xl={6}>
+              <Card title="Card title" style={{width: "100%"}}>
+                <Skeleton loading={loading} active={true}>
+                  {!loading && DemoPie() }
+                </Skeleton>
+              </Card>
           </Col>
           <Col xs={24} sm={12} md={12} lg={8} xl={6}>
             <Card title="Card title" style={{width: "100%"}}>
-              {DemoPie()}
-            </Card>
-          </Col>
-          <Col xs={24} sm={12} md={12} lg={8} xl={6}>
-            <Card title="Card title" style={{width: "100%"}}>
-              {DemoColumn()}
+              <Skeleton loading={loading} active={true}>
+                {!loading && DemoColumn() }
+              </Skeleton>
             </Card>
           </Col>
         </Row>
