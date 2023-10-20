@@ -1,6 +1,9 @@
 import React, { FC } from "react";
-import { classes } from "../../utils";
-import styles from "./Landing.module.scss";
+import Title from "antd/lib/typography/Title";
+
+import { Layout } from "antd";
+
+const { Header, Content, Footer } = Layout;
 
 interface IProps {
   main?: {
@@ -11,10 +14,23 @@ interface IProps {
 
 export const Landing: FC<IProps> = ({ main, children }: IProps): JSX.Element => {
   return (
-    <div className={classes("d-flex flex-column align-items-stretch", styles.container)}>
-      <main className={classes("d-flex flex-column", styles.main, main?.className)}>
-        {children}
-      </main>
-    </div>
+    <Layout style={{ height: "100vh" }}>
+      <Header
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 1,
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <Title level={2}>НУМО</Title>
+      </Header>
+      <Content style={{ padding: "50px 50px 0 50px", height: "100%" }}>
+        <div style={{ padding: 24, height: '100%', background: "#ffffff", overflowY: "auto" }}>{children}</div>
+      </Content>
+      <Footer style={{ textAlign: "center" }}>©2023 Created by JWP</Footer>
+    </Layout>
   );
 };

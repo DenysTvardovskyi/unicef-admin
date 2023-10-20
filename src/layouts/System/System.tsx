@@ -1,9 +1,10 @@
 import React, { FC, useState } from "react";
-import { UploadOutlined, UserOutlined, VideoCameraOutlined, MenuUnfoldOutlined, MenuFoldOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Button, Flex, Layout, Menu, Select, Typography } from "antd";
+import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Flex, Layout, Menu, Select } from "antd";
 import i18n from "i18next";
 import { useTranslation } from "react-i18next";
 import Title from "antd/lib/typography/Title";
+import { useAuthorization } from "../../hooks";
 
 const { Header, Content, Sider } = Layout;
 
@@ -13,16 +14,13 @@ const LANGUAGES: any = {
 };
 
 interface IProps {
-  main?: {
-    isFull?: boolean;
-    className?: string;
-  };
   children?: React.ReactNode | React.ReactNode[];
 }
 
-export const System: FC<IProps> = ({ main, children }: IProps): JSX.Element => {
-  const [collapsed, setCollapsed] = useState(false);
+export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
+  const [ collapsed, setCollapsed ] = useState(false);
   const { t } = useTranslation();
+  const { resetAuthorization } = useAuthorization();
 
   const langOptions: { value: string, label: string }[] = Object.keys(LANGUAGES)
     .map((lng) => ({ value: lng, label: LANGUAGES[lng].nativeName }));
@@ -47,49 +45,51 @@ export const System: FC<IProps> = ({ main, children }: IProps): JSX.Element => {
           console.log(collapsed, type);
         }}
       >
-        <Flex style={{height: "100%"}} vertical>
-        <div style={{height: 64, display: "flex", alignItems: "center", justifyContent: "center"}}>
-          <Title level={4} style={{margin: 0, lineHeight: 1}}>НУМО </Title>
-        </div>
-        <Flex style={{height: "100%"}} vertical justify="space-between">
-          <Menu
-            theme="dark"
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            items={[
-              {
-                key: '1',
-                icon: <UserOutlined />,
-                label: 'nav 1',
-              },
-              {
-                key: '2',
-                icon: <VideoCameraOutlined />,
-                label: 'nav 2',
-              },
-              {
-                key: '3',
-                icon: <UploadOutlined />,
-                label: 'nav 3',
-              },
-            ]}
-          />
-          <Button style={{margin: "0 4px 16px 4px"}} icon={<LogoutOutlined />}>Log out</Button>
-        </Flex>
+        <Flex style={{ height: "100%" }} vertical>
+          <div style={{ height: 64, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Title level={4} style={{ margin: 0, lineHeight: 1 }}>НУМО </Title>
+          </div>
+          <Flex style={{ height: "100%" }} vertical justify="space-between">
+            <Menu
+              theme="dark"
+              mode="inline"
+              defaultSelectedKeys={[ "1" ]}
+              items={[
+                {
+                  key: "1",
+                  icon: <UserOutlined />,
+                  label: "nav 1",
+                },
+              ]}
+            />
+            <Button
+              style={{ margin: "0 4px 16px 4px" }}
+              onClick={resetAuthorization}
+              icon={<LogoutOutlined />}
+            >Log out</Button>
+          </Flex>
         </Flex>
 
       </Sider>
       <Layout className="site-layout" style={{ minHeight: "100vh" }}>
-        <Header style={{ padding: 0, background: "#001529", display: "flex", alignItems: "center", justifyContent: "space-between", }} >
+        <Header
+          style={{
+            padding: 0,
+            background: "#001529",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
             style={{
-              fontSize: '16px',
+              fontSize: "16px",
               width: 48,
               height: 48,
-              color: "#ffffff"
+              color: "#ffffff",
             }}
           />
 
@@ -102,7 +102,7 @@ export const System: FC<IProps> = ({ main, children }: IProps): JSX.Element => {
           />
         </Header>
         <Content style={{ margin: "24px 16px" }}>
-          <div style={{ padding: 24, height: "100%", background: "blue" }}>{children}</div>
+          <div style={{ padding: 24, height: "100%", background: "#ffffff" }}>{children}</div>
         </Content>
       </Layout>
     </Layout>

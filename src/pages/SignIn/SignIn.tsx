@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { System as SystemLayout } from "../../layouts";
+import { Landing as AuthLayout } from "../../layouts";
 import { useApi, useAuthorization } from "../../hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
@@ -24,7 +24,7 @@ export const SignIn: FC<IProps> = (): JSX.Element => {
   };
 
   return !isAuthorized ? (
-    <SystemLayout>
+    <AuthLayout>
       <Form
         name="normal_login"
         className="login-form"
@@ -66,11 +66,11 @@ export const SignIn: FC<IProps> = (): JSX.Element => {
 
         </Form.Item>
       </Form>
-    </SystemLayout>
+    </AuthLayout>
   ) : (
-    <SystemLayout main={{ className: "d-flex justify-content-center" }}>
+    <AuthLayout main={{ className: "d-flex justify-content-center" }}>
       <Title>{t("signIn.authorized.title")}</Title>
       <Link to="/">{t("signIn.authorized.goHome")}</Link>
-    </SystemLayout>
+    </AuthLayout>
   );
 };

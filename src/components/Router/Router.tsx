@@ -1,18 +1,19 @@
 import { FC } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
-import * as Page from "../../pages";
+import {Home, SignIn, NotFound} from "../../pages";
+import { withCheckAuthorization } from "../../hocs";
 
 interface IProps {}
 
 export const Router: FC<IProps> = (): JSX.Element => {
+  const PageHomeWithCheckAuthorization = withCheckAuthorization(Home);
 
   return (
-    <HashRouter>
+    <HashRouter >
       <Routes>
-        <Route path="/" element={<Page.Home />} />
-        <Route path="/sign-in" element={<Page.SignIn />} />
-        <Route path="/sign-up" element={<Page.SignUp />} />
-        <Route path="*" element={<Page.NotFound />} />
+        <Route path="/" element={<PageHomeWithCheckAuthorization/>} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </HashRouter>
   );
