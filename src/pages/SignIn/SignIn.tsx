@@ -1,11 +1,12 @@
 import { FC } from "react";
-import { Landing as AuthLayout } from "../../layouts";
+import { AuthLayout } from "../../layouts";
 import { useApi, useAuthorization } from "../../hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { LockOutlined, MailOutlined, SmileOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Flex, Form, Input, Result } from "antd";
 import { useTranslation } from "react-i18next";
 import { constants } from "../../styles/constants";
+import Title from "antd/es/typography/Title";
 
 interface IProps {}
 
@@ -26,6 +27,7 @@ export const SignIn: FC<IProps> = (): JSX.Element => {
 
   return !isAuthorized ? (
     <AuthLayout>
+        <Title level={1} style={{color: constants.blue}}>НУМО</Title>
       <Form
         name="normal_login"
         className="login-form"
@@ -59,11 +61,10 @@ export const SignIn: FC<IProps> = (): JSX.Element => {
 
         <Form.Item>
           <Flex gap="small" align="center">
-            <Button type="primary" htmlType="submit" className="login-form-button">
+            <Button style={{background: constants.blue}} type="primary" htmlType="submit" className="login-form-button">
               {t("signIn.navigation.logIn")}
             </Button>
           </Flex>
-
         </Form.Item>
       </Form>
     </AuthLayout>
