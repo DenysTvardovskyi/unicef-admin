@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Flex, Layout, Menu, Select } from "antd";
+import { Button, Flex, Layout, Menu, MenuProps, Select } from "antd";
 import i18n from "i18next";
 import { useTranslation } from "react-i18next";
 import Title from "antd/lib/typography/Title";
@@ -16,6 +16,28 @@ const LANGUAGES: any = {
 interface IProps {
   children?: React.ReactNode | React.ReactNode[];
 }
+type MenuItem = Required<MenuProps>['items'][number];
+function getItem(
+  label: React.ReactNode,
+  key?: React.Key | null,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+  } as MenuItem;
+}
+
+const LINKS = [
+  {
+    key: "1",
+    icon: <UserOutlined />,
+    label: "nav 1",
+  }
+]
 
 export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
   const [ collapsed, setCollapsed ] = useState(false);
@@ -46,21 +68,16 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
         }}
       >
         <Flex style={{ height: "100%" }} vertical>
-          <div style={{ height: 64, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Title level={4} style={{ margin: 0, lineHeight: 1 }}>НУМО </Title>
+          <div style={{ minHeight: 64, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Title level={4} style={{ margin: 0, lineHeight: 1 }}>НУМО</Title>
           </div>
           <Flex style={{ height: "100%" }} vertical justify="space-between">
             <Menu
               theme="dark"
               mode="inline"
-              defaultSelectedKeys={[ "1" ]}
-              items={[
-                {
-                  key: "1",
-                  icon: <UserOutlined />,
-                  label: "nav 1",
-                },
-              ]}
+              defaultSelectedKeys={['1']}
+              defaultOpenKeys={['sub1']}
+              items={LINKS}
             />
             <Button
               style={{ margin: "0 4px 16px 4px" }}

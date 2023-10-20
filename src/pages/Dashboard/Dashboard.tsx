@@ -8,7 +8,7 @@ import Title from "antd/es/typography/Title";
 
 interface IProps {}
 
-export const Home: FC<IProps> = (): JSX.Element => {
+export const Dashboard: FC<IProps> = (): JSX.Element => {
   const { t } = useTranslation();
   const notification = useNotification();
   const loader = useLoader();
