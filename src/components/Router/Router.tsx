@@ -43,7 +43,7 @@ export const Router: FC<IProps> = (): JSX.Element => {
   const PageActivityAnalyticsWithCheckAuthorization = withCheckAuthorization(ActivityAnalytics);
   const PageNewsletterAnalyticsWithCheckAuthorization = withCheckAuthorization(NewsletterAnalytics);
   const PageProfileWithCheckAuthorization = withCheckAuthorization(Profile);
-  const PageStaffWithCheckAuthorization = withCheckAuthorization(withCheckRole(Staff), "superAdmin");
+  const PageStaffWithCheckAuthorization = withCheckAuthorization(withCheckRole(Staff, "superAdmin"));
 
   return (
     <HashRouter>

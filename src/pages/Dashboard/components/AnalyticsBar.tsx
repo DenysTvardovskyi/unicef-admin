@@ -1,4 +1,4 @@
-import {Card, Col, Flex, Row, Skeleton} from "antd";
+import {Card, Col, Row, Skeleton} from "antd";
 import Title from "antd/es/typography/Title";
 
 interface IProps {}

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { useLoader, useNotification } from "../../hooks";
-import { Card, Col, Flex, Row, Skeleton, Table } from "antd";
+// import { useLoader, useNotification } from "../../hooks";
+import {Card, Col, Flex, Row, Skeleton, Table} from "antd";
 import { ILoaderTask } from "../../components/Loader/Loader";
 import Title from "antd/es/typography/Title";
 import {Column, Pie} from '@ant-design/plots';
@@ -12,16 +12,16 @@ interface IProps {}
 
 export const Dashboard: FC<IProps> = (): JSX.Element => {
   const { t } = useTranslation();
-  const notification = useNotification();
-  const loader = useLoader();
-
-  const handleLoader = () => {
-    const task: ILoaderTask = loader.create("Loader");
-    loader.start(task);
-    setTimeout(() => {
-      loader.stop(task);
-    }, 3000);
-  };
+  // const notification = useNotification();
+  // const loader = useLoader();
+  //
+  // const handleLoader = () => {
+  //   const task: ILoaderTask = loader.create("Loader");
+  //   loader.start(task);
+  //   setTimeout(() => {
+  //     loader.stop(task);
+  //   }, 3000);
+  // };
 
   const DemoPie = () => {
     const data = [
