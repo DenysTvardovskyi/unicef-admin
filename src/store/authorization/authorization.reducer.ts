@@ -1,9 +1,8 @@
 import { IUser } from "../../models";
-import { RST_AUTHORIZATION, SET_AUTHORIZATION } from "./authorization.actions";
+import { RST_AUTHORIZATION, SET_AUTHORIZATION, SET_USER } from "./authorization.actions";
 
 export interface IState {
   readonly accessToken: string;
-  readonly tokenType: string;
   readonly user: IUser;
 }
 
@@ -11,13 +10,12 @@ export type TReducer = (state: IState, action: any) => IState;
 
 const initialState: IState = {
   accessToken: "",
-  tokenType: "",
   user: {
     id: 0,
-    lastname: "",
-    firstname: "",
+    lastName: "",
+    name: "",
     email: "",
-    username: "",
+    role: null,
   },
 };
 
@@ -26,7 +24,12 @@ export const authorizationReducer: TReducer = (state: IState = initialState, act
     case SET_AUTHORIZATION:
       return {
         accessToken: action.accessToken,
-        tokenType: action.tokenType,
+        user: action.user,
+      };
+
+    case SET_USER:
+      return {
+        ...state,
         user: action.user,
       };
     case RST_AUTHORIZATION:

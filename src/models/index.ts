@@ -1,5 +1,4 @@
 import { IUser } from "./user";
+import { ITableParams } from "./tableParams";
 
-export type {
-  IUser,
-};
+export type { IUser, ITableParams };

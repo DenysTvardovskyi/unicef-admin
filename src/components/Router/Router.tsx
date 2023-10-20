@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import {
   Dashboard,
@@ -17,10 +17,20 @@ import {
   SignIn,
 } from "../../pages";
 import { withCheckAuthorization, withCheckRole } from "../../hocs";
+import { useApi, useAuthorization } from "../../hooks";
 
 interface IProps {}
 
 export const Router: FC<IProps> = (): JSX.Element => {
+  const api = useApi();
+  const { isAuthorized, setUser } = useAuthorization();
+
+  useEffect(() => {
+    if (isAuthorized) {
+      api.account.get({}).then((user) => setUser(user));
+    }
+  }, []);
+
   const PageDashboardWithCheckAuthorization = withCheckAuthorization(Dashboard);
   const PageUsersWithCheckAuthorization = withCheckAuthorization(Users);
   const PageUserWithCheckAuthorization = withCheckAuthorization(User);

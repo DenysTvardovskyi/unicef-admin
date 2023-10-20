@@ -3,9 +3,9 @@ import { Landing as AuthLayout } from "../../layouts";
 import { useApi, useAuthorization } from "../../hooks";
 import { Link, useNavigate } from "react-router-dom";
 import { LockOutlined, MailOutlined, SmileOutlined } from "@ant-design/icons";
-import {Button, Checkbox, Flex, Form, Input, Result} from "antd";
+import { Button, Checkbox, Flex, Form, Input, Result } from "antd";
 import { useTranslation } from "react-i18next";
-import {constants} from "../../styles/constants";
+import { constants } from "../../styles/constants";
 
 interface IProps {}
 
@@ -16,9 +16,10 @@ export const SignIn: FC<IProps> = (): JSX.Element => {
   const { isAuthorized, setAuthorization } = useAuthorization();
 
   const onFinish = (values: any) => {
-    api.authorization.signIn({ username: values.username, password: values.password, loader: t("signIn.loader.title") })
-      .then(({ accessToken, tokenType, user }) => {
-        setAuthorization(accessToken, tokenType, user);
+    console.log(values);
+    api.authorization.signIn({ email: values.email, password: values.password, loader: t("signIn.loader.title") })
+      .then(({ accessToken, user }) => {
+        setAuthorization(accessToken, user);
         navigate("/");
       });
   };
@@ -61,7 +62,6 @@ export const SignIn: FC<IProps> = (): JSX.Element => {
             <Button type="primary" htmlType="submit" className="login-form-button">
               {t("signIn.navigation.logIn")}
             </Button>
-            <Link to="/sign-up">{t("signIn.navigation.register")}</Link>
           </Flex>
 
         </Form.Item>
@@ -69,15 +69,18 @@ export const SignIn: FC<IProps> = (): JSX.Element => {
     </AuthLayout>
   ) : (
     <AuthLayout>
-        <Flex style={{width: "100%", height: "100%", justifyContent: "center", alignItems: "center"}}>
-            <Result
-                icon={<SmileOutlined style={{color: constants.blue}}/>}
-                title={t("signIn.authorized.title")}
-                extra={
-                    <Link to="/"><Button type="primary" style={{background: constants.blue}}>{t("signIn.authorized.goHome")}</Button></Link>
-                }
-            />
-        </Flex>
+      <Flex style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+        <Result
+          icon={<SmileOutlined style={{ color: constants.blue }} />}
+          title={t("signIn.authorized.title")}
+          extra={
+            <Link to="/"><Button
+              type="primary"
+              style={{ background: constants.blue }}
+            >{t("signIn.authorized.goHome")}</Button></Link>
+          }
+        />
+      </Flex>
     </AuthLayout>
   );
 };

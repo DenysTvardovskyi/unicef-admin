@@ -11,14 +11,8 @@ interface IApiConfig {
   debug?: boolean;
 }
 
-interface IApiAuthorizationSignUpConfig extends IApiConfig {
-  email: string;
-  fullname: string;
-  password: string;
-}
-
 interface IApiAuthorizationSignInConfig extends IApiConfig {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -46,7 +40,7 @@ export const useApi: TUseApi = (): IUseApi => {
     const _headers: any = {};
 
     if (isAuthorized) {
-      _headers["Authorization"] = `${tokenType} ${accessToken}`;
+      _headers["Authorization"] = `Bearer ${accessToken}`;
     }
 
     _headers["Access-Control-Allow-Origin"] = "*";
@@ -57,26 +51,25 @@ export const useApi: TUseApi = (): IUseApi => {
 
   return {
     authorization: {
-      signIn: ({ loader, debug, password, username }) => {
+      signIn: ({ loader, debug, password, email }) => {
         return new Promise((resolve, reject) => {
 
-          http.request<{ access_token: string, token_type: string, account: IUser }>({
+          http.request<{ rawToken: string, account: IUser }>({
             method: "POST",
             url: `${API_URL}/authentication`,
             headers,
             data: {
               password,
-              username,
+              email,
             },
             loader: !!loader ? loader : "Processing sign in...",
             debug,
           })
             .then((data) => {
-              const { access_token, token_type, account } = data;
+              const { rawToken, account } = data;
 
               return resolve({
-                accessToken: access_token,
-                tokenType: token_type,
+                accessToken: rawToken,
                 user: account,
               });
             })
@@ -97,7 +90,7 @@ export const useApi: TUseApi = (): IUseApi => {
       get: ({ loader }) => {
         return http.request<IUser>({
           method: "GET",
-          url: `${API_URL}/account`,
+          url: `${API_URL}/users/current`,
           headers,
           loader: !!loader ? loader : "Loading users...",
         });
