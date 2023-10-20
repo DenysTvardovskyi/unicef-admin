@@ -40,7 +40,7 @@ export const Router: FC<IProps> = (): JSX.Element => {
         <Route path="/" element={<PageDashboardWithCheckAuthorization />} />
         <Route path="/users" element={<PageUsersWithCheckAuthorization />} />
         <Route path="/user/:userId" element={<PageUserWithCheckAuthorization />} />
-        <Route path="/groups" element={<PageGroupsWithCheckAuthorization />} />
+        <Route path="/group/all" element={<PageGroupsWithCheckAuthorization />} />
         <Route path="/group/:groupId" element={<PageGroupWithCheckAuthorization />} />
         <Route path="/group/create" element={<PageCreateGroupWithCheckAuthorization />} />
         <Route path="/analytics/users" element={<PageUserAnalyticsWithCheckAuthorization />} />

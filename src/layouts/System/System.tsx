@@ -1,10 +1,20 @@
-import React, { FC, useState } from "react";
-import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } from "@ant-design/icons";
+import React, { FC, useEffect, useState } from "react";
+import {
+  AppstoreOutlined,
+  CoffeeOutlined,
+  FundOutlined,
+  LogoutOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  TeamOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { Button, Flex, Layout, Menu, MenuProps, Select } from "antd";
 import i18n from "i18next";
 import { useTranslation } from "react-i18next";
 import Title from "antd/lib/typography/Title";
 import { useAuthorization } from "../../hooks";
+import { Link, useLocation } from "react-router-dom";
 import {constants} from "../../styles/constants";
 
 const { Header, Content, Sider } = Layout;
@@ -17,7 +27,9 @@ const LANGUAGES: any = {
 interface IProps {
   children?: React.ReactNode | React.ReactNode[];
 }
-type MenuItem = Required<MenuProps>['items'][number];
+
+type MenuItem = Required<MenuProps>["items"][number];
+
 function getItem(
   label: React.ReactNode,
   key?: React.Key | null,
@@ -33,16 +45,25 @@ function getItem(
 }
 
 const LINKS = [
-  {
-    key: "1",
-    icon: <UserOutlined />,
-    label: "nav 1",
-  }
-]
+  getItem(<Link to="/">Dashboard</Link>, "/", <AppstoreOutlined />),
+  getItem(<Link to="/users">Users</Link>, "/users", <UserOutlined />),
+  getItem("Groups", "/group", <TeamOutlined />, [
+    getItem(<Link to="/group/all">All</Link>, "/group/all"),
+    getItem(<Link to="/group/create">Creat</Link>, "/group/create"),
+  ]),
+  getItem("Analytics", "/analytics", <FundOutlined />, [
+    getItem(<Link to="/analytics/users">Users</Link>, "/analytics/users"),
+    getItem(<Link to="/analytics/traffic">Traffic</Link>, "/analytics/traffic"),
+    getItem(<Link to="/analytics/activity">Activity</Link>, "/analytics/activity"),
+    getItem(<Link to="/analytics/newsletter">Newsletter</Link>, "/analytics/newsletter"),
+  ]),
+  getItem(<Link to="/staff">Staff</Link>, "/staff", <CoffeeOutlined />),
+];
 
 export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
   const [ collapsed, setCollapsed ] = useState(false);
   const { t } = useTranslation();
+  const location = useLocation();
   const { resetAuthorization } = useAuthorization();
 
   const langOptions: { value: string, label: string }[] = Object.keys(LANGUAGES)
@@ -76,8 +97,8 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
           <Flex style={{ height: "100%" }} vertical justify="space-between">
             <Menu
               mode="inline"
-              defaultSelectedKeys={['1']}
-              defaultOpenKeys={['sub1']}
+              defaultSelectedKeys={[ location.pathname ]}
+              defaultOpenKeys={[ LINKS.filter((link) => (location.pathname).split(link.key).length === 2)[0].key ]}
               items={LINKS}
               style={{background: constants.blue}}
             />
@@ -88,7 +109,6 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
             >Log out</Button>
           </Flex>
         </Flex>
-
       </Sider>
       <Layout className="site-layout" style={{ maxHeight: "100vh" }}>
         <Header
