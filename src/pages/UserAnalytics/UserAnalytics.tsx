@@ -41,7 +41,7 @@ export const UserAnalytics: FC<IProps> = (): JSX.Element => {
     <Flex gap="small" vertical>
       <Flex vertical>
         <Title>{t("analytics.users.title")}</Title>
-        <Flex align={"center"} justify={"space-between"}>
+        <Flex align={"center"} justify={"space-between"} gap={"middle"}>
           <Select
             placeholder={t("analytics.selectPlaceholder")}
             style={{ width: "280px" }}
