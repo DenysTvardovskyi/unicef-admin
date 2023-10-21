@@ -202,7 +202,9 @@
       "role": "Role",
       "email": "Email",
       "joinDate": "Join Date",
-      "lastUpdate": "Last Update"
+      "lastUpdate": "Last Update",
+      "reset": "Reset Password",
+      "resetConfirm": "Sure to Reset Password?"
     },
     "dashboard": {
       "users": "Number of users",

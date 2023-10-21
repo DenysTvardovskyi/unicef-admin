@@ -109,10 +109,15 @@ interface IApiUsersUpdateConfig extends IApiConfig {
   user: IUser;
 }
 
+interface IApiAuthorizationPasswordResetConfig extends IApiConfig {}
+
 export interface IUseApi {
   authorization: {
     signIn: (config: IApiAuthorizationSignInConfig) => Promise<{ accessToken: string, user: IUser }>;
     signOut: (config: IApiAuthorizationSignOutConfig) => Promise<void>;
+    password: {
+      reset: (config: IApiAuthorizationPasswordResetConfig) => Promise<void>
+    }
   };
   account: {
     get: (config: IApiAccountGetConfig) => Promise<IUser>;
@@ -188,6 +193,17 @@ export const useApi: TUseApi = (): IUseApi => {
             })
             .catch(reject);
         });
+      },
+      password: {
+        reset: ({ loader }) => {
+          return http.request<void>({
+            method: "PUT",
+            url: `${API_URL}/users/current/password/resetting`,
+            headers,
+            loader: !!loader ? loader : false,
+          });
+
+        },
       },
       signOut: ({ loader }) => {
         return http.request<void>({

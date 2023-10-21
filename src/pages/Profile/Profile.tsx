@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { Avatar, Badge, Card, Descriptions, DescriptionsProps, Flex } from "antd";
+import { Avatar, Badge, Button, Col, Descriptions, DescriptionsProps, Flex, Popconfirm, Row, Space } from "antd";
 import Title from "antd/es/typography/Title";
-import { useAuthorization } from "../../hooks";
+import { useApi, useAuthorization, useNotification } from "../../hooks";
 import { getInitials } from "../../utils";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 interface IProps {}
 
@@ -15,6 +15,8 @@ const BADGES: any = {
 export const Profile: FC<IProps> = (): JSX.Element => {
   const { user } = useAuthorization();
   const { t } = useTranslation();
+  const api = useApi();
+  const notification = useNotification();
 
   const items: DescriptionsProps["items"] = [
     {
@@ -49,23 +51,32 @@ export const Profile: FC<IProps> = (): JSX.Element => {
     },
   ];
 
+  const handleReset = () => {
+    api.authorization.password.reset({}).then(() => notification.success(""));
+  };
+
   return (
-    <Flex gap="small" justify={"center"} align={"center"}>
-      <Card style={{ width: 500 }}>
+    <Flex gap="small" vertical>
+      <Flex justify="space-between" align="center">
         <Title>{t("account.title")}</Title>
-        <Flex vertical gap={"middle"}>
-          <Flex>
+        <Popconfirm title={t("account.resetConfirm")} onConfirm={() => handleReset()}>
+          <Button type="primary" danger>{t("account.reset")}</Button>
+        </Popconfirm>
+      </Flex>
+      <Row>
+        <Col xs={24} sm={24} md={24} lg={12} xl={8}>
+          <Space>
             <Badge.Ribbon text={user.role} color={BADGES[user.role || ""]}>
               <Avatar size={128} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                 <Title style={{ margin: 0 }}>{getInitials(user)}</Title>
               </Avatar>
             </Badge.Ribbon>
-          </Flex>
-
-          <Descriptions column={1} items={items} />
-        </Flex>
-
-      </Card>
+          </Space>
+        </Col>
+        <Col xs={24} sm={24} md={24} lg={18} xl={16}>
+          <Descriptions column={{ xs: 1, sm: 1, md: 2, lg: 2, xl: 2 }} items={items} />
+        </Col>
+      </Row>
     </Flex>
   );
 };
