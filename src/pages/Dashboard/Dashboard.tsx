@@ -8,78 +8,13 @@ import { useApi } from "../../hooks";
 import { IUser } from "../../models";
 import { IData } from "../../models/data";
 import { PieChart } from "./components/PieChart";
+import {LineChart} from "./components/LineChart";
+import {ColumnChart} from "./components/ColumnChart";
 
 interface IProps {}
 
 export const Dashboard: FC<IProps> = (): JSX.Element => {
   const { t } = useTranslation();
-
-  const DemoColumn = () => {
-    const data: any = [
-      {
-        type: "家具家电",
-        sales: 38,
-      },
-      {
-        type: "粮油副食",
-        sales: 52,
-      },
-      {
-        type: "生鲜水果",
-        sales: 61,
-      },
-      {
-        type: "美容洗护",
-        sales: 145,
-      },
-      {
-        type: "母婴用品",
-        sales: 48,
-      },
-      {
-        type: "进口食品",
-        sales: 38,
-      },
-      {
-        type: "食品饮料",
-        sales: 38,
-      },
-      {
-        type: "家庭清洁",
-        sales: 38,
-      },
-    ];
-    const config: any = {
-      data,
-      xField: "type",
-      yField: "sales",
-      label: {
-        // 可手动配置 label 数据标签位置
-        position: "middle",
-        // 'top', 'bottom', 'middle',
-        // 配置样式
-        style: {
-          fill: "#ffffff",
-          opacity: 0.6,
-        },
-      },
-      xAxis: {
-        label: {
-          autoHide: true,
-          autoRotate: false,
-        },
-      },
-      meta: {
-        type: {
-          alias: "类别",
-        },
-        sales: {
-          alias: "销售额",
-        },
-      },
-    };
-    return <Column {...config} />;
-  };
 
   const api = useApi();
   const [ data, setData ] = useState<IData>();
@@ -111,24 +46,26 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
       <Title>{t("home.title")}</Title>
       <AnalyticsBar data={data} />
       <Row gutter={[ 16, 16 ]}>
-        <Col xs={24} sm={12} md={12} lg={8} xl={6}>
-          <Card title="Card title" style={{ width: "100%" }}>
+        <Col xs={24} sm={12} md={12} lg={8} xl={8}>
+          <Card title={t("dashboard.regionsChart")} style={{ width: "100%" }}>
             <Skeleton loading={loading} active={true}>
-              <PieChart users={users} />
+              <PieChart data={users} keyword={"region.name"} />
             </Skeleton>
           </Card>
         </Col>
-        <Col xs={24} sm={12} md={12} lg={8} xl={6}>
-          <Card title="Card title" style={{ width: "100%" }}>
+        <Col xs={24} sm={12} md={12} lg={8} xl={8}>
+          <Card title={t("dashboard.daysChart")} style={{ width: "100%" }}>
             <Skeleton loading={loading} active={true}>
-              {DemoColumn()}
+              <LineChart data={users} keyword={"recommendationDay"} />
             </Skeleton>
           </Card>
         </Col>
-        <Col xs={24} sm={12} md={12} lg={8} xl={12}>
-          <Skeleton loading={loading} active={true}>
-
-          </Skeleton>
+        <Col xs={24} sm={12} md={12} lg={8} xl={8}>
+          <Card title={t("dashboard.deviceChart")} style={{ width: "100%" }}>
+            <Skeleton loading={loading} active={true}>
+              <ColumnChart data={users} keyword={"botType"} />
+            </Skeleton>
+          </Card>
         </Col>
       </Row>
     </Flex>

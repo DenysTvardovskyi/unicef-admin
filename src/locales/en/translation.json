@@ -209,8 +209,10 @@
     "dashboard": {
       "users": "Number of users",
       "groups": "Number of groups",
-      "regions": "Number of regions"
+      "regions": "Number of regions",
+      "regionsChart": "Users by regions",
+      "daysChart": "Users by days",
+      "deviceChart": "Users by messengers"
     }
-
   }
 }

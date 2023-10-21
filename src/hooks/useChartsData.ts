@@ -1,12 +1,28 @@
 import { useMemo } from "react";
 import { IPieChart } from "../models/chart";
 
-export const useChartsData = (params: IPieChart) => {
+function getObjectProperty(obj, keyPath) {
+  const keys = keyPath.split('.');
+  let result = obj;
+
+  for (const key of keys) {
+    if (result && result.hasOwnProperty(key)) {
+      result = result[key];
+    } else {
+      return undefined;
+    }
+  }
+
+  return result;
+}
+
+export const useChartsData = ({data, keyword}: IPieChart) => {
   return useMemo(() => {
     const regionCounts: any = {};
 
-    params.users?.forEach((obj) => {
-      const regionName = obj.region.name;
+    data?.forEach((obj) => {
+
+      const regionName = getObjectProperty(obj, keyword);
 
       if (regionCounts[regionName]) {
         regionCounts[regionName]++;
@@ -19,5 +35,5 @@ export const useChartsData = (params: IPieChart) => {
       name: regionName,
       count: regionCounts[regionName],
     }));
-  }, [ params.users ]);
+  }, [ data, keyword ]);
 };

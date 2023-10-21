@@ -1,31 +1,23 @@
-import { Pie } from "@ant-design/plots";
+import { Bar } from "@ant-design/plots";
 import { useChartsData } from "../../../hooks/useChartsData";
 import { IPieChart } from "../../../models/chart";
 import { FC } from "react";
+import {constants} from "../../../styles/constants";
 
-export const PieChart: FC<IPieChart> = (params: IPieChart) => {
-  const data = useChartsData(params);
+export const LineChart: FC<IPieChart> = (params: IPieChart) => {
+  const chartsData = useChartsData(params);
+
+  console.log(chartsData)
 
   const config: any = {
-    appendPadding: 10,
-    data,
-    angleField: "count",
-    colorField: "name",
-    radius: 0.9,
-    label: {
-      type: "inner",
-      offset: "-30%",
-      content: ({ percent }: any) => `${(percent * 100).toFixed(0)}%`,
-      style: {
-        fontSize: 14,
-        textAlign: "center",
-      },
+    data: chartsData,
+    xField: 'count',
+    yField: 'name',
+    seriesField: 'year',
+    legend: {
+      position: 'top-left',
     },
-    interactions: [
-      {
-        type: "element-active",
-      },
-    ],
+    color: () => constants.blue
   };
-  return <Pie {...config} />;
+  return <Bar {...config} />;
 };

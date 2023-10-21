@@ -1,5 +1,5 @@
-import {IUser} from "./user";
 
 export interface IPieChart{
-    users: IUser[] | undefined
+    data: any[] | undefined
+    keyword: string
 }
