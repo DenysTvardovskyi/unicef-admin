@@ -40,19 +40,19 @@ export const ActivityAnalytics: FC<IProps> = (): JSX.Element => {
                 <Title>{t('analytics.activity.title')}</Title>
                 <Flex align={"center"} justify={"space-between"}>
                     <Select
-                        placeholder={"Select a group"}
+                        placeholder={t("analytics.selectPlaceholder")}
                         style={{ width: "280px" }}
                         onChange={handleChange}
                         value={selected}
                         options={groups}
                     />
-                    {selected && <Title style={{margin: 0}} level={5}>Users in group: {data?.length}</Title>}
+                    {selected && <Title style={{margin: 0}} level={5}>{t("analytics.usersInGroup")}: {data?.length}</Title>}
                 </Flex>
             </Flex>
             {data?.length ? <Row gutter={[16, 16]}>
                 <Skeleton loading={loading} active={true}>
                     <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                        <Card title={"Subscribed"}>
+                        <Card title={t("analytics.subscribed")}>
                             <PieChart data={data} keyword={"isSubscribed"}/>
                         </Card>
                     </Col>
@@ -60,12 +60,12 @@ export const ActivityAnalytics: FC<IProps> = (): JSX.Element => {
                 <Skeleton loading={loading} active={true}>
                     <Title></Title>
                     <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                        <Card title={"Conversation state"}>
+                        <Card title={t("analytics.conversationState")}>
                             <LineChart data={data} keyword={"conversationState"}/>
                         </Card>
                     </Col>
                 </Skeleton>
-            </Row> : <Result icon={< FileSearchOutlined color={constants.blue}/>} title={selected ? "Please select another group" : "Please select a group"} />}
+            </Row> : <Result icon={< FileSearchOutlined color={constants.blue}/>} title={selected ? t("analytics.emptySelectMessage") : t("analytics.selectMessage")} />}
         </Flex>
     );
 };
