@@ -126,6 +126,69 @@
     },
     "not-found": {
       "title": "Вибачте, сторінка, яку ви відвідали, не існує."
+    },
+    "days": {
+      "monday": "Понеділок",
+      "tuesday": "Вівторок",
+      "wednesday": "Середа",
+      "thursday": "Четвер",
+      "friday": "П'ятниця",
+      "saturday": "Субота",
+      "sunday": "Неділя"
+    },
+    "conversationStates": {
+      "welcome": "Вітання",
+      "parentRegion": "Регіон батьків",
+      "childName": "Ім'я дитини",
+      "childAge": "Вік дитини",
+      "lessThan3YearsOldChild": "Дитина до 3 років",
+      "preschoolStatus": "Статус дошкільної освіти",
+      "survey": "Опитування",
+      "mainMenu": "Головне меню",
+      "pause": "Пауза",
+      "skipOrTakeSurvey": "Пропустити або пройти опитування"
+    },
+    "tableLabels": {
+      "name": "Назва",
+      "customersCount": "Кількість клієнтів",
+      "description": "Опис",
+      "customerTraffics": "Трафік клієнтів",
+      "conversationStates": "Стани розмови",
+      "maxChildAge": "Максимальний вік дитини",
+      "minChildAge": "Мінімальний вік дитини",
+      "maxChildCount": "Максимальна кількість дітей",
+      "minChildCount": "Мінімальна кількість дітей",
+      "recommendationDays": "Дні рекомендацій",
+      "recommendationFrequencies": "Частота рекомендацій",
+      "updatedAt": "Оновлено",
+      "createdAt": "Створено"
+    },
+    "freequency": {
+      "daily": "Щоденно",
+      "monthly": "Щомісячно"
+    },
+    "save": "Зберегти",
+    "groups": {
+      "title": "Групи",
+      "name": "Назва",
+      "traffic": "Трафік",
+      "users": "Користувачі",
+      "createTitle": "Створити групу",
+      "actions": "Дії",
+      "view": "Перегляд",
+      "delete": "Видалити",
+      "deleteConfirm": "Впевнені, що потрібно видалити?",
+      "deleteFinal": "Групу видалено!"
+    },
+    "account": {
+      "title": "Акаунт",
+      "firstName": "Ім'я",
+      "lastName": "Прізвище",
+      "role": "Роль",
+      "email": "Електронна пошта",
+      "joinDate": "Дата приєднання",
+      "lastUpdate": "Останнє оновлення"
     }
+
   }
 }

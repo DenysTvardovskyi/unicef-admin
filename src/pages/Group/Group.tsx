@@ -16,11 +16,12 @@ import { useApi, useNotification } from "../../hooks";
 import { IGroup } from "../../models/group";
 import TextArea from "antd/es/input/TextArea";
 import { useNavigate } from "react-router-dom";
-import { conversationStates, days, tableLabels } from "./tableData";
 import Title from "antd/es/typography/Title";
 import { List } from "../../components";
 import { useUsersConfig } from "../Users/useUsersConfig";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
+import {useTranslation} from "react-i18next";
+import {useTableData} from "./useTableData";
 
 interface IProps {}
 
@@ -32,9 +33,11 @@ const getDate = (date) => new Date(date).toLocaleDateString(
 export const Group: FC<IProps> = (): JSX.Element => {
   const { groupId } = useParams();
   const api = useApi();
+  const {t} = useTranslation();
   const navigate = useNavigate();
   const notification = useNotification();
   const [ groupData, setGroupData ] = useState<IGroup>();
+  const {days, tableLabels, conversationStates, freequency} = useTableData()
 
   useEffect(() => {
     if (groupId) {
@@ -93,7 +96,6 @@ export const Group: FC<IProps> = (): JSX.Element => {
               initialValues={{ ...groupData }}
               onFinish={data => handleSave(data)}
             >
-
               <Title>Edit</Title>
               <Form.Item name="name" label={tableLabels.name}>
                 <Input />
@@ -150,11 +152,11 @@ export const Group: FC<IProps> = (): JSX.Element => {
                 <Select
                   mode="multiple"
                 >
-                  <Option value="Daily" label="Daily">
-                    Daily
+                  <Option value="Daily" label={freequency.daily}>
+                    {freequency.daily}
                   </Option>
-                  <Option value="Weekly" label="Weekly">
-                    Weekly
+                  <Option value="Weekly" label={freequency.monthly}>
+                    {freequency.monthly}
                   </Option>
                 </Select>
               </Form.Item>
@@ -171,20 +173,20 @@ export const Group: FC<IProps> = (): JSX.Element => {
                 </Select>
               </Form.Item>
               <Form.Item>
-                <Button htmlType="submit">Save</Button>
+                <Button htmlType="submit">{t("save")}</Button>
               </Form.Item>
             </Form>
           </Skeleton>
         </Col>
       </Row>
-      <Row>
-        <Title level={3} style={{ margin: 0 }}>Users: </Title>
+      <Flex justify={"center"} vertical>
+        <Title level={3} style={{ margin: 0 }}>{t("users.title")}</Title>
         <List
           resource="groupUsers"
           apiConfig={{ id: groupId }}
           config={config}
         />
-      </Row>
+      </Flex>
     </Flex>
   );
 };
