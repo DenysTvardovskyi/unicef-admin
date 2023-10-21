@@ -46,6 +46,7 @@ interface IApiGroupsDeleteConfig extends IApiConfig {
 }
 interface IApiGroupsUpdateConfig extends IApiConfig {
   id: string;
+  body: IApiGroupsCreateConfig
 }
 
 interface IApiUsersGetConfig extends IApiConfig {}
@@ -237,12 +238,12 @@ export const useApi: TUseApi = (): IUseApi => {
           // loader: !!loader ? loader : "Loading users...",
         });
       },
-      update: ({ id, user, loader }) => {
+      update: ({ id, body, loader }) => {
         return http.request<IGroup>({
           method: "PUT",
           url: `${API_URL}/groups/${id}`,
           headers,
-          data: { ...user },
+          data: { ...body },
           // loader: !!loader ? loader : "Loading users...",
         });
       },

@@ -1,15 +1,15 @@
 export interface IGroup {
   name: string
   description: string
-  telegramCustomers: any
-  viberCustomers: any
+  customersCount: number
   minChildAge: number
   maxChildAge: number
   minChildCount: number
   maxChildCount: number
-  dailyRecommendations: any
-  weeklyRecommendations: any
-  partiallyFilledRegistrationForm: any
+  customerTraffics: string[]
+  recommendationDays: string[]
+  recommendationFrequencies: string[]
+  conversationStates: any
   id: number
   createdAt: string
   updatedAt: any
