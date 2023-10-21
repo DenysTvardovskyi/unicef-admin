@@ -5,5 +5,8 @@ export interface IUser {
   updatedAt?: string;
   name: string;
   lastName: string;
+  region: {
+    name
+  }
   role: "Admin" | "SuperAdmin" | null;
 }
