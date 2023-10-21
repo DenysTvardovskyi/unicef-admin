@@ -72,7 +72,7 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
     getItem(t("sidebar.analytics"), "/analytics", <FundOutlined />, [
       getItem(<Link to="/analytics/users">{t("sidebar.users")}</Link>, "/analytics/users"),
       getItem(<Link to="/analytics/traffic">{t("sidebar.traffic")}</Link>, "/analytics/traffic"),
-      getItem(<Link to="/analytics/activity">{t("sidebar.activity")}</Link>, "/analytics/activity"),
+      getItem(<Link to="/analytics/activity" >{t("sidebar.activity")}</Link>, "/analytics/activity"),
       getItem(<Link to="/analytics/newsletter">{t("sidebar.newsletter")}</Link>, "/analytics/newsletter"),
     ]),
     getItem(<Link to="/staff">{t("sidebar.staff")}</Link>, "/staff", <CoffeeOutlined />),

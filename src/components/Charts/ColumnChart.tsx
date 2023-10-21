@@ -1,6 +1,6 @@
 import { Column } from "@ant-design/plots";
-import { useChartsData } from "../../../hooks/useChartsData";
-import { IPieChart } from "../../../models/chart";
+import { useChartsData } from "../../hooks/useChartsData";
+import { IPieChart } from "../../models/chart";
 import { FC } from "react";
 
 export const ColumnChart: FC<IPieChart> = (params: IPieChart) => {

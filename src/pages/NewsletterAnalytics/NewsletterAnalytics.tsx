@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Flex } from "antd";
+import {Flex, Result} from "antd";
 import Title from "antd/es/typography/Title";
 import {useTranslation} from "react-i18next";
 
@@ -10,6 +10,7 @@ export const NewsletterAnalytics: FC<IProps> = (): JSX.Element => {
   return (
     <Flex gap="small" vertical>
         <Title>{t('analytics.newsletter.title')}</Title>
+        <Result title={"Coming soon..."}/>
     </Flex>
   );
 };
