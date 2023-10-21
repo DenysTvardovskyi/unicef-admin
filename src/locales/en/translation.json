@@ -198,6 +198,11 @@
       "monthly": "Monthly"
     },
     "save": "Save",
+    "cancel": "Cancel",
+    "deleteConfirm": "Sure to cancel?",
+    "deleteMessage": "User was deleted!",
+    "canselConfirm": "Sure to delete?",
+    "inviteAdmin": "Invite new Admin",
     "groups": {
       "name": "Name",
       "title": "Groups",

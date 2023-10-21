@@ -3,11 +3,13 @@ import { Button, Flex, Form, Input, InputNumber, Modal, Popconfirm } from "antd"
 import Title from "antd/es/typography/Title";
 import { useApi, useNotification } from "../../hooks";
 import { List } from "../../components/List";
+import {useTranslation} from "react-i18next";
 
 interface IProps {}
 
 export const Staff: FC<IProps> = (): JSX.Element => {
   const api = useApi();
+  const {t} = useTranslation();
   const [ form ] = Form.useForm();
   const notification = useNotification();
   const [ isModalOpen, setIsModalOpen ] = useState(false);
@@ -53,33 +55,33 @@ export const Staff: FC<IProps> = (): JSX.Element => {
       key: "id",
     },
     {
-      title: "First name",
+      title: t("account.firstName"),
       dataIndex: "name",
       sorter: true,
       editable: true,
       key: "name",
     },
     {
-      title: "Last name",
+      title: t("account.lastName"),
       dataIndex: "lastName",
       sorter: true,
       editable: true,
       key: "lastName",
     },
     {
-      title: "Email",
+      title: t("account.email"),
       dataIndex: "email",
       sorter: true,
       editable: true,
       key: "email",
     },
     {
-      title: "Role",
+      title: t("account.role"),
       dataIndex: "role",
       key: "role",
     },
     {
-      title: "Actions",
+      title: t("users.actions"),
       dataIndex: "",
       key: "x",
       fixed: "right",
@@ -90,10 +92,10 @@ export const Staff: FC<IProps> = (): JSX.Element => {
         return editable ? (
           <Flex gap={8}>
             <Button onClick={() => save(record)}>
-              Save
+              {t("save")}
             </Button>
-            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <Button>Cancel</Button>
+            <Popconfirm title={t("cancelConfirm")} onConfirm={cancel}>
+              <Button>{t("cancel")}</Button>
             </Popconfirm>
           </Flex>
         ) : (
@@ -101,7 +103,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
             <Button disabled={editingKey !== ""} onClick={() => edit(record)}>
               Edit
             </Button>
-            <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.id)}>
+            <Popconfirm title={t("deleteConfirm")} onConfirm={() => handleDelete(record.id)}>
               <Button danger>Delete</Button>
             </Popconfirm>
           </Flex>
@@ -144,7 +146,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
   };
 
   const handleDelete = (id: any): void => {
-    api.staff.delete({ id }).then(() => notification.success("User was deleted!"));
+    api.staff.delete({ id }).then(() => notification.success(t("deleteMessage")));
   };
 
   return (
@@ -165,7 +167,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
         />
       </Form>}
       <Modal
-        title="Invite new Admin"
+        title={t("inviteAdmin")}
         footer={null}
         open={isModalOpen}
         onCancel={handleCancel}
