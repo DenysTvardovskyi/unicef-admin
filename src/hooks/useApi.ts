@@ -7,9 +7,9 @@ import { IGroup } from "../models/group";
 import { ICustomer } from "../models/customer";
 import { serializeParams } from "../utils/serializer";
 import { IRegion } from "../models/region";
-import {INewsletter} from "../models/newletter";
+import { INewsletter } from "../models/newletter";
 
-const API_URL: string = import.meta.env.VITE_BASE_URL!;
+const API_URL: string = "https://sdy3dwxcmk.eu-central-1.awsapprunner.com/api";
 
 interface IApiConfig {
   loader?: boolean | string;
@@ -91,11 +91,11 @@ interface IApiGroupsCreateConfig extends IApiConfig {
 }
 
 interface IApiNewsletterCreateConfig extends IApiConfig {
-  name: string
-  type: "text" | "exercice" | "advice"
-  content: string
-  frequency: "daily" | "weekly"
-  groupId: number
+  name: string;
+  type: "text" | "exercice" | "advice";
+  content: string;
+  frequency: "daily" | "weekly";
+  groupId: number;
 }
 
 interface IApiGroupsDeleteConfig extends IApiConfig {
@@ -119,7 +119,6 @@ interface IApiNewsletterUpdateConfig extends IApiConfig {
   id: string;
   body: INewsletter;
 }
-
 
 interface IApiUsersGetConfig extends IApiConfig {
   params?: {
@@ -358,7 +357,7 @@ export const useApi: TUseApi = (): IUseApi => {
           // loader: !!loader ? loader : "Loading users...",
         });
       },
-      customers: ({params, id }) => {
+      customers: ({ params, id }) => {
         return http.request<{ items: ICustomer[], totalCount: number, page: number, pageSize: number }>({
           method: "GET",
           url: `${API_URL}/groups/${id}/customers`,
