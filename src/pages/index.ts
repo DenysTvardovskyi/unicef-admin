@@ -13,6 +13,8 @@ import { Profile } from "./Profile";
 import { Dashboard } from "./Dashboard";
 import { NotFound } from "./NotFound";
 import { SignIn } from "./SignIn";
+import { Newsletters } from "./Newsletters";
+import { CreateNewsletter } from "./CreateNewsletter";
 
 export {
   AccessDenied,
@@ -30,4 +32,6 @@ export {
   User,
   UserAnalytics,
   Users,
+  Newsletters,
+  CreateNewsletter
 };
