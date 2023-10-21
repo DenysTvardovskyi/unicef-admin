@@ -49,7 +49,7 @@ export const Group: FC<IProps> = (): JSX.Element => {
 
   const handleSave = (body: any) => {
     try {
-      api.groups.update({ id: groupId, ...body }).then((result) => {
+      api.groups.update({ id: groupId, body }).then((result) => {
         setGroupData(result);
         notification.success("Saved");
       });
@@ -108,7 +108,7 @@ export const Group: FC<IProps> = (): JSX.Element => {
               initialValues={{ ...groupData }}
               onFinish={data => handleSave(data)}
             >
-              <Title>Edit</Title>
+              <Title>{t("editButton")}</Title>
               <Form.Item name="name" label={tableLabels.name}>
                 <Input />
               </Form.Item>
