@@ -10,7 +10,7 @@ export const NewsletterAnalytics: FC<IProps> = (): JSX.Element => {
   return (
     <Flex gap="small" vertical>
         <Title>{t('analytics.newsletter.title')}</Title>
-        <Result title={"Coming soon..."}/>
+        <Result title={t("analytics.comingSoon")}/>
     </Flex>
   );
 };
