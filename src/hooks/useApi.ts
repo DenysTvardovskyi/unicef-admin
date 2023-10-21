@@ -6,6 +6,7 @@ import { IUser } from "../models";
 import { IGroup } from "../models/group";
 import { ICustomer } from "../models/customer";
 import { serializeParams } from "../utils/serializer";
+import {IRegion} from "../models/region";
 
 const API_URL: string = import.meta.env.VITE_BASE_URL!;
 
@@ -22,6 +23,7 @@ interface IApiAuthorizationSignInConfig extends IApiConfig {
 interface IApiAuthorizationSignOutConfig extends IApiConfig {}
 
 interface IApiAccountGetConfig extends IApiConfig {}
+interface IApiRegionGetConfig extends IApiConfig {}
 
 interface IApiCustomerGetConfig extends IApiConfig {
   params?: {
@@ -130,6 +132,9 @@ export interface IUseApi {
   groupUsers: {
     get: (config: IApiGroupsUsersGetConfig) => Promise<ICustomer[]>;
   };
+  regions: {
+    get: (config: IApiRegionGetConfig) => Promise<IRegion[]>
+  }
 }
 
 type TUseApi = () => IUseApi;
@@ -325,6 +330,20 @@ export const useApi: TUseApi = (): IUseApi => {
         return http.request<ICustomer[]>({
           method: "GET",
           url: `${API_URL}/groups/${id}/customers`,
+          headers,
+          params,
+          paramsSerializer: {
+            serialize: serializeParams,
+          }
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+    },
+    regions:{
+      get: ({ id, loader, params }) => {
+        return http.request<IRegion[]>({
+          method: "GET",
+          url: `${API_URL}/regions`,
           headers,
           params,
           paramsSerializer: {

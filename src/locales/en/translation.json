@@ -203,6 +203,12 @@
       "email": "Email",
       "joinDate": "Join Date",
       "lastUpdate": "Last Update"
+    },
+    "dashboard": {
+      "users": "Number of users",
+      "groups": "Number of groups",
+      "regions": "Number of regions"
     }
+
   }
 }

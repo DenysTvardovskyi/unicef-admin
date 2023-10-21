@@ -1,78 +1,18 @@
-import { FC } from "react";
+import {FC, useEffect, useState} from "react";
 import { useTranslation } from "react-i18next";
-// import { useLoader, useNotification } from "../../hooks";
 import {Card, Col, Flex, Row, Skeleton, Table} from "antd";
-import { ILoaderTask } from "../../components/Loader/Loader";
 import Title from "antd/es/typography/Title";
-import {Column, Pie} from '@ant-design/plots';
+import {Column} from '@ant-design/plots';
 import {AnalyticsBar} from "./components/AnalyticsBar";
-import {columns, dataSource} from "./mocks";
+import {useApi} from "../../hooks";
+import {IUser} from "../../models";
+import {IData} from "../../models/data";
+import {PieChart} from "./components/PieChart";
 
 interface IProps {}
 
 export const Dashboard: FC<IProps> = (): JSX.Element => {
   const { t } = useTranslation();
-  // const notification = useNotification();
-  // const loader = useLoader();
-  //
-  // const handleLoader = () => {
-  //   const task: ILoaderTask = loader.create("Loader");
-  //   loader.start(task);
-  //   setTimeout(() => {
-  //     loader.stop(task);
-  //   }, 3000);
-  // };
-
-  const DemoPie = () => {
-    const data = [
-      {
-        type: "分类一",
-        value: 27,
-      },
-      {
-        type: "分类二",
-        value: 25,
-      },
-      {
-        type: "分类三",
-        value: 18,
-      },
-      {
-        type: "分类四",
-        value: 15,
-      },
-      {
-        type: "分类五",
-        value: 10,
-      },
-      {
-        type: "其他",
-        value: 5,
-      },
-    ];
-    const config = {
-      appendPadding: 10,
-      data,
-      angleField: "value",
-      colorField: "type",
-      radius: 0.9,
-      label: {
-        type: "inner",
-        offset: "-30%",
-        content: ({ percent }) => `${(percent * 100).toFixed(0)}%`,
-        style: {
-          fontSize: 14,
-          textAlign: "center",
-        },
-      },
-      interactions: [
-        {
-          type: "element-active",
-        },
-      ],
-    };
-    return <Pie {...config} />;
-  };
 
   const DemoColumn = () => {
     const data = [
@@ -141,32 +81,55 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
     return <Column {...config} />;
   };
 
-  const loading = true
+  const api = useApi()
+  const [data, setData] = useState<IData>()
+  const [users, setUsers] = useState<IUser[]>()
+
+  const convertToAnalyticsData = (values) => ({users: values[0], groups: values[1], regions: values[2]})
+
+  useEffect(() => {
+    Promise.all([
+      api.users.get({}).then(r => r),
+      api.groups.get({}).then(r => r),
+      api.regions.get({}).then(r => r)]
+    ).then(value => setData(convertToAnalyticsData(value)))
+  }, [])
+
+  useEffect(() => {
+    // @ts-ignore
+    api.users.get({ params: {pagination: [ {pageSize: 1000000, page: 1} ] }})
+        .then(r => setUsers(r.items))
+
+  }, [])
+
+  const loading = !data
+
+  console.log(users)
 
   return (
 
     <Flex gap={"small"} vertical>
       <Title>{t("home.title")}</Title>
-      <AnalyticsBar />
+      <AnalyticsBar data={data}/>
       <Row gutter={[ 16, 16 ]}>
+        <Col xs={24} sm={12} md={12} lg={8} xl={6}>
+          <Card title="Card title" style={{ width: "100%" }}>
+            <Skeleton loading={loading} active={true}>
+              <PieChart users={users}/>
+            </Skeleton>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={12} lg={8} xl={6}>
+          <Card title="Card title" style={{ width: "100%" }}>
+            <Skeleton loading={loading} active={true}>
+              {DemoColumn()}
+            </Skeleton>
+          </Card>
+        </Col>
         <Col xs={24} sm={12} md={12} lg={8} xl={12}>
           <Skeleton loading={loading} active={true}>
-            <Table style={{ width: "100%" }} dataSource={dataSource} columns={columns} pagination={false} />
+
           </Skeleton>
-        </Col>
-        <Col xs={24} sm={12} md={12} lg={8} xl={6}>
-          <Card title="Card title" style={{ width: "100%" }}>
-            <Skeleton loading={loading} active={true}>
-              {!loading && DemoPie()}
-            </Skeleton>
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={12} lg={8} xl={6}>
-          <Card title="Card title" style={{ width: "100%" }}>
-            <Skeleton loading={loading} active={true}>
-              {!loading && DemoColumn()}
-            </Skeleton>
-          </Card>
         </Col>
       </Row>
     </Flex>
