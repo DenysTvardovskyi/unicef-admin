@@ -101,10 +101,10 @@ export const Staff: FC<IProps> = (): JSX.Element => {
         ) : (
           <Flex gap={8}>
             <Button disabled={editingKey !== ""} onClick={() => edit(record)}>
-              Edit
+              {t("editButton")}
             </Button>
             <Popconfirm title={t("deleteConfirm")} onConfirm={() => handleDelete(record.id)}>
-              <Button danger>Delete</Button>
+              <Button danger>{t("groups.delete")}</Button>
             </Popconfirm>
           </Flex>
         );
@@ -154,8 +154,8 @@ export const Staff: FC<IProps> = (): JSX.Element => {
   return (
     <Flex gap="small" vertical>
       <Flex align="center" justify="space-between">
-        <Title level={3}>Staff</Title>
-        <Button type="primary" onClick={showModal}>Add</Button>
+        <Title level={3}>{t("sidebar.staff")}</Title>
+        <Button type="primary" onClick={showModal}>{t("addButton")}</Button>
       </Flex>
       {!refresh && <Form form={form} component={false}>
         <List

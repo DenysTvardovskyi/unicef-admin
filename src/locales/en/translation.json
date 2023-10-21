@@ -100,7 +100,11 @@
       "message": "Sorry, you are not authorized to access this page."
     },
     "backHome": "Back home",
+    "editButton": "Edit",
+    "addButton": "Add",
     "analytics": {
+      "botType": "Bot Type",
+      "region": "Region",
       "selectPlaceholder": "Select a group",
       "kidsAge": "Kids age",
       "recommendationDay": "RecommendationDay",
