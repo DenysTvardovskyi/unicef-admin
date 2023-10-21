@@ -123,7 +123,7 @@ export interface IUseApi {
     get: (config: IApiAccountGetConfig) => Promise<IUser>;
   };
   users: {
-    get: (config: IApiCustomerGetConfig) => Promise<ICustomer[]>;
+    get: (config: IApiCustomerGetConfig) => Promise<{ items: ICustomer[], totalCount: number, page: number, pageSize: number }>;
     one: (config: IApiGUsersOneConfig) => Promise<{ items: ICustomer[], totalCount: number, page: number, pageSize: number }>;
   };
   staff: {
@@ -227,7 +227,7 @@ export const useApi: TUseApi = (): IUseApi => {
     },
     users: {
       get: ({ params }) => {
-        return http.request<ICustomer[]>({
+        return http.request<{ items: ICustomer[], totalCount: number, page: number, pageSize: number }>({
           method: "GET",
           url: `${API_URL}/customers`,
           headers,

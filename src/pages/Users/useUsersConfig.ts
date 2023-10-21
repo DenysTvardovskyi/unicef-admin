@@ -12,11 +12,10 @@ export const useUsersConfig: any = ({ onView, onSub }: any) => {
       },
       {
         title: t("users.totalKids"),
-        dataIndex: "kids",
+        dataIndex: "childrenCount",
         align: "center",
-        sorter: (a: any, b: any) => a.kids.length - b.kids.length,
-        key: "kids",
-        render: (record: any) => record.length,
+        sorter: (a: any, b: any) => a.childrenCount - b.childrenCount,
+        key: "childrenCount",
       },
       {
         title: t("users.bot"),

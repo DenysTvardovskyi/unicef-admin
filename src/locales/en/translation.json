@@ -141,7 +141,11 @@
       "kidsCount": "Kids Count",
       "id": "ID",
       "createdAt": "Created At",
-      "updatedAt": "Updated At"
+      "updatedAt": "Updated At",
+      "children": "Children",
+      "name": "Name",
+      "age": "Age",
+      "preschoolStatus": "Preschool Status"
     },
     "days": {
       "monday": "Monday",
