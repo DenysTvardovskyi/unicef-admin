@@ -3,7 +3,7 @@ import {
   AppstoreOutlined,
   CoffeeOutlined,
   FundOutlined,
-  LogoutOutlined,
+  LogoutOutlined, MailOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   TeamOutlined,
@@ -75,7 +75,7 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
       getItem(<Link to="/analytics/activity" >{t("sidebar.activity")}</Link>, "/analytics/activity"),
       getItem(<Link to="/analytics/newsletter">{t("sidebar.newsletter")}</Link>, "/analytics/newsletter"),
     ]),
-    getItem("Newsletter", "/newsletter", <TeamOutlined />, [
+    getItem(t("sidebar.newsletter"), "/newsletter", <MailOutlined />, [
       getItem(<Link to="/newsletter/all">{t("sidebar.all")}</Link>, "/newsletter/all"),
       getItem(<Link to="/newsletter/create">{t("sidebar.create")}</Link>, "/newsletter/create"),
     ]),
