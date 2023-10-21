@@ -127,6 +127,22 @@
     "not-found": {
       "title": "Sorry, the page you visited does not exist."
     },
+    "user-info": {
+      "title": "User Information",
+      "botType": "Bot Type",
+      "recommendationFrequency": "Recommendation Frequency",
+      "conversationState": "Conversation State",
+      "recommendationDay": "Recommendation Day",
+      "recommendationTime": "Recommendation Time",
+      "regionId": "Region Id",
+      "isSubscribed": "Is Subscribed",
+      "region": "Region",
+      "kids": "Kids",
+      "kidsCount": "Kids Count",
+      "id": "ID",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    },
     "days": {
       "monday": "Monday",
       "tuesday": "Tuesday",

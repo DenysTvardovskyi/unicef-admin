@@ -127,6 +127,22 @@
     "not-found": {
       "title": "Вибачте, сторінка, яку ви відвідали, не існує."
     },
+    "user-info": {
+      "title": "Інформація користувача",
+      "botType": "Тип боту",
+      "recommendationFrequency": "Частота рекомендацій",
+      "conversationState": "Стан розмови",
+      "recommendationDay": "День рекомендацій",
+      "recommendationTime": "Час рекомендацій",
+      "regionId": "Ідентифікатор регіону",
+      "isSubscribed": "Підписаний",
+      "region": "Регіон",
+      "kids": "Діти",
+      "kidsCount": "Кількість дітей",
+      "id": "Ідентифікатор",
+      "createdAt": "Дата створення",
+      "updatedAt": "Дата оновлення"
+    },
     "days": {
       "monday": "Понеділок",
       "tuesday": "Вівторок",

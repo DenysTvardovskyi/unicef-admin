@@ -88,6 +88,10 @@ interface IApiUsersCreateConfig extends IApiConfig {
   email: string;
 }
 
+interface IApiGUsersOneConfig extends IApiConfig {
+  id: string;
+}
+
 interface IApiUsersDeleteConfig extends IApiConfig {
   id: string;
 }
@@ -107,6 +111,7 @@ export interface IUseApi {
   };
   users: {
     get: (config: IApiCustomerGetConfig) => Promise<ICustomer[]>;
+    one: (config: IApiGUsersOneConfig) => Promise<ICustomer[]>;
   };
   staff: {
     get: (config: IApiUsersGetConfig) => Promise<IUser[]>;
@@ -203,6 +208,14 @@ export const useApi: TUseApi = (): IUseApi => {
           paramsSerializer: {
             serialize: serializeParams,
           }
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+      one: ({ id, loader }) => {
+        return http.request<ICustomer[]>({
+          method: "GET",
+          url: `${API_URL}/customers?$filter=id eq ${id}`,
+          headers,
           // loader: !!loader ? loader : "Loading users...",
         });
       },
