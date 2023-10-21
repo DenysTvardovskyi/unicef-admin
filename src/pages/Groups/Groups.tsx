@@ -1,21 +1,21 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Button, Flex, Popconfirm } from "antd";
 import { useNavigate } from "react-router-dom";
 import Title from "antd/es/typography/Title";
 import { useApi, useNotification } from "../../hooks";
 import { List } from "../../components/List";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 interface IProps {}
 
 export const Groups: FC<IProps> = (): JSX.Element => {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
 
   const columns: any = [
     {
       title: "ID",
       dataIndex: "id",
-      sorter: (a, b) => a.id - b.id,
+      sorter: (a: any, b: any) => a.id - b.id,
       key: "id",
     },
     {
@@ -25,7 +25,7 @@ export const Groups: FC<IProps> = (): JSX.Element => {
       key: "name",
     },
     {
-      title:  t("groups.users"),
+      title: t("groups.users"),
       dataIndex: "customersCount",
       sorter: (a: any, b: any) => a.customersCount - b.customersCount,
       key: "customersCount",
@@ -42,7 +42,7 @@ export const Groups: FC<IProps> = (): JSX.Element => {
       fixed: "right",
       width: "166px",
       align: "center",
-      render: (record) => {
+      render: (record: any) => {
         return (
           <Flex gap={8}>
             <Button onClick={() => navigate("/group/" + record.id)}>{t("groups.view")}</Button>
@@ -59,7 +59,7 @@ export const Groups: FC<IProps> = (): JSX.Element => {
   const notification = useNotification();
   const navigate = useNavigate();
 
-  const handleDelete = (id): void => {
+  const handleDelete = (id: any): void => {
     api.groups.delete({ id }).then(() => notification.success("Groud was deleted!"));
   };
   return (

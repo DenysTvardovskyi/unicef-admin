@@ -11,7 +11,7 @@ export const serializeParams = (params: Record<string, any>): string => {
 
         return `$filter=` + value.map((i: object) => Object.entries(i)
           .map((i) => {
-            return `${i[0]} ${i[1].length > 1 ? `in (${i[1].map((v) => (`'${v}'`))})` : `eq '${i[1]}'`}`;
+            return `${i[0]} ${i[1].length > 1 ? `in (${i[1].map((v: any) => (`'${v}'`))})` : `eq '${i[1]}'`}`;
           })
           .join(" and ")).join("&");
       }

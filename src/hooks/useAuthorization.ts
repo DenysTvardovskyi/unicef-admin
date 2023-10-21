@@ -9,7 +9,7 @@ type TUseAuthorization = () => {
   isAuthorized: boolean;
   accessToken: string;
   user: IUser;
-  setAuthorization: (token: string, type?: string, user?: IUser) => void;
+  setAuthorization: (token: string, user?: IUser) => void;
   resetAuthorization: () => void;
   setUser: (user: IUser) => void;
 };
@@ -25,7 +25,7 @@ export const useAuthorization: TUseAuthorization = () => {
     dispatch({ type: SET_AUTHORIZATION, accessToken: token, user: user });
   };
 
-  const setUser = (user: IUser | undefined): void => {
+  const setUser = (user: IUser): void => {
     dispatch({ type: SET_USER, user: user });
   };
 

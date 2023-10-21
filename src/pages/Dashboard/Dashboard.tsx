@@ -1,12 +1,10 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-// import { useLoader, useNotification } from "../../hooks";
-import {Card, Col, Flex, Row, Skeleton, Table} from "antd";
-import { ILoaderTask } from "../../components/Loader/Loader";
+import { Card, Col, Flex, Row, Skeleton, Table } from "antd";
 import Title from "antd/es/typography/Title";
-import {Column, Pie} from '@ant-design/plots';
-import {AnalyticsBar} from "./components/AnalyticsBar";
-import {columns, dataSource} from "./mocks";
+import { Column, Pie } from "@ant-design/plots";
+import { AnalyticsBar } from "./components/AnalyticsBar";
+import { columns, dataSource } from "./mocks";
 
 interface IProps {}
 
@@ -24,7 +22,7 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
   // };
 
   const DemoPie = () => {
-    const data = [
+    const data: any = [
       {
         type: "分类一",
         value: 27,
@@ -50,7 +48,7 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
         value: 5,
       },
     ];
-    const config = {
+    const config: any = {
       appendPadding: 10,
       data,
       angleField: "value",
@@ -59,7 +57,7 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
       label: {
         type: "inner",
         offset: "-30%",
-        content: ({ percent }) => `${(percent * 100).toFixed(0)}%`,
+        content: ({ percent }: any) => `${(percent * 100).toFixed(0)}%`,
         style: {
           fontSize: 14,
           textAlign: "center",
@@ -75,7 +73,7 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
   };
 
   const DemoColumn = () => {
-    const data = [
+    const data: any = [
       {
         type: "家具家电",
         sales: 38,
@@ -109,7 +107,7 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
         sales: 38,
       },
     ];
-    const config = {
+    const config: any = {
       data,
       xField: "type",
       yField: "sales",
@@ -141,7 +139,7 @@ export const Dashboard: FC<IProps> = (): JSX.Element => {
     return <Column {...config} />;
   };
 
-  const loading = true
+  const loading = true;
 
   return (
 

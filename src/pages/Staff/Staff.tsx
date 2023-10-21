@@ -19,7 +19,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
     setIsModalOpen(true);
   };
 
-  const onFinish = (values) => {
+  const onFinish = (values: any) => {
     api.staff.create({ ...values }).then(() => notification.info("Invitation was sent to " + values.email + "!"));
     setIsModalOpen(false);
   };
@@ -30,7 +30,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
 
   const edit = (record: Partial<any> & { key: React.Key }) => {
     form.setFieldsValue({ name: "", age: "", address: "", ...record });
-    setEditingKey(record.key);
+    setEditingKey(record.key as any);
   };
 
   const cancel = () => {
@@ -41,7 +41,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
     {
       title: "ID",
       dataIndex: "id",
-      sorter: (a, b) => a.id - b.id,
+      sorter: (a: any, b: any) => a.id - b.id,
       key: "id",
     },
     {
@@ -77,7 +77,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
       fixed: "right",
       width: "166px",
       align: "center",
-      render: (record) => {
+      render: (record: any) => {
         const editable = isEditing(record);
         return editable ? (
           <Flex gap={8}>
@@ -101,7 +101,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
       },
     },
   ];
-  const mergedColumns = columns.map((col) => {
+  const mergedColumns: any = columns.map((col) => {
     if (!col.editable) {
       return col;
     }
@@ -135,7 +135,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
     }
   };
 
-  const handleDelete = (id): void => {
+  const handleDelete = (id: any): void => {
     api.staff.delete({ id }).then(() => notification.success("User was deleted!"));
   };
 

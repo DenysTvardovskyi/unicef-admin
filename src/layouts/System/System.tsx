@@ -104,7 +104,7 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
             <Menu
               mode="inline"
               defaultSelectedKeys={[ location.pathname ]}
-              defaultOpenKeys={[ ""+LINKS.filter((link) => (location.pathname).split(link?.key).length === 2)?.[0]?.key || "" ]}
+              defaultOpenKeys={[ ""+LINKS.filter((link) => (location.pathname).split(link?.key as any).length === 2)?.[0]?.key || "" ]}
               items={LINKS}
               style={{ background: constants.blue, color: constants.white }}
             />

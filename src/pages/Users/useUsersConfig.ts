@@ -1,13 +1,13 @@
 import {useTranslation} from "react-i18next";
 
-export const useUsersConfig: any = ({ onView, onSub }) => {
+export const useUsersConfig: any = ({ onView, onSub }: any) => {
     const {t} = useTranslation()
   return (
     [
       {
         title: "ID",
         dataIndex: "id",
-        sorter: (a, b) => a.id - b.id,
+        sorter: (a: any, b: any) => a.id - b.id,
         key: "id",
       },
       {
@@ -16,7 +16,7 @@ export const useUsersConfig: any = ({ onView, onSub }) => {
         align: "center",
         sorter: (a: any, b: any) => a.kids.length - b.kids.length,
         key: "kids",
-        render: (record) => record.length,
+        render: (record: any) => record.length,
       },
       {
         title: t("users.bot"),
@@ -40,7 +40,7 @@ export const useUsersConfig: any = ({ onView, onSub }) => {
         dataIndex: "isSubscribed",
         key: "isSubscribed",
         align: "center",
-        render: (record) => onSub(record),
+        render: (record: any) => onSub(record),
       },
       {
         title: t("users.frequency"),
@@ -51,7 +51,7 @@ export const useUsersConfig: any = ({ onView, onSub }) => {
         title: t("users.region"),
         dataIndex: "region",
         key: "region",
-        render: (record) => record.name,
+        render: (record: any) => record.name,
       },
       {
         title: t("users.actions"),
@@ -60,7 +60,7 @@ export const useUsersConfig: any = ({ onView, onSub }) => {
         fixed: "right",
         width: "100px",
         align: "center",
-        render: (record) => onView(record),
+        render: (record: any) => onView(record),
       },
     ]
   );

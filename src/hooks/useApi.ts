@@ -72,7 +72,7 @@ interface IApiGroupsDeleteConfig extends IApiConfig {
 
 interface IApiGroupsUpdateConfig extends IApiConfig {
   id: string;
-  body: IApiGroupsCreateConfig
+  body: IApiGroupsCreateConfig;
 }
 
 interface IApiUsersGetConfig extends IApiConfig {
@@ -111,7 +111,7 @@ export interface IUseApi {
   };
   users: {
     get: (config: IApiCustomerGetConfig) => Promise<ICustomer[]>;
-    one: (config: IApiGUsersOneConfig) => Promise<ICustomer[]>;
+    one: (config: IApiGUsersOneConfig) => Promise<{ items: ICustomer[], totalCount: number, page: number, pageSize: number }>;
   };
   staff: {
     get: (config: IApiUsersGetConfig) => Promise<IUser[]>;
@@ -121,7 +121,7 @@ export interface IUseApi {
   };
   groups: {
     get: (config: IApiGroupsGetConfig) => Promise<IGroup[]>;
-    one: (config: IApiGroupsOneConfig) => Promise<IGroup[]>;
+    one: (config: IApiGroupsOneConfig) => Promise<{ items: IGroup[], totalCount: number, page: number, pageSize: number }>;
     customers: (config: IApiGroupsCustomersConfig) => Promise<ICustomer[]>;
     create: (config: IApiGroupsCreateConfig) => Promise<IGroup>;
     delete: (config: IApiGroupsDeleteConfig) => Promise<void>;
@@ -156,7 +156,7 @@ export const useApi: TUseApi = (): IUseApi => {
       signIn: ({ loader, debug, password, email }) => {
         return new Promise((resolve, reject) => {
 
-          http.request<{ rawToken: string, user: IUser }>({
+          http.request<{ token: string, user: IUser }>({
             method: "POST",
             url: `${API_URL}/authentication`,
             headers,
@@ -183,13 +183,13 @@ export const useApi: TUseApi = (): IUseApi => {
           method: "POST",
           url: `${API_URL}/account/logout`,
           headers,
-          loader: !!loader ? loader : "Processing sign out...",
+          loader: !!loader ? loader : false,
         });
 
       },
     },
     account: {
-      get: ({ loader }) => {
+      get: ({}) => {
         return http.request<IUser>({
           method: "GET",
           url: `${API_URL}/users/current`,
@@ -199,7 +199,7 @@ export const useApi: TUseApi = (): IUseApi => {
       },
     },
     users: {
-      get: ({ loader, params }) => {
+      get: ({ params }) => {
         return http.request<ICustomer[]>({
           method: "GET",
           url: `${API_URL}/customers`,
@@ -207,12 +207,12 @@ export const useApi: TUseApi = (): IUseApi => {
           params,
           paramsSerializer: {
             serialize: serializeParams,
-          }
+          },
           // loader: !!loader ? loader : "Loading users...",
         });
       },
-      one: ({ id, loader }) => {
-        return http.request<ICustomer[]>({
+      one: ({ id }) => {
+        return http.request<{ items: ICustomer[], totalCount: number, page: number, pageSize: number }>({
           method: "GET",
           url: `${API_URL}/customers?$filter=id eq ${id}`,
           headers,
@@ -221,7 +221,7 @@ export const useApi: TUseApi = (): IUseApi => {
       },
     },
     staff: {
-      get: ({ loader, params }) => {
+      get: ({ params }) => {
         return http.request<IUser[]>({
           method: "GET",
           url: `${API_URL}/users`,
@@ -229,11 +229,11 @@ export const useApi: TUseApi = (): IUseApi => {
           params,
           paramsSerializer: {
             serialize: serializeParams,
-          }
+          },
           // loader: !!loader ? loader : "Loading users...",
         });
       },
-      create: ({ name, lastName, email, loader }) => {
+      create: ({ name, lastName, email }) => {
         return http.request<IUser>({
           method: "POST",
           url: `${API_URL}/users`,
@@ -246,7 +246,7 @@ export const useApi: TUseApi = (): IUseApi => {
           // loader: !!loader ? loader : "Loading users...",
         });
       },
-      delete: ({ id, loader }) => {
+      delete: ({ id }) => {
         return http.request<void>({
           method: "DELETE",
           url: `${API_URL}/users/${id}`,
@@ -254,7 +254,7 @@ export const useApi: TUseApi = (): IUseApi => {
           // loader: !!loader ? loader : "Loading users...",
         });
       },
-      update: ({ id, user, loader }) => {
+      update: ({ id, user }) => {
         return http.request<IUser>({
           method: "PUT",
           url: `${API_URL}/users/${id}`,
@@ -265,7 +265,7 @@ export const useApi: TUseApi = (): IUseApi => {
       },
     },
     groups: {
-      get: ({ loader, params }) => {
+      get: ({ params }) => {
         return http.request<IGroup[]>({
           method: "GET",
           url: `${API_URL}/groups`,
@@ -273,19 +273,19 @@ export const useApi: TUseApi = (): IUseApi => {
           params,
           paramsSerializer: {
             serialize: serializeParams,
-          }
+          },
           // loader: !!loader ? loader : "Loading users...",
         });
       },
-      one: ({ id, loader }) => {
-        return http.request<IGroup[]>({
+      one: ({ id }) => {
+        return http.request<{ items: IGroup[], totalCount: number, page: number, pageSize: number }>({
           method: "GET",
           url: `${API_URL}/groups?$filter=id eq ${id}`,
           headers,
           // loader: !!loader ? loader : "Loading users...",
         });
       },
-      customers: ({ id, loader }) => {
+      customers: ({ id }) => {
         return http.request<ICustomer[]>({
           method: "GET",
           url: `${API_URL}/groups${id}/customers`,
@@ -299,10 +299,10 @@ export const useApi: TUseApi = (): IUseApi => {
           url: `${API_URL}/groups`,
           headers,
           data: { ...body },
-          // loader: !!loader ? loader : "Loading users...",
+          loader: !!loader ? loader : false,
         });
       },
-      delete: ({ id, loader }) => {
+      delete: ({ id }) => {
         return http.request<void>({
           method: "DELETE",
           url: `${API_URL}/groups/${id}`,
@@ -310,7 +310,7 @@ export const useApi: TUseApi = (): IUseApi => {
           // loader: !!loader ? loader : "Loading users...",
         });
       },
-      update: ({ id, body, loader }) => {
+      update: ({ id, body }) => {
         return http.request<IGroup>({
           method: "PUT",
           url: `${API_URL}/groups/${id}`,
@@ -321,7 +321,7 @@ export const useApi: TUseApi = (): IUseApi => {
       },
     },
     groupUsers: {
-      get: ({ id, loader, params }) => {
+      get: ({ id, params }) => {
         return http.request<ICustomer[]>({
           method: "GET",
           url: `${API_URL}/groups/${id}/customers`,
@@ -329,10 +329,10 @@ export const useApi: TUseApi = (): IUseApi => {
           params,
           paramsSerializer: {
             serialize: serializeParams,
-          }
+          },
           // loader: !!loader ? loader : "Loading users...",
         });
       },
-    }
+    },
   };
 };

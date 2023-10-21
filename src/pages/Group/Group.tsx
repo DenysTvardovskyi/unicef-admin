@@ -20,12 +20,14 @@ import Title from "antd/es/typography/Title";
 import { List } from "../../components";
 import { useUsersConfig } from "../Users/useUsersConfig";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import {useTranslation} from "react-i18next";
-import {useTableData} from "./useTableData";
+import { useTranslation } from "react-i18next";
+import { useTableData } from "./useTableData";
+
+const { Option } = Select;
 
 interface IProps {}
 
-const getDate = (date) => new Date(date).toLocaleDateString(
+const getDate = (date: any) => new Date(date).toLocaleDateString(
   "en-US",
   { year: "numeric", month: "2-digit", day: "numeric" },
 );
@@ -33,11 +35,11 @@ const getDate = (date) => new Date(date).toLocaleDateString(
 export const Group: FC<IProps> = (): JSX.Element => {
   const { groupId } = useParams();
   const api = useApi();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const notification = useNotification();
   const [ groupData, setGroupData ] = useState<IGroup>();
-  const {days, tableLabels, conversationStates, freequency} = useTableData()
+  const { days, tableLabels, conversationStates, freequency } = useTableData();
 
   useEffect(() => {
     if (groupId) {
@@ -47,20 +49,20 @@ export const Group: FC<IProps> = (): JSX.Element => {
 
   const handleSave = (body: any) => {
     try {
-      api.groups.update({ id: groupId, ...body }).then(result => {
+      api.groups.update({ id: groupId, ...body }).then((result) => {
         setGroupData(result);
         notification.success("Saved");
       });
-    } catch (e) {
+    } catch (e: any) {
       notification.error(`Saving failed ${e.message}`);
     }
   };
 
   const renderView = (record: any) => <Button onClick={() => navigate("/user/" + record.key)}>View</Button>;
-  const renderSubscription = (record) => record ? <CheckOutlined style={{ color: "green" }} /> :
+  const renderSubscription = (record: any) => record ? <CheckOutlined style={{ color: "green" }} /> :
     <CloseOutlined style={{ color: "red" }} />;
 
-  const config = useUsersConfig({ onView: renderView, onSub: renderSubscription })
+  const config = useUsersConfig({ onView: renderView, onSub: renderSubscription });
 
   return (
     <Flex vertical>
@@ -165,7 +167,7 @@ export const Group: FC<IProps> = (): JSX.Element => {
                 <Select
                   mode="multiple"
                 >
-                  {conversationStates.map(item =>
+                  {conversationStates.map((item: any) =>
                     <Option value={item.key} label={item.label}>
                       {item.label}
                     </Option>,

@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
-import {Skeleton, Table} from "antd";
+import { FC, useEffect, useState } from "react";
+import { Table } from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import { FilterValue, TablePaginationConfig } from "antd/es/table/interface";
 import { useApi } from "../../hooks";
@@ -11,6 +11,7 @@ interface IProps<T> {
   disabled?: boolean;
   apiConfig?: any;
   resource: string;
+  components?: any;
   searchConfig?: {
     placeholder: string;
   };
@@ -36,7 +37,7 @@ export const List: FC<IProps<any>> = (props: IProps<any>): JSX.Element => {
   const { config, resource, searchConfig, search = false, disabled = false, ...rest } = props;
   const api = useApi();
   const [ dataSource, setDataSource ] = useState<object[]>([]);
-  const [ total, setTotal ] = useState();
+  const [ total, setTotal ] = useState<number>();
   const [ params, setParams ] = useState<IQueryParams>({
     pagination: {
       page: 1,
@@ -52,13 +53,14 @@ export const List: FC<IProps<any>> = (props: IProps<any>): JSX.Element => {
       ...rest.apiConfig,
       params: { ...params, pagination: [ params.pagination ] },
     })
-      .then(({ items, totalCount }) => {
+      .then(({ items, totalCount }: any) => {
         setTotal(totalCount);
-        setDataSource(items.map((item) => ({ ...item, key: item.id })));
+        setDataSource(items.map((item: any) => ({ ...item, key: item.id })));
       });
   }, [ params ]);
 
   const onChange: TableProps<any>["onChange"] = (pagination, filters, sorter, extra): void => {
+    console.log(pagination);
     if (extra.action === "sort") {
       handleSort(sorter);
     }
@@ -124,7 +126,7 @@ export const List: FC<IProps<any>> = (props: IProps<any>): JSX.Element => {
   return (
     <Table
       {...rest}
-        loading={!dataSource.length}
+      loading={!dataSource.length}
       columns={config}
       pagination={{ ...params.pagination, total, onChange: onPaginationChange }}
       dataSource={dataSource}
