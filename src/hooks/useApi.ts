@@ -91,6 +91,7 @@ interface IApiGroupsCreateConfig extends IApiConfig {
 }
 
 interface IApiNewsletterCreateConfig extends IApiConfig {
+  name: string
   type: "text" | "exercice" | "advice"
   content: string
   frequency: "daily" | "weekly"

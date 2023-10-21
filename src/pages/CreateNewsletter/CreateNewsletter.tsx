@@ -1,81 +1,90 @@
-import { FC, useEffect, useState } from "react";
-import { Button, Flex, Popconfirm } from "antd";
+import { FC } from "react";
+import { Button, Col, Flex, Form, Input, InputNumber, Row, Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import Title from "antd/es/typography/Title";
 import { useApi, useNotification } from "../../hooks";
-import { List } from "../../components/List";
 import { useTranslation } from "react-i18next";
+import TextArea from "antd/lib/input/TextArea";
+
+const { Option } = Select;
 
 interface IProps {}
 
 export const CreateNewsletter: FC<IProps> = (): JSX.Element => {
   const { t } = useTranslation();
 
-  const columns: any = [
-    {
-      title: "ID",
-      dataIndex: "id",
-      sorter: (a: any, b: any) => a.id - b.id,
-      key: "id",
-    },
-    {
-      title: t("groups.name"),
-      dataIndex: "name",
-      sorter: true,
-      key: "name",
-    },
-    {
-      title: t("groups.users"),
-      dataIndex: "customersCount",
-      sorter: (a: any, b: any) => a.customersCount - b.customersCount,
-      key: "customersCount",
-    },
-    {
-      title: t("groups.traffic"),
-      dataIndex: "customerTraffics",
-      key: "customerTraffics",
-    },
-    {
-      title: t("groups.actions"),
-      dataIndex: "",
-      key: "x",
-      fixed: "right",
-      width: "166px",
-      align: "center",
-      render: (record: any) => {
-        return (
-          <Flex gap={8}>
-            <Button onClick={() => navigate("/group/" + record.id)}>{t("groups.view")}</Button>
-            <Popconfirm title={t("groups.deleteConfirm")} onConfirm={() => handleDelete(record.id)}>
-              <Button danger>{t("groups.delete")}</Button>
-            </Popconfirm>
-          </Flex>
-        );
-      },
-    },
-  ];
-
   const api = useApi();
   const notification = useNotification();
   const navigate = useNavigate();
-  const [ refresh, setRefresh ] = useState(false);
 
-  useEffect(() => {
-    if (refresh) {
-      setRefresh(false);
+  const handleCreate = (body: any) => {
+    try {
+      api.newsletters.create({ ...body }).then((r) => {
+        notification.success("Success");
+        navigate("/newsletter/all");
+      });
+    } catch (e: any) {
+      notification.error(e);
     }
-  }, [ refresh ]);
-
-  const handleDelete = (id: any): void => {
-    api.groups.delete({ id }).then(() => {
-      notification.success("Groud was deleted!");
-      setRefresh(true);
-    });
   };
+
+  const initialValues = {
+    type: null,
+    content: null,
+    frequency: null,
+    groupId: null,
+  };
+
   return (
     <Flex gap="small" vertical>
-      <Title level={3}>{t("groups.title")}</Title>
-      {!refresh && <List resource="newsletters" config={columns} />}
+      <Row gutter={[ 24, 24 ]} justify={"center"}>
+        <Col xs={24} sm={24} md={24} lg={16} xl={8}>
+          <Form
+            layout="vertical"
+            onFinish={data => handleCreate(data)}
+            initialValues={initialValues}
+          >
+            <Title>Create newsletter</Title>
+            <Form.Item required name="name" label={"Name"}>
+              <Input />
+            </Form.Item>
+            <Form.Item required name="content" label={"content"}>
+              <TextArea rows={2} />
+            </Form.Item>
+            <Flex gap={"small"} vertical style={{ width: "100%" }}>
+              <Form.Item name="type" label={"type"}>
+                <Select
+                  placeholder="Select Type"
+                >
+                  <Option value="text" label="Text">
+                    Text
+                  </Option>
+                  <Option value="exercice" label="Exercice">
+                    Exercice
+                  </Option>
+                  <Option value="advice" label="Advice">
+                    Advice
+                  </Option>
+                </Select>
+              </Form.Item>
+
+              <Form.Item name="frequency" label={"frequency"}>
+                <Select>
+                  <Option value="daily" label="Daily">
+                    Daily
+                  </Option>
+                  <Option value="weekly" label="Weekly">
+                    Weekly
+                  </Option>
+                </Select>
+              </Form.Item>
+              <Form.Item>
+                <Button htmlType="submit">{t("save")}</Button>
+              </Form.Item>
+            </Flex>
+          </Form>
+        </Col>
+      </Row>
     </Flex>
   );
 };

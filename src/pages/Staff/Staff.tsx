@@ -3,13 +3,13 @@ import { Button, Flex, Form, Input, InputNumber, Modal, Popconfirm } from "antd"
 import Title from "antd/es/typography/Title";
 import { useApi, useNotification } from "../../hooks";
 import { List } from "../../components/List";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 interface IProps {}
 
 export const Staff: FC<IProps> = (): JSX.Element => {
   const api = useApi();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const [ form ] = Form.useForm();
   const notification = useNotification();
   const [ isModalOpen, setIsModalOpen ] = useState(false);
@@ -139,6 +139,8 @@ export const Staff: FC<IProps> = (): JSX.Element => {
           lastName: row.lastName,
           email: row.email,
         },
+      }).then(() => {
+        setRefresh(true);
       });
     } catch (errInfo) {
       console.log("Validate Failed:", errInfo);

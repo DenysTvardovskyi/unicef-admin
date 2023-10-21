@@ -11,6 +11,12 @@ export const useUsersConfig: any = ({ onView, onSub }: any) => {
         key: "id",
       },
       {
+        title: "Bot Customer Id",
+        dataIndex: "botCustomerId",
+        sorter: (a: any, b: any) => a.id - b.id,
+        key: "botCustomerId",
+      },
+      {
         title: t("users.totalKids"),
         dataIndex: "childrenCount",
         align: "center",
