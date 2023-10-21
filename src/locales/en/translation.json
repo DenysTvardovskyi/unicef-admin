@@ -101,6 +101,16 @@
     },
     "backHome": "Back home",
     "analytics": {
+      "selectPlaceholder": "Select a group",
+      "kidsAge": "Kids age",
+      "recommendationDay": "RecommendationDay",
+      "conversationState": "Conversation state",
+      "subscribed": "Subscribed",
+      "preschoolStatus": "Preschool Status",
+      "selectMessage": "Please select a group",
+      "emptySelectMessage": "Please select another group",
+      "usersInGroup": "Users in group",
+      "comingSoon": "Coming soon...",
       "activity": {
         "title": "Activity analytics"
       },

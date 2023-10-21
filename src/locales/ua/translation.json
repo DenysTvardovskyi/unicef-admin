@@ -101,6 +101,16 @@
     },
     "backHome": "Назад додому",
     "analytics": {
+      "selectPlaceholder": "Оберіть групу",
+      "kidsAge": "Вік дітей",
+      "recommendationDay": "День надання рекомендацій",
+      "conversationState": "Стан розмови",
+      "preschoolStatus": "Статус дошкліьної освіти",
+      "subscribed": "Підписка",
+      "selectMessage": "Будь ласка, оберіть групу",
+      "emptySelectMessage": "Будь ласка, оберіть іншу групу",
+      "usersInGroup": "Користувачів у групі",
+      "comingSoon": "Скоро буде...",
       "activity": {
         "title": "Аналітика активності"
       },
@@ -219,6 +229,5 @@
       "daysChart": "Користувачі по дням",
       "deviceChart": "Користувачі по месенджерам"
     }
-
   }
 }
