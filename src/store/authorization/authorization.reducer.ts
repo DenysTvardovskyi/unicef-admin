@@ -16,6 +16,9 @@ const initialState: IState = {
     name: "",
     email: "",
     role: null,
+    region: {
+      name: ""
+    }
   },
 };
 
