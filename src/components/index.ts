@@ -2,7 +2,7 @@ import { ILoaderContext, Loader, LoaderContext } from "./Loader";
 import { Root } from "./Root";
 import { List } from "./List";
 import { Router } from "./Router";
-import { ChartsSection } from "./ChartsSection";
+import { ColumnChart, PieChart, LineChart } from "./Charts";
 
 export type { ILoaderContext };
 
@@ -11,6 +11,5 @@ export {
   List,
   LoaderContext,
   Root,
-  Router,
-  ChartsSection
+  Router,ColumnChart, PieChart, LineChart
 };

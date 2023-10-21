@@ -1,8 +1,8 @@
 import { Bar } from "@ant-design/plots";
-import { useChartsData } from "../../../hooks/useChartsData";
-import { IPieChart } from "../../../models/chart";
+import { useChartsData } from "../../hooks/useChartsData";
+import { IPieChart } from "../../models/chart";
 import { FC } from "react";
-import {constants} from "../../../styles/constants";
+import {constants} from "../../styles/constants";
 
 export const LineChart: FC<IPieChart> = (params: IPieChart) => {
   const chartsData = useChartsData(params);

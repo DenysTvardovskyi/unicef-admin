@@ -6,9 +6,7 @@ import { AnalyticsBar } from "./components/AnalyticsBar";
 import { useApi } from "../../hooks";
 import { IUser } from "../../models";
 import { IData } from "../../models/data";
-import { PieChart } from "./components/PieChart";
-import {LineChart} from "./components/LineChart";
-import {ColumnChart} from "./components/ColumnChart";
+import { PieChart, LineChart, ColumnChart } from "../../components";
 
 interface IProps {}
 

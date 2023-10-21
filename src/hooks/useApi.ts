@@ -59,6 +59,10 @@ interface IApiGroupsOneConfig extends IApiConfig {
 
 interface IApiGroupsCustomersConfig extends IApiConfig {
   id: string;
+  params?: {
+    page: number;
+    pageSize: number;
+  };
 }
 
 interface IApiGroupsCreateConfig extends IApiConfig {
@@ -135,7 +139,7 @@ export interface IUseApi {
   groups: {
     get: (config: IApiGroupsGetConfig) => Promise<IGroup[]>;
     one: (config: IApiGroupsOneConfig) => Promise<{ items: IGroup[], totalCount: number, page: number, pageSize: number }>;
-    customers: (config: IApiGroupsCustomersConfig) => Promise<ICustomer[]>;
+    customers: (config: IApiGroupsCustomersConfig) => Promise<{ items: ICustomer[], totalCount: number, page: number, pageSize: number }>;
     create: (config: IApiGroupsCreateConfig) => Promise<IGroup>;
     delete: (config: IApiGroupsDeleteConfig) => Promise<void>;
     update: (config: IApiGroupsUpdateConfig) => Promise<IGroup>;
@@ -312,11 +316,15 @@ export const useApi: TUseApi = (): IUseApi => {
           // loader: !!loader ? loader : "Loading users...",
         });
       },
-      customers: ({ id }) => {
-        return http.request<ICustomer[]>({
+      customers: ({params, id }) => {
+        return http.request<{ items: ICustomer[], totalCount: number, page: number, pageSize: number }>({
           method: "GET",
-          url: `${API_URL}/groups${id}/customers`,
+          url: `${API_URL}/groups/${id}/customers`,
           headers,
+          params,
+          paramsSerializer: {
+            serialize: serializeParams,
+          },
           // loader: !!loader ? loader : "Loading users...",
         });
       },
