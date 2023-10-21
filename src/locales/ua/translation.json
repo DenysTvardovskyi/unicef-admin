@@ -100,7 +100,11 @@
       "message": "Вибачте, ви не авторизовані для доступу до цієї сторінки."
     },
     "backHome": "Назад додому",
+    "editButton": "Редагувати",
+    "addButton": "Додати",
     "analytics": {
+      "botType": "Бот",
+      "region": "Регіон",
       "selectPlaceholder": "Оберіть групу",
       "kidsAge": "Вік дітей",
       "recommendationDay": "День надання рекомендацій",
