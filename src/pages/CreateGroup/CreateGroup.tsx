@@ -20,9 +20,10 @@ export const CreateGroup: FC<IProps> = (): JSX.Element => {
 
   const handleCreate = (body: any) => {
     try {
-      api.groups.create({ ...body }).then(r => console.log(r));
-      notification.success("Success");
-      navigate("/group/all");
+      api.groups.create({ ...body }).then((r) => {
+        notification.success("Success");
+        navigate("/group/" + r.id);
+      });
     } catch (e: any) {
       notification.error(e);
     }
@@ -31,10 +32,10 @@ export const CreateGroup: FC<IProps> = (): JSX.Element => {
   const initialValues = {
     name: null,
     description: null,
-    minChildAge: 0,
-    maxChildAge: 0,
-    minChildCount: 0,
-    maxChildCount: 0,
+    minChildAge: null,
+    maxChildAge: null,
+    minChildCount: null,
+    maxChildCount: null,
     customerTraffics: [],
     recommendationDays: [],
     recommendationFrequencies: [],

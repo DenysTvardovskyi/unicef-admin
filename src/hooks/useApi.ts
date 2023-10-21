@@ -145,7 +145,7 @@ export interface IUseApi {
     update: (config: IApiGroupsUpdateConfig) => Promise<IGroup>;
   };
   groupUsers: {
-    get: (config: IApiGroupsUsersGetConfig) => Promise<ICustomer[]>;
+    get: (config: IApiGroupsUsersGetConfig) => Promise<{ items: ICustomer[], totalCount: number, page: number, pageSize: number }>;
   };
   regions: {
     get: (config: IApiRegionGetConfig) => Promise<{ items: IRegion[], totalCount: number, page: number, pageSize: number }>
@@ -357,7 +357,7 @@ export const useApi: TUseApi = (): IUseApi => {
     },
     groupUsers: {
       get: ({ id, params }) => {
-        return http.request<ICustomer[]>({
+        return http.request<{ items: ICustomer[], totalCount: number, page: number, pageSize: number }>({
           method: "GET",
           url: `${API_URL}/groups/${id}/customers`,
           headers,

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Button, Flex, Form, Input, InputNumber, Modal, Popconfirm } from "antd";
 import Title from "antd/es/typography/Title";
 import { useApi, useNotification } from "../../hooks";
@@ -14,6 +14,14 @@ export const Staff: FC<IProps> = (): JSX.Element => {
 
   const [ editingKey, setEditingKey ] = useState("");
   const isEditing = (record: any) => record.key === editingKey;
+
+  const [ refresh, setRefresh ] = useState(false);
+
+  useEffect(() => {
+    if (refresh) {
+      setRefresh(false);
+    }
+  }, [ refresh ]);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -145,7 +153,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
         <Title level={3}>Staff</Title>
         <Button type="primary" onClick={showModal}>Add</Button>
       </Flex>
-      <Form form={form} component={false}>
+      {!refresh && <Form form={form} component={false}>
         <List
           resource="staff"
           config={mergedColumns}
@@ -155,7 +163,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
             },
           }}
         />
-      </Form>
+      </Form>}
       <Modal
         title="Invite new Admin"
         footer={null}

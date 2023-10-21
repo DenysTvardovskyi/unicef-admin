@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Button, Flex, Popconfirm } from "antd";
 import { useNavigate } from "react-router-dom";
 import Title from "antd/es/typography/Title";
@@ -58,14 +58,24 @@ export const Groups: FC<IProps> = (): JSX.Element => {
   const api = useApi();
   const notification = useNotification();
   const navigate = useNavigate();
+  const [ refresh, setRefresh ] = useState(false);
+
+  useEffect(() => {
+    if (refresh) {
+      setRefresh(false);
+    }
+  }, [ refresh ]);
 
   const handleDelete = (id: any): void => {
-    api.groups.delete({ id }).then(() => notification.success("Groud was deleted!"));
+    api.groups.delete({ id }).then(() => {
+      notification.success("Groud was deleted!");
+      setRefresh(true);
+    });
   };
   return (
     <Flex gap="small" vertical>
       <Title level={3}>{t("groups.title")}</Title>
-      <List resource="groups" config={columns} />
+      {!refresh && <List resource="groups" config={columns} />}
     </Flex>
   );
 };

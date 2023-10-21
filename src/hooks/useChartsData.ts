@@ -21,7 +21,7 @@ export const useChartsData = ({data, keyword}: IPieChart) => {
     const regionCounts: any = {};
 
     data?.forEach((obj) => {
-
+      console.log(data, keyword)
       const regionName = getObjectProperty(obj, keyword);
 
       if (regionCounts[regionName]) {

@@ -190,6 +190,7 @@
     "save": "Save",
     "groups": {
       "name": "Name",
+      "title": "Groups",
       "traffic": "Traffic",
       "users": "Users",
       "createTitle": "Create group",
