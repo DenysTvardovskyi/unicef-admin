@@ -37,6 +37,14 @@ interface IApiGroupsGetConfig extends IApiConfig {
   };
 }
 
+interface IApiGroupsUsersGetConfig extends IApiConfig {
+  id: string;
+  params?: {
+    page: number;
+    pageSize: number;
+  };
+}
+
 interface IApiGroupsOneConfig extends IApiConfig {
   id: string;
 }
@@ -113,6 +121,9 @@ export interface IUseApi {
     create: (config: IApiGroupsCreateConfig) => Promise<IGroup>;
     delete: (config: IApiGroupsDeleteConfig) => Promise<void>;
     update: (config: IApiGroupsUpdateConfig) => Promise<IGroup>;
+  };
+  groupUsers: {
+    get: (config: IApiGroupsUsersGetConfig) => Promise<ICustomer[]>;
   };
 }
 
@@ -296,5 +307,19 @@ export const useApi: TUseApi = (): IUseApi => {
         });
       },
     },
+    groupUsers: {
+      get: ({ id, loader, params }) => {
+        return http.request<ICustomer[]>({
+          method: "GET",
+          url: `${API_URL}/groups/${id}/customers`,
+          headers,
+          params,
+          paramsSerializer: {
+            serialize: serializeParams,
+          }
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+    }
   };
 };
