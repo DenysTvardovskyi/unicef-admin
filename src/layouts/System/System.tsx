@@ -46,27 +46,11 @@ function getItem(
   } as MenuItem;
 }
 
-const LINKS = [
-  getItem(<Link to="/">Dashboard</Link>, "/", <AppstoreOutlined />),
-  getItem(<Link to="/users">Users</Link>, "/users", <UserOutlined />),
-  getItem("Groups", "/group", <TeamOutlined />, [
-    getItem(<Link to="/group/all">All</Link>, "/group/all"),
-    getItem(<Link to="/group/create">Creat</Link>, "/group/create"),
-  ]),
-  getItem("Analytics", "/analytics", <FundOutlined />, [
-    getItem(<Link to="/analytics/users">Users</Link>, "/analytics/users"),
-    getItem(<Link to="/analytics/traffic">Traffic</Link>, "/analytics/traffic"),
-    getItem(<Link to="/analytics/activity">Activity</Link>, "/analytics/activity"),
-    getItem(<Link to="/analytics/newsletter">Newsletter</Link>, "/analytics/newsletter"),
-  ]),
-  getItem(<Link to="/staff">Staff</Link>, "/staff", <CoffeeOutlined />),
-];
-
 export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
   const { user } = useAuthorization();
   const [ collapsed, setCollapsed ] = useState(false);
   const [ hasBreakPoint, setBreakPoint ] = useState(false);
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
   const { resetAuthorization } = useAuthorization();
@@ -77,6 +61,22 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
   const handleChange = (value: string) => {
     i18n.changeLanguage(value);
   };
+
+  const LINKS = [
+    getItem(<Link to="/">{t("sidebar.dashboard")}</Link>, "/", <AppstoreOutlined />),
+    getItem(<Link to="/users">Users</Link>, "/users", <UserOutlined />),
+    getItem("Groups", "/group", <TeamOutlined />, [
+      getItem(<Link to="/group/all">All</Link>, "/group/all"),
+      getItem(<Link to="/group/create">Creat</Link>, "/group/create"),
+    ]),
+    getItem("Analytics", "/analytics", <FundOutlined />, [
+      getItem(<Link to="/analytics/users">Users</Link>, "/analytics/users"),
+      getItem(<Link to="/analytics/traffic">Traffic</Link>, "/analytics/traffic"),
+      getItem(<Link to="/analytics/activity">Activity</Link>, "/analytics/activity"),
+      getItem(<Link to="/analytics/newsletter">Newsletter</Link>, "/analytics/newsletter"),
+    ]),
+    getItem(<Link to="/staff">Staff</Link>, "/staff", <CoffeeOutlined />),
+  ];
 
   return (
     <Layout>

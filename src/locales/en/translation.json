@@ -38,6 +38,9 @@
         "title": "Process sign in..."
       }
     },
+    "sidebar": {
+      "dashboard": "Dashboard"
+    },
     "signUp": {
       "fullname": {
         "title": "Full Name",
@@ -81,6 +84,24 @@
       },
       "loader": {
         "title": "Process sign up..."
+      }
+    },
+    "no-auth": {
+      "message": "Sorry, you are not authorized to access this page."
+    },
+    "backHome": "Back home",
+    "analytics": {
+      "activity": {
+        "title": "Activity analytics"
+      },
+      "users": {
+        "title": "Users analytics"
+      },
+      "traffic": {
+        "title": "Traffic analytics"
+      },
+      "newsletter": {
+        "title": "Newsletter analytics"
       }
     }
   }
