@@ -102,6 +102,10 @@ interface IApiGroupsDeleteConfig extends IApiConfig {
   id: string;
 }
 
+interface IApiGroupsDownloadConfig extends IApiConfig {
+  id: string;
+}
+
 interface IApiNewsletterDeleteConfig extends IApiConfig {
   id: string;
 }
@@ -172,6 +176,7 @@ export interface IUseApi {
     customers: (config: IApiGroupsCustomersConfig) => Promise<{ items: ICustomer[], totalCount: number, page: number, pageSize: number }>;
     create: (config: IApiGroupsCreateConfig) => Promise<IGroup>;
     delete: (config: IApiGroupsDeleteConfig) => Promise<void>;
+    download: (config: IApiGroupsDownloadConfig) => Promise<void>;
     update: (config: IApiGroupsUpdateConfig) => Promise<IGroup>;
   };
   groupUsers: {
@@ -378,6 +383,14 @@ export const useApi: TUseApi = (): IUseApi => {
         return http.request<void>({
           method: "DELETE",
           url: `${API_URL}/groups/${id}`,
+          headers,
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+      download: ({ id }) => {
+        return http.request<void>({
+          method: "GET",
+          url: `${API_URL}/groups/${id}/analytics/excel`,
           headers,
           // loader: !!loader ? loader : "Loading users...",
         });

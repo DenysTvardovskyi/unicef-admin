@@ -64,12 +64,19 @@ export const Group: FC<IProps> = (): JSX.Element => {
 
   const config = useUsersConfig({ onView: renderView, onSub: renderSubscription });
 
+  const handleDownload = () => {
+    api.groups.download({ id: groupId }).then((res) => console.log(res));
+  };
+
   return (
     <Flex vertical>
       <Row gutter={[ 24, 24 ]} justify={"center"}>
         <Col xs={24} sm={24} md={24} lg={16} xl={8}>
           <Skeleton loading={!groupData} active={true}>
-            <Title>{groupData?.name}</Title>
+            <Flex justify="space-between" align="center">
+              <Title>{groupData?.name}</Title>
+            </Flex>
+
           </Skeleton>
 
           <Flex vertical gap={"middle"}>
@@ -88,6 +95,9 @@ export const Group: FC<IProps> = (): JSX.Element => {
                 <Card title={tableLabels.updatedAt}>
                   <Title level={2}>{getDate(groupData?.updatedAt)}</Title>
                 </Card>}
+            </Skeleton>
+            <Skeleton loading={!groupData} active={true}>
+              <Button onClick={handleDownload}>Download PDF</Button>
             </Skeleton>
           </Flex>
         </Col>
