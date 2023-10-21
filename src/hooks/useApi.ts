@@ -7,6 +7,7 @@ import { IGroup } from "../models/group";
 import { ICustomer } from "../models/customer";
 import { serializeParams } from "../utils/serializer";
 import { IRegion } from "../models/region";
+import {INewsletter} from "../models/newletter";
 
 const API_URL: string = import.meta.env.VITE_BASE_URL!;
 
@@ -45,6 +46,13 @@ interface IApiGroupsGetConfig extends IApiConfig {
   };
 }
 
+interface IApiNewsletterGetConfig extends IApiConfig {
+  params?: {
+    page: number;
+    pageSize: number;
+  };
+}
+
 interface IApiGroupsUsersGetConfig extends IApiConfig {
   id: string;
   params?: {
@@ -54,6 +62,10 @@ interface IApiGroupsUsersGetConfig extends IApiConfig {
 }
 
 interface IApiGroupsOneConfig extends IApiConfig {
+  id: string;
+}
+
+interface IApiNewsletterOneConfig extends IApiConfig {
   id: string;
 }
 
@@ -78,7 +90,18 @@ interface IApiGroupsCreateConfig extends IApiConfig {
   conversationStates: string[];
 }
 
+interface IApiNewsletterCreateConfig extends IApiConfig {
+  type: "text" | "exercice" | "advice"
+  content: string
+  frequency: "daily" | "weekly"
+  groupId: number
+}
+
 interface IApiGroupsDeleteConfig extends IApiConfig {
+  id: string;
+}
+
+interface IApiNewsletterDeleteConfig extends IApiConfig {
   id: string;
 }
 
@@ -86,6 +109,12 @@ interface IApiGroupsUpdateConfig extends IApiConfig {
   id: string;
   body: IApiGroupsCreateConfig;
 }
+
+interface IApiNewsletterUpdateConfig extends IApiConfig {
+  id: string;
+  body: INewsletter;
+}
+
 
 interface IApiUsersGetConfig extends IApiConfig {
   params?: {
@@ -149,6 +178,13 @@ export interface IUseApi {
   };
   regions: {
     get: (config: IApiRegionGetConfig) => Promise<{ items: IRegion[], totalCount: number, page: number, pageSize: number }>
+  };
+  newsletters: {
+    get: (config: IApiNewsletterGetConfig) => Promise<{ items: INewsletter[], totalCount: number, page: number, pageSize: number }>;
+    one: (config: IApiNewsletterOneConfig) => Promise<{ items: INewsletter[], totalCount: number, page: number, pageSize: number }>;
+    create: (config: IApiNewsletterCreateConfig) => Promise<INewsletter>;
+    delete: (config: IApiNewsletterDeleteConfig) => Promise<void>;
+    update: (config: IApiNewsletterUpdateConfig) => Promise<INewsletter>;
   };
 }
 
@@ -379,6 +415,54 @@ export const useApi: TUseApi = (): IUseApi => {
           paramsSerializer: {
             serialize: serializeParams,
           },
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+    },
+    newsletters: {
+      get: ({ params }) => {
+        return http.request<{ items: INewsletter[], totalCount: number, page: number, pageSize: number }>({
+          method: "GET",
+          url: `${API_URL}/groups`,
+          headers,
+          params,
+          paramsSerializer: {
+            serialize: serializeParams,
+          },
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+      one: ({ id }) => {
+        return http.request<{ items: INewsletter[], totalCount: number, page: number, pageSize: number }>({
+          method: "GET",
+          url: `${API_URL}/groups?$filter=id eq ${id}`,
+          headers,
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+      create: ({ loader, debug, ...body }) => {
+        return http.request<INewsletter>({
+          method: "POST",
+          url: `${API_URL}/groups`,
+          headers,
+          data: { ...body },
+          loader: !!loader ? loader : false,
+        });
+      },
+      delete: ({ id }) => {
+        return http.request<void>({
+          method: "DELETE",
+          url: `${API_URL}/groups/${id}`,
+          headers,
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+      update: ({ id, body }) => {
+        return http.request<INewsletter>({
+          method: "PUT",
+          url: `${API_URL}/groups/${id}`,
+          headers,
+          data: { ...body },
           // loader: !!loader ? loader : "Loading users...",
         });
       },

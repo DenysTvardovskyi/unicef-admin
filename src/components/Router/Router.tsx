@@ -3,11 +3,11 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import { AuthLayout as LandingLayout, System as SystemLayout } from "../../layouts";
 import {
   ActivityAnalytics,
-  CreateGroup,
+  CreateGroup, CreateNewsletter,
   Dashboard,
   Group,
   Groups,
-  NewsletterAnalytics,
+  NewsletterAnalytics, Newsletters,
   NotFound,
   Profile,
   SignIn,
@@ -36,6 +36,8 @@ export const Router: FC<IProps> = (): JSX.Element => {
   const PageUsersWithCheckAuthorization = withCheckAuthorization(Users);
   const PageUserWithCheckAuthorization = withCheckAuthorization(User);
   const PageGroupsWithCheckAuthorization = withCheckAuthorization(Groups);
+  const PageNewslettersWithCheckAuthorization = withCheckAuthorization(Newsletters);
+  const PageCreateNewslettersWithCheckAuthorization = withCheckAuthorization(CreateNewsletter);
   const PageGroupWithCheckAuthorization = withCheckAuthorization(Group);
   const PageCreateGroupWithCheckAuthorization = withCheckAuthorization(CreateGroup);
   const PageUserAnalyticsWithCheckAuthorization = withCheckAuthorization(UserAnalytics);
@@ -59,6 +61,8 @@ export const Router: FC<IProps> = (): JSX.Element => {
             <Route path="/analytics/traffic" element={<PageTrafficAnalyticsWithCheckAuthorization />} />
             <Route path="/analytics/activity" element={<PageActivityAnalyticsWithCheckAuthorization />} />
             <Route path="/analytics/newsletter" element={<PageNewsletterAnalyticsWithCheckAuthorization />} />
+            <Route path="/newsletter/all" element={<PageNewslettersWithCheckAuthorization />} />
+            <Route path="/newsletter/create" element={<PageCreateNewslettersWithCheckAuthorization />} />
             <Route path="/profile" element={<PageProfileWithCheckAuthorization />} />
             <Route path="/staff" element={<PageStaffWithCheckAuthorization />} />
             <Route path="*" element={<NotFound />} />
