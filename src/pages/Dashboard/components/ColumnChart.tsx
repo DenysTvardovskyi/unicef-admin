@@ -6,7 +6,6 @@ import { FC } from "react";
 export const ColumnChart: FC<IPieChart> = (params: IPieChart) => {
   const chartsData = useChartsData(params);
 
-  console.log(chartsData)
   const config: any = {
     data: chartsData,
     xField: 'name',
