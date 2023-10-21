@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Card, Col, Flex, Row, Skeleton } from "antd";
 import Title from "antd/es/typography/Title";
-import { Column } from "@ant-design/plots";
 import { AnalyticsBar } from "./components/AnalyticsBar";
 import { useApi } from "../../hooks";
 import { IUser } from "../../models";

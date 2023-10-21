@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { IPieChart } from "../models/chart";
 
-function getObjectProperty(obj, keyPath) {
+function getObjectProperty(obj: any, keyPath: any) {
   const keys = keyPath.split('.');
   let result = obj;
 
