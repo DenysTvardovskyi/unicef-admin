@@ -1,10 +1,11 @@
 import { FC } from "react";
 import {Button, Col, Flex, Form, Input, InputNumber, Row, Select} from "antd";
 import Title from "antd/es/typography/Title";
-import {conversationStates, days, tableLabels} from "../Group/tableData";
 import TextArea from "antd/es/input/TextArea";
 import {useApi, useNotification} from "../../hooks";
 import {useNavigate} from "react-router-dom";
+import {useTableData} from "../Group/useTableData";
+import {useTranslation} from "react-i18next";
 
 interface IProps {}
 
@@ -12,6 +13,8 @@ export const CreateGroup: FC<IProps> = (): JSX.Element => {
     const api = useApi()
     const navigate = useNavigate()
     const notification = useNotification();
+    const {days, tableLabels, conversationStates} = useTableData()
+    const {t} = useTranslation();
 
     const handleCreate = (body: any) => {
         try{
@@ -46,7 +49,7 @@ export const CreateGroup: FC<IProps> = (): JSX.Element => {
                     onFinish={data => handleCreate(data)}
                     initialValues={initialValues}
                 >
-                    <Title>Create group</Title>
+                    <Title>{t("groups.createTitle")}</Title>
                     <Form.Item required name="name" label={tableLabels.name}>
                         <Input />
                     </Form.Item>
@@ -123,7 +126,7 @@ export const CreateGroup: FC<IProps> = (): JSX.Element => {
                         </Select>
                     </Form.Item>
                     <Form.Item>
-                        <Button htmlType="submit">Save</Button>
+                        <Button htmlType="submit">{t("save")}</Button>
                     </Form.Item>
                 </Form>
             </Col>

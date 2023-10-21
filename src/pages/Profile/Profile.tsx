@@ -3,6 +3,7 @@ import { Avatar, Badge, Card, Descriptions, DescriptionsProps, Flex } from "antd
 import Title from "antd/es/typography/Title";
 import { useAuthorization } from "../../hooks";
 import { getInitials } from "../../utils";
+import {useTranslation} from "react-i18next";
 
 interface IProps {}
 
@@ -13,36 +14,37 @@ const BADGES = {
 
 export const Profile: FC<IProps> = (): JSX.Element => {
   const { user } = useAuthorization();
+  const { t } = useTranslation();
 
   const items: DescriptionsProps["items"] = [
     {
       key: "1",
-      label: "First Name",
+      label: t("account.firstName"),
       children: user?.name || "",
     },
     {
       key: "2",
-      label: "Last Name",
+      label: t("account.lastName"),
       children: user?.lastName || "",
     },
     {
       key: "3",
-      label: "Role",
+      label: t("account.role"),
       children: user.role,
     },
     {
       key: "4",
-      label: "Email",
+      label: t("account.email"),
       children: user.email,
     },
     {
       key: "5",
-      label: "Join Date",
+      label: t("account.joinDate"),
       children: (new Date(user.createdAt)).toLocaleString(),
     },
     {
       key: "6",
-      label: "Last Update",
+      label: t("account.lastUpdate"),
       children: (new Date(user.updatedAt)).toLocaleString(),
     },
   ];
@@ -50,7 +52,7 @@ export const Profile: FC<IProps> = (): JSX.Element => {
   return (
     <Flex gap="small" justify={"center"} align={"center"}>
       <Card style={{ width: 500 }}>
-        <Title>Profile</Title>
+        <Title>{t("account.title")}</Title>
         <Flex vertical gap={"middle"}>
           <Flex>
             <Badge.Ribbon text={user.role} color={BADGES[user.role]}>
@@ -60,7 +62,7 @@ export const Profile: FC<IProps> = (): JSX.Element => {
             </Badge.Ribbon>
           </Flex>
 
-          <Descriptions column={1} title="User Info" items={items} />
+          <Descriptions column={1} items={items} />
         </Flex>
 
       </Card>

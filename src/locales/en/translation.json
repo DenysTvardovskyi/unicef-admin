@@ -126,6 +126,67 @@
     },
     "not-found": {
       "title": "Sorry, the page you visited does not exist."
+    },
+    "days": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "conversationStates": {
+      "Welcome": "Welcome",
+      "ParentRegion": "ParentRegion",
+      "ChildName": "ChildName",
+      "ChildAge": "ChildAge",
+      "LessThan3YearsOldChild": "LessThan3YearsOldChild",
+      "PreschoolStatus": "PreschoolStatus",
+      "Survey": "Survey",
+      "MainMenu": "MainMenu",
+      "Pause": "Pause",
+      "SkipOrTakeSurvey": "SkipOrTakeSurvey"
+    },
+    "tableLabels":{
+      "name": "Name",
+      "customersCount": "Customer count",
+      "description": "Description",
+      "customerTraffics": "Customer Traffics",
+      "conversationStates": "Conversation states",
+      "maxChildAge": "Max child age",
+      "minChildAge": "Min child age",
+      "maxChildCount": "Max child count",
+      "minChildCount": "Min child count",
+      "recommendationDays": "Recommendation days",
+      "recommendationFrequencies": "Recommendation frequencies",
+      "updatedAt": "Updated at",
+      "createdAt": "Created at"
+    },
+    "freequency": {
+      "daily": "Daily",
+      "monthly": "Monthly"
+    },
+    "save": "Save",
+    "groups": {
+      "name": "Name",
+      "traffic": "Traffic",
+      "users": "Users",
+      "createTitle": "Create group",
+      "actions": "Actions",
+      "view": "View",
+      "delete": "Delete",
+      "deleteConfirm": "Sure to delete?",
+      "deleteFinal": "Group was deleted!"
+    },
+    "account": {
+      "title": "Account",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "role": "Role",
+      "email": "Email",
+      "joinDate": "Join Date",
+      "lastUpdate": "Last Update"
     }
   }
 }
