@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
-import { Landing as LandingLayout, System as SystemLayout } from "../../layouts";
+import { AuthLayout as LandingLayout, System as SystemLayout } from "../../layouts";
 import {
   ActivityAnalytics,
   CreateGroup,
@@ -61,6 +61,7 @@ export const Router: FC<IProps> = (): JSX.Element => {
             <Route path="/analytics/newsletter" element={<PageNewsletterAnalyticsWithCheckAuthorization />} />
             <Route path="/profile" element={<PageProfileWithCheckAuthorization />} />
             <Route path="/staff" element={<PageStaffWithCheckAuthorization />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </SystemLayout>
         :
