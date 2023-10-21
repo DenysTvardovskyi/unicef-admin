@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Table } from "antd";
+import {Skeleton, Table} from "antd";
 import type { ColumnsType, TableProps } from "antd/es/table";
 import { FilterValue, TablePaginationConfig } from "antd/es/table/interface";
 import { useApi } from "../../hooks";
@@ -124,6 +124,7 @@ export const List: FC<IProps<any>> = (props: IProps<any>): JSX.Element => {
   return (
     <Table
       {...rest}
+        loading={!dataSource.length}
       columns={config}
       pagination={{ ...params.pagination, total, onChange: onPaginationChange }}
       dataSource={dataSource}

@@ -64,18 +64,18 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
 
   const LINKS = [
     getItem(<Link to="/">{t("sidebar.dashboard")}</Link>, "/", <AppstoreOutlined />),
-    getItem(<Link to="/users">Users</Link>, "/users", <UserOutlined />),
-    getItem("Groups", "/group", <TeamOutlined />, [
-      getItem(<Link to="/group/all">All</Link>, "/group/all"),
-      getItem(<Link to="/group/create">Creat</Link>, "/group/create"),
+    getItem(<Link to="/users">{t("sidebar.users")}</Link>, "/users", <UserOutlined />),
+    getItem(t("sidebar.groups"), "/group", <TeamOutlined />, [
+      getItem(<Link to="/group/all">{t("sidebar.all")}</Link>, "/group/all"),
+      getItem(<Link to="/group/create">{t("sidebar.create")}</Link>, "/group/create"),
     ]),
-    getItem("Analytics", "/analytics", <FundOutlined />, [
-      getItem(<Link to="/analytics/users">Users</Link>, "/analytics/users"),
-      getItem(<Link to="/analytics/traffic">Traffic</Link>, "/analytics/traffic"),
-      getItem(<Link to="/analytics/activity">Activity</Link>, "/analytics/activity"),
-      getItem(<Link to="/analytics/newsletter">Newsletter</Link>, "/analytics/newsletter"),
+    getItem(t("sidebar.analytics"), "/analytics", <FundOutlined />, [
+      getItem(<Link to="/analytics/users">{t("sidebar.users")}</Link>, "/analytics/users"),
+      getItem(<Link to="/analytics/traffic">{t("sidebar.traffic")}</Link>, "/analytics/traffic"),
+      getItem(<Link to="/analytics/activity">{t("sidebar.activity")}</Link>, "/analytics/activity"),
+      getItem(<Link to="/analytics/newsletter">{t("sidebar.newsletter")}</Link>, "/analytics/newsletter"),
     ]),
-    getItem(<Link to="/staff">Staff</Link>, "/staff", <CoffeeOutlined />),
+    getItem(<Link to="/staff">{t("sidebar.staff")}</Link>, "/staff", <CoffeeOutlined />),
   ];
 
   return (
@@ -120,7 +120,7 @@ export const System: FC<IProps> = ({ children }: IProps): JSX.Element => {
                 style={{ margin: "0 4px 16px 4px" }}
                 onClick={resetAuthorization}
                 icon={<LogoutOutlined />}
-              >Log out</Button>
+              >{t("sidebar.logout")}</Button>
             }
           </Flex>
         </Flex>

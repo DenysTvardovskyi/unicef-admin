@@ -39,7 +39,17 @@
       }
     },
     "sidebar": {
-      "dashboard": "Dashboard"
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "groups": "Groups",
+      "all": "All",
+      "create": "Create",
+      "analytics": "Analytics",
+      "traffic": "Traffic",
+      "activity": "Activity",
+      "newsletter": "Newsletter",
+      "staff": "Staff",
+      "logout": "Log out"
     },
     "signUp": {
       "fullname": {
@@ -103,6 +113,19 @@
       "newsletter": {
         "title": "Newsletter analytics"
       }
+    },
+    "users": {
+      "title": "Users",
+      "totalKids": "Total Kids",
+      "bot": "Bot",
+      "subscription": "Subscription",
+      "frequency": "Frequency",
+      "region": "Region",
+      "actions": "Actions",
+      "view": "View"
+    },
+    "not-found": {
+      "title": "Sorry, the page you visited does not exist."
     }
   }
 }

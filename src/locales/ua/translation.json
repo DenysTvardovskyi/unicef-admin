@@ -39,7 +39,17 @@
       }
     },
     "sidebar": {
-      "dashboard": "Дашборд"
+      "dashboard": "Дашборд",
+      "users": "Користувачі",
+      "groups": "Групи",
+      "all": "Всі",
+      "create": "Створити",
+      "analytics": "Аналітика",
+      "traffic": "Трафік",
+      "activity": "Активність",
+      "newsletter": "Пошта",
+      "staff": "Працівники",
+      "logout": "Вийти"
     },
     "signUp": {
       "fullname": {
@@ -103,6 +113,19 @@
       "newsletter": {
         "title": "Аналітика пошти"
       }
+    },
+    "users": {
+      "title": "Користувачі",
+      "totalKids": "Всього дітей",
+      "bot": "Бот",
+      "subscription": "Підписка",
+      "frequency": "Частота",
+      "region": "Регіон",
+      "actions": "Дії",
+      "view": "Переглянути"
+    },
+    "not-found": {
+      "title": "Вибачте, сторінка, яку ви відвідали, не існує."
     }
   }
 }

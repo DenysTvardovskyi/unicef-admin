@@ -18,8 +18,8 @@ import TextArea from "antd/es/input/TextArea";
 import { useNavigate } from "react-router-dom";
 import { conversationStates, days, tableLabels } from "./tableData";
 import Title from "antd/es/typography/Title";
-import { List } from "../../components/List";
-import { UsersConfig } from "../Users/Users.config";
+import { List } from "../../components";
+import { useUsersConfig } from "../Users/useUsersConfig";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 
 interface IProps {}
@@ -56,6 +56,8 @@ export const Group: FC<IProps> = (): JSX.Element => {
   const renderView = (record: any) => <Button onClick={() => navigate("/user/" + record.key)}>View</Button>;
   const renderSubscription = (record) => record ? <CheckOutlined style={{ color: "green" }} /> :
     <CloseOutlined style={{ color: "red" }} />;
+
+  const config = useUsersConfig({ onView: renderView, onSub: renderSubscription })
 
   return (
     <Flex vertical>
@@ -180,7 +182,7 @@ export const Group: FC<IProps> = (): JSX.Element => {
         <List
           resource="groupUsers"
           apiConfig={{ id: groupId }}
-          config={UsersConfig({ onView: renderView, onSub: renderSubscription })}
+          config={config}
         />
       </Row>
     </Flex>

@@ -1,4 +1,7 @@
-export const UsersConfig: any = ({ onView, onSub }) => {
+import {useTranslation} from "react-i18next";
+
+export const useUsersConfig: any = ({ onView, onSub }) => {
+    const {t} = useTranslation()
   return (
     [
       {
@@ -8,7 +11,7 @@ export const UsersConfig: any = ({ onView, onSub }) => {
         key: "id",
       },
       {
-        title: "Total Kids",
+        title: t("users.totalKids"),
         dataIndex: "kids",
         align: "center",
         sorter: (a: any, b: any) => a.kids.length - b.kids.length,
@@ -16,7 +19,7 @@ export const UsersConfig: any = ({ onView, onSub }) => {
         render: (record) => record.length,
       },
       {
-        title: "Bot Type",
+        title: t("users.bot"),
         dataIndex: "botType",
         filters: [
           {
@@ -33,25 +36,25 @@ export const UsersConfig: any = ({ onView, onSub }) => {
         key: "botType",
       },
       {
-        title: "Subscribed",
+        title: t("users.subscription"),
         dataIndex: "isSubscribed",
         key: "isSubscribed",
         align: "center",
         render: (record) => onSub(record),
       },
       {
-        title: "Frequency",
+        title: t("users.frequency"),
         dataIndex: "recommendationFrequency",
         key: "recommendationFrequency",
       },
       {
-        title: "Region",
+        title: t("users.region"),
         dataIndex: "region",
         key: "region",
         render: (record) => record.name,
       },
       {
-        title: "Actions",
+        title: t("users.actions"),
         dataIndex: "",
         key: "x",
         fixed: "right",
