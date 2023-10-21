@@ -5,6 +5,7 @@ import { AxiosRequestHeaders } from "axios";
 import { IUser } from "../models";
 import { IGroup } from "../models/group";
 import { ICustomer } from "../models/customer";
+import { serializeParams } from "../utils/serializer";
 
 const API_URL: string = import.meta.env.VITE_BASE_URL!;
 
@@ -22,33 +23,55 @@ interface IApiAuthorizationSignOutConfig extends IApiConfig {}
 
 interface IApiAccountGetConfig extends IApiConfig {}
 
-interface IApiGroupsGetConfig extends IApiConfig {}
+interface IApiCustomerGetConfig extends IApiConfig {
+  params?: {
+    page: number;
+    pageSize: number;
+  };
+}
+
+interface IApiGroupsGetConfig extends IApiConfig {
+  params?: {
+    page: number;
+    pageSize: number;
+  };
+}
+
 interface IApiGroupsOneConfig extends IApiConfig {
   id: string;
 }
+
 interface IApiGroupsCustomersConfig extends IApiConfig {
   id: string;
 }
+
 interface IApiGroupsCreateConfig extends IApiConfig {
-  name: string
-  description: string
-  minChildAge: number
-  maxChildAge: number
-  minChildCount: number
-  maxChildCount: number
-  customerTraffics: string[]
-  recommendationDays: string[]
-  recommendationFrequencies: string[]
-  conversationStates: string[]
+  name: string;
+  description: string;
+  minChildAge: number;
+  maxChildAge: number;
+  minChildCount: number;
+  maxChildCount: number;
+  customerTraffics: string[];
+  recommendationDays: string[];
+  recommendationFrequencies: string[];
+  conversationStates: string[];
 }
+
 interface IApiGroupsDeleteConfig extends IApiConfig {
   id: string;
 }
+
 interface IApiGroupsUpdateConfig extends IApiConfig {
   id: string;
 }
 
-interface IApiUsersGetConfig extends IApiConfig {}
+interface IApiUsersGetConfig extends IApiConfig {
+  params?: {
+    page: number;
+    pageSize: number;
+  };
+}
 
 interface IApiUsersCreateConfig extends IApiConfig {
   name: string;
@@ -74,6 +97,9 @@ export interface IUseApi {
     get: (config: IApiAccountGetConfig) => Promise<IUser>;
   };
   users: {
+    get: (config: IApiCustomerGetConfig) => Promise<ICustomer[]>;
+  };
+  staff: {
     get: (config: IApiUsersGetConfig) => Promise<IUser[]>;
     create: (config: IApiUsersCreateConfig) => Promise<IUser>;
     delete: (config: IApiUsersDeleteConfig) => Promise<void>;
@@ -86,7 +112,7 @@ export interface IUseApi {
     create: (config: IApiGroupsCreateConfig) => Promise<IGroup>;
     delete: (config: IApiGroupsDeleteConfig) => Promise<void>;
     update: (config: IApiGroupsUpdateConfig) => Promise<IGroup>;
-  }
+  };
 }
 
 type TUseApi = () => IUseApi;
@@ -156,11 +182,29 @@ export const useApi: TUseApi = (): IUseApi => {
       },
     },
     users: {
-      get: ({ loader }) => {
+      get: ({ loader, params }) => {
+        return http.request<ICustomer[]>({
+          method: "GET",
+          url: `${API_URL}/customers`,
+          headers,
+          params,
+          paramsSerializer: {
+            serialize: serializeParams,
+          }
+          // loader: !!loader ? loader : "Loading users...",
+        });
+      },
+    },
+    staff: {
+      get: ({ loader, params }) => {
         return http.request<IUser[]>({
           method: "GET",
           url: `${API_URL}/users`,
           headers,
+          params,
+          paramsSerializer: {
+            serialize: serializeParams,
+          }
           // loader: !!loader ? loader : "Loading users...",
         });
       },
@@ -196,15 +240,19 @@ export const useApi: TUseApi = (): IUseApi => {
       },
     },
     groups: {
-      get: ({ loader }) => {
+      get: ({ loader, params }) => {
         return http.request<IGroup[]>({
           method: "GET",
           url: `${API_URL}/groups`,
           headers,
+          params,
+          paramsSerializer: {
+            serialize: serializeParams,
+          }
           // loader: !!loader ? loader : "Loading users...",
         });
       },
-      one: ({ id,loader }) => {
+      one: ({ id, loader }) => {
         return http.request<IGroup[]>({
           method: "GET",
           url: `${API_URL}/groups?$filter=id eq ${id}`,
@@ -225,7 +273,7 @@ export const useApi: TUseApi = (): IUseApi => {
           method: "POST",
           url: `${API_URL}/groups`,
           headers,
-          data: {...body},
+          data: { ...body },
           // loader: !!loader ? loader : "Loading users...",
         });
       },

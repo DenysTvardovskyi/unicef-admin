@@ -16,7 +16,6 @@ export const SignIn: FC<IProps> = (): JSX.Element => {
   const { isAuthorized, setAuthorization } = useAuthorization();
 
   const onFinish = (values: any) => {
-    console.log(values);
     api.authorization.signIn({ email: values.email, password: values.password, loader: t("signIn.loader.title") })
       .then(({ accessToken, user }) => {
         setAuthorization(accessToken, user);

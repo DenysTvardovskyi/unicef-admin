@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useState } from "react";
-import { Button, Flex, Form, Input, InputNumber, Modal, Popconfirm, Table } from "antd";
+import React, { FC, useState } from "react";
+import { Button, Flex, Form, Input, InputNumber, Modal, Popconfirm } from "antd";
 import Title from "antd/es/typography/Title";
-import { ITableParams, IUser } from "../../models";
 import { useApi, useNotification } from "../../hooks";
+import { List } from "../../components/List";
 
 interface IProps {}
 
@@ -11,13 +11,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
   const [ form ] = Form.useForm();
   const notification = useNotification();
   const [ isModalOpen, setIsModalOpen ] = useState(false);
-  const [ data, setData ] = useState<IUser[]>([]);
-  const [ tableParams, setTableParams ] = useState<ITableParams>({
-    pagination: {
-      current: 1,
-      pageSize: 10,
-    },
-  });
+
   const [ editingKey, setEditingKey ] = useState("");
   const isEditing = (record: any) => record.key === editingKey;
 
@@ -26,7 +20,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
   };
 
   const onFinish = (values) => {
-    api.users.create({ ...values }).then(() => notification.info("Invitation was sent to " + values.email + "!"));
+    api.staff.create({ ...values }).then(() => notification.info("Invitation was sent to " + values.email + "!"));
     setIsModalOpen(false);
   };
 
@@ -42,6 +36,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
   const cancel = () => {
     setEditingKey("");
   };
+
   const columns = [
     {
       title: "ID",
@@ -99,7 +94,7 @@ export const Staff: FC<IProps> = (): JSX.Element => {
               Edit
             </Button>
             <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.id)}>
-              <Button>Delete</Button>
+              <Button danger>Delete</Button>
             </Popconfirm>
           </Flex>
         );
@@ -125,29 +120,15 @@ export const Staff: FC<IProps> = (): JSX.Element => {
   const save = async (record: any) => {
     try {
       const row = (await form.validateFields()) as any;
-      const newData = [ ...data ];
-      const index = newData.findIndex((item) => record.key === item.key);
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, {
-          ...item,
-          ...row,
-        });
-        setData(newData);
-        setEditingKey("");
-      } else {
-        newData.push(row);
-        setData(newData);
-        setEditingKey("");
-      }
-      api.users.update({
+      setEditingKey("");
+      api.staff.update({
         id: record.id,
         user: {
+          ...record,
           name: row.name,
           lastName: row.lastName,
           email: row.email,
-          ...record,
-        }
+        },
       });
     } catch (errInfo) {
       console.log("Validate Failed:", errInfo);
@@ -155,33 +136,23 @@ export const Staff: FC<IProps> = (): JSX.Element => {
   };
 
   const handleDelete = (id): void => {
-    api.users.delete({ id }).then(() => notification.success("User was deleted!"));
+    api.staff.delete({ id }).then(() => notification.success("User was deleted!"));
   };
-
-  useEffect(() => {
-    api.users.get({}).then((users) => setData(users.items));
-  }, []);
 
   return (
     <Flex gap="small" vertical>
-
       <Flex align="center" justify="space-between">
         <Title level={3}>Staff</Title>
         <Button type="primary" onClick={showModal}>Add</Button>
       </Flex>
       <Form form={form} component={false}>
-        <Table
-          dataSource={data}
+        <List
+          resource="staff"
+          config={mergedColumns}
           components={{
             body: {
               cell: EditableCell,
             },
-          }}
-          columns={mergedColumns}
-          scroll={{ x: 700 }}
-          pagination={{
-            ...tableParams.pagination,
-            onChange: cancel,
           }}
         />
       </Form>

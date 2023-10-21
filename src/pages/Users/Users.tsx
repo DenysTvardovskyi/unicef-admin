@@ -1,85 +1,64 @@
-import { FC, useState } from "react";
-import { Button, Flex, Table } from "antd";
+import { FC } from "react";
+import { Button, Flex } from "antd";
+import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import Title from "antd/es/typography/Title";
-import { ITableParams } from "../../models";
+import { List } from "../../components/List";
 
 interface IProps {}
 
-const dataSource = [
-  {
-    key: "1",
-    name: "Mike",
-    age: 32,
-    address: "10 Downing Street",
-  },
-  {
-    key: "2",
-    name: "John",
-    age: 42,
-    address: "10 Downing Street",
-  },
-  {
-    key: "3",
-    name: "John",
-    age: 42,
-    address: "10 Downing Street",
-  },
-  {
-    key: "4",
-    name: "John",
-    age: 42,
-    address: "10 Downing Street",
-  },
-  {
-    key: "5",
-    name: "John",
-    age: 42,
-    address: "10 Downing Street",
-  },
-  {
-    key: "6",
-    name: "John",
-    age: 42,
-    address: "10 Downing Street",
-  },
-  {
-    key: "7",
-    name: "John",
-    age: 42,
-    address: "10 Downing Street",
-  },
-];
-
 export const Users: FC<IProps> = (): JSX.Element => {
+  const navigate = useNavigate();
   const columns: any = [
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "ID",
+      dataIndex: "id",
+      sorter: (a, b) => a.id - b.id,
+      key: "id",
+    },
+    {
+      title: "Total Kids",
+      dataIndex: "kids",
+      align: "center",
+      sorter: (a: any, b: any) => a.kids.length - b.kids.length,
+      key: "kids",
+      render: (record) => record.length,
+    },
+    {
+      title: "Bot Type",
+      dataIndex: "botType",
       filters: [
         {
-          text: "Mike",
-          value: "Mike",
+          text: "Telegram",
+          value: "Telegram",
         },
         {
-          text: "John",
-          value: "John",
+          text: "Viber",
+          value: "Viber",
         },
       ],
-      filterSearch: true,
-      onFilter: (value: string, record: any) => record.name.includes(value),
-      key: "name",
+      filterMode: "tree",
+      onFilter: (value: string, record: any) => record.botType === value,
+      key: "botType",
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      sorter: (a: any, b: any) => a.age - b.age,
-      key: "age",
+      title: "Subscribed",
+      dataIndex: "isSubscribed",
+      key: "isSubscribed",
+      align: "center",
+      render: (record) => record ? <CheckOutlined style={{ color: "green" }} /> :
+        <CloseOutlined style={{ color: "red" }} />,
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
+      title: "Frequency",
+      dataIndex: "recommendationFrequency",
+      key: "recommendationFrequency",
+    },
+    {
+      title: "Region",
+      dataIndex: "region",
+      key: "region",
+      render: (record) => record.name,
     },
     {
       title: "Actions",
@@ -91,24 +70,11 @@ export const Users: FC<IProps> = (): JSX.Element => {
       render: (record: any) => <Button onClick={() => navigate("/user/" + record.key)}>View</Button>,
     },
   ];
-  const navigate = useNavigate();
-  const [ data, setData ] = useState<any[]>(dataSource);
-  const [ tableParams, setTableParams ] = useState<ITableParams>({
-    pagination: {
-      current: 1,
-      pageSize: 10,
-    },
-  });
 
   return (
     <Flex gap="small" vertical>
-      <Title level={3}>Users</Title>
-      <Table
-        dataSource={data}
-        columns={columns}
-        scroll={{ x: 700 }}
-        pagination={tableParams.pagination}
-      />
+      <Title level={3} style={{ margin: 0 }}>Users: </Title>
+      <List resource="users" config={columns} />
     </Flex>
   );
 };

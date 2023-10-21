@@ -1,81 +1,68 @@
-import { FC, useState } from "react";
-import { Button, Flex, Table } from "antd";
+import React, { FC } from "react";
+import { Button, Flex, Popconfirm } from "antd";
 import { useNavigate } from "react-router-dom";
 import Title from "antd/es/typography/Title";
-import { ITableParams } from "../../models";
+import { useApi, useNotification } from "../../hooks";
+import { List } from "../../components/List";
 
 interface IProps {}
-
-const dataSource = [
-  {
-    key: "1",
-    name: "Prime 1",
-    totalUsers: 32,
-  },
-  {
-    key: "2",
-    name: "True",
-    totalUsers: 42,
-  },
-  {
-    key: "3",
-    name: "Vice",
-    totalUsers: 42,
-  },
-];
 
 export const Groups: FC<IProps> = (): JSX.Element => {
   const columns: any = [
     {
+      title: "ID",
+      dataIndex: "id",
+      sorter: (a, b) => a.id - b.id,
+      key: "id",
+    },
+    {
       title: "Name",
       dataIndex: "name",
-      filters: [
-        {
-          text: "True",
-          value: "True",
-        },
-        {
-          text: "Vice",
-          value: "Vice",
-        },
-      ],
-      filterSearch: true,
-      onFilter: (value: string, record) => record.name.includes(value),
+      sorter: true,
       key: "name",
     },
     {
       title: "Users",
-      dataIndex: "totalUsers",
-      sorter: (a: any, b: any) => a.totalUsers - b.totalUsers,
-      key: "totalUsers",
+      dataIndex: "customersCount",
+      sorter: (a: any, b: any) => a.customersCount - b.customersCount,
+      key: "customersCount",
+    },
+    {
+      title: "Traffic",
+      dataIndex: "customerTraffics",
+      key: "customerTraffics",
     },
     {
       title: "Actions",
       dataIndex: "",
       key: "x",
       fixed: "right",
-      width: "100px",
+      width: "166px",
       align: "center",
-      render: (record) => <Button onClick={() => navigate("/group/" + record.key)}>View</Button>,
+      render: (record) => {
+        return (
+          <Flex gap={8}>
+            <Button onClick={() => navigate("/group/" + record.id)}>View</Button>
+            <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.id)}>
+              <Button danger>Delete</Button>
+            </Popconfirm>
+          </Flex>
+        );
+      },
     },
   ];
+
+  const api = useApi();
+  const notification = useNotification();
   const navigate = useNavigate();
-  const [ data, setData ] = useState<any[]>(dataSource);
-  const [ tableParams, setTableParams ] = useState<ITableParams>({
-    pagination: {
-      current: 1,
-      pageSize: 10,
-    },
-  });
+
+  const handleDelete = (id): void => {
+    api.groups.delete({ id }).then(() => notification.success("User was deleted!"));
+  };
   return (
     <Flex gap="small" vertical>
       <Title level={3}>Groups</Title>
-      <Table
-        dataSource={data}
-        columns={columns}
-        scroll={{ x: 700 }}
-        pagination={tableParams.pagination}
-      />
+      <List resource="groups" config={columns} />
     </Flex>
   );
 };
