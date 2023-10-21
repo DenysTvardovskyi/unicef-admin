@@ -49,10 +49,13 @@ export const Group: FC<IProps> = (): JSX.Element => {
 
   const handleSave = (body: any) => {
     try {
-      api.groups.update({ id: groupId, body }).then((result) => {
-        setGroupData(result);
-        notification.success("Saved");
-      });
+      if (groupId) {
+        api.groups.update({ id: groupId, body }).then((result) => {
+          setGroupData(result);
+          notification.success("Saved");
+        });
+      }
+
     } catch (e: any) {
       notification.error(`Saving failed ${e.message}`);
     }
@@ -65,7 +68,9 @@ export const Group: FC<IProps> = (): JSX.Element => {
   const config = useUsersConfig({ onView: renderView, onSub: renderSubscription });
 
   const handleDownload = () => {
-    api.groups.download({ id: groupId }).then((res) => console.log(res));
+    if (groupId) {
+      api.groups.download({ id: groupId }).then((res) => console.log(res));
+    }
   };
 
   return (

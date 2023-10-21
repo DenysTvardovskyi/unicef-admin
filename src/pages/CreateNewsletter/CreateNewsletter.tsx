@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Button, Col, Flex, Form, Input, InputNumber, Row, Select } from "antd";
+import { Button, Col, Flex, Form, Input, Row, Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import Title from "antd/es/typography/Title";
 import { useApi, useNotification } from "../../hooks";
@@ -19,7 +19,7 @@ export const CreateNewsletter: FC<IProps> = (): JSX.Element => {
 
   const handleCreate = (body: any) => {
     try {
-      api.newsletters.create({ ...body }).then((r) => {
+      api.newsletters.create({ ...body }).then(() => {
         notification.success("Success");
         navigate("/newsletter/all");
       });
