@@ -7,8 +7,6 @@ import {constants} from "../../../styles/constants";
 export const LineChart: FC<IPieChart> = (params: IPieChart) => {
   const chartsData = useChartsData(params);
 
-  console.log(chartsData)
-
   const config: any = {
     data: chartsData,
     xField: 'count',
